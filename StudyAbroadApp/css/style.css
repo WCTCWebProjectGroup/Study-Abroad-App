@@ -1,0 +1,40 @@
+/* 
+    Created on : Feb 11, 2016, 4:52:49 PM
+    Author     : emmakordik
+*/
+
+h2{
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+tr .time{
+    width: 27%;
+}
+
+.day{
+    display:none;
+}
+
+.calendar{
+    display:none;
+}
+
+.showCalendar{
+    float: right;
+	margin-right: 15px;
+}
+
+div.ui-datebox-container.ui-datebox-inline{
+	width: 300px;
+}
+
+nav{
+	padding-top: 20px;
+}
+
+@media screen and (maxwidth :360px){
+	div.ui-datebox-container.ui-datebox-inline{
+	width: 100%;
+	}
+}

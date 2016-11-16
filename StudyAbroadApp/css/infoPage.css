@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+
+  h3.first {
+        line-height: 0.7em; 
+        font-size: 1.2em;
+    }
+    p.second {
+        line-height: 1.1em; 
+        font-size: 1.0em;
+    }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-left:20px;
+  padding-top: 10px;
+  text-align: left;
+  font-size: 1.1em;
+}
+ 
+li {
+  border-bottom: 1px solid #ccc;
+}
+ 
+ .nav li{
+ 	border: none;
+ }
+li:last-child {
+  border: none;
+}
+ 
+li a {
+  text-decoration: none;
+  display: block;
+}
+
+li a:hover {
+  color: #999;
+  text-decoration:none;  
+}
+.profile {
+    margin: auto;
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, .6);
+ 
+}
+.profilePic {
+   border-radius: 15px;
+}
+	
+.btnImage{
+	width: 30px;
+	margin-right: 10px;
+}
+.btn{
+	text-align:left;
+	height: 50px;
+}
+
+.txtAlignCenter{
+	text-align:center;
+}
+.wctc{
+	background-color: #003e7a;
+	color: #fff;
+}
+.wctcTan{
+	background-color: #e3e0cf;
+	color: #000;
+	border-bottom: thin solid #333;
+}
+
+.wctcBlue{
+	background-color: #003e7a;
+	color: #fff;
+	border-bottom: thin solid #aaa;
+}
+
+.wctcBlue:hover{
+	color: #aaa;
+}
+
+.madisonOrange{
+	background-color: #fe9402;
+	border-bottom: thin solid #333;
+}
+.madisonBlue{
+	background-color: #037FC5;
+	color: #fff;
+	border-bottom: thin solid #aaa;
+}
