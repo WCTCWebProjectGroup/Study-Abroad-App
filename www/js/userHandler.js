@@ -97,7 +97,7 @@ function getUserByUID(uid)
 {
 	for (var entry in userList)
 	{
-		if (userList[entry] == uid)
+		if (userList[entry].uid == uid)
 			return userList[entry];
 	}
 }
@@ -109,6 +109,7 @@ function group(jsonObj)
 	var members = document.createElement("div");
 	members.innerHTML = "Members: ";
 	document.getElementById("groups").appendChild(this.el);
+	this.el.appendChild(members);
 	for (var prop in jsonObj)
 	{
 		switch (prop)
@@ -123,8 +124,8 @@ function group(jsonObj)
 				
 				for (var memId in jsonObj[prop])
 				{
-					console.log(getUserByUID(memId.uid));
-					var us = new user(jsonObj[prop].uid);
+					console.log(getUserByUID(jsonObj[prop][memId]));
+					var us = new user(getUserByUID(jsonObj[prop][memId]));
 				}
 				break;
 			default:
