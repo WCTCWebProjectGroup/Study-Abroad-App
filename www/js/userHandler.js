@@ -7,7 +7,7 @@ var cUser = {
 		phoneNo: [
 			2624421666,
 			2526508372
-		],
+		], 
 		pictureUrl: "",
 		school: "WCTC",
 		groups: [
@@ -21,7 +21,7 @@ var groupList = [
 	{
 		guid: "ASDF789ASD0F8ASDF8A",
 		hashkey: "68ASD4F3AS1DFA68DF4",
-		name: "Placeholder Group A",
+		name: "WCTC Travel Group",
 		desc: "This is a tmp group. And this is its description.",
 		owners: [
 			"ABC124"
@@ -31,8 +31,35 @@ var groupList = [
 			"ABC125"
 		],
 		school: "WCTC"
+	},
+	{
+		guid: "ASDF789ASD0F8ASDF8A",
+		hashkey: "68ASD4F3AS1DFA68DF4",
+		name: "Madison Travel Group",
+		desc: "This is a tmp group. And this is its description.",
+		owners: [
+			"ABC124"
+		],
+		members: [
+			"ABC123",
+			"ABC125"
+		],
+		school: "Madison"
+	},
+	{
+		guid: "ASDF789ASD0F8ASDF8A",
+		hashkey: "68ASD4F3AS1DFA68DF4",
+		name: "Platteville Travel Group",
+		desc: "This is a tmp group. And this is its description.",
+		owners: [
+			"ABC124"
+		],
+		members: [
+			"ABC123",
+			"ABC125"
+		],
+		school: "Platteville"
 	}
-	
 ];
 
 
@@ -45,7 +72,8 @@ var userList = [
 		lname: "Hayes",
 		phoneNo: [
 			2624421666,
-			2526508372
+			2526508372,
+			1234567890
 		],
 		pictureUrl: "",
 		school: "WCTC",
@@ -164,7 +192,10 @@ function user(jsonObj)
 				for (var no in jsonObj[prop])
 				{
 					var entry = document.createElement("li");
-					entry.innerHTML = prop + ": " + jsonObj[prop][no];
+					var t_no = document.createElement("a");
+					t_no.setAttribute("href", "tel:" + jsonObj[prop][no])
+					t_no.innerHTML = prop + ": " + jsonObj[prop][no];
+					entry.appendChild(t_no);
 					list.appendChild(entry);
 				}
 				this.el_phoneNo.appendChild(list);
