@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/material.css">
+    <link rel="stylesheet" type="text/css" href="static.css">
+
+    <title>Login</title>
+</head>
+<body>
+    <header class="MAppBar">
+        <div id="openDrawerContainer">
+            <div id="openDrawer" onclick="openDrawer()"></div>
+        </div>
+        <h1>Trip My School</h1>
+    </header>
+    <nav id="sideNav" class="MNavDrawer">
+        <a href="javascript:void(0)" class="closeDrawer" onclick="closeDrawer()">Close</a>
+        <a href="login.html">login</a>
+        <a href="index.html">index</a>
+        <a href="static.html">static</a>
+        <a href="user.html">user</a>
+        <a href="group.html">group</a>
+    </nav>
+    <main>
+        <h2>Login/Register</h2>
+        <div class="card MCard">
+            <form>
+                <div class="loginForm">
+                    <div>
+                        <!--<label for="email">
+                            Email:
+                        </label>-->
+                        <input id="email" type="email" placeholder="Email">
+                    </div>
+
+                    <div>
+                        <!--<label for="password">
+                            Password:
+                        </label>-->
+                        <input id="password" type="password" placeholder="Password">
+                    </div>
+
+                    <div class="register">
+                        <!--<label for="confirmPass">
+                            Re-Enter Password:
+                        </label>-->
+                        <input id="confirmPass" type="password" placeholder="Please re-enter your password">
+                    </div>
+                </div>
+
+                <input id="loginButton" class="MFloatingActionButton" type="submit">
+            </form>
+            <p>New user? Then click <a href="index.html"><div class="MButton">Register</div></a></p>
+        </div>
+        
+        <div class="MCard">
+            <h2>Login with Google/Microsoft/Facebook</h2>
+            <p>Feature Coming Soon</p>
+        </div>
+    </main>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
+    <script type="text/javascript" src="js/drawer.js"></script>
+</body>
+</html>
