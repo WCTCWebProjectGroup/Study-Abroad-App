@@ -1,22 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
 :root {
 	--main-bg-color: rgba(76,175,80, 1);
 	--dark-text: rgba(27,94,32, 1);
@@ -87,20 +68,10 @@
 }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: text;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    user-select: text;
-
 	background-attachment:fixed;
 	background-color: var(--50);
 	color: black;
     font-family:'Roboto', 'Noto', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding: 0px;
-    width:100%;
 }
 
 h1 {
@@ -116,13 +87,13 @@ h2 {
 
 header {
 	background-color: var(--900);
-	/*box-shadow: 0px 2px 5px #888888;*/
 	box-shadow: var(--box-shadow);
 	color: var(--light-text);
 	font-family: Roboto;
 	font-size: 20px;
 	font-style: normal;
 	padding: 10px 0px;
+
 	height: auto;
 	width: 100%;
 }
@@ -134,7 +105,7 @@ header {
 	background-repeat: no-repeat;
 	border-radius: 50%;
 	box-shadow: var(--box-shadow);
-	display: none;
+	/*display: none;*/
 	opacity: .75;
 
 	position: absolute;
@@ -211,6 +182,7 @@ header {
 
 .gfooter {
 	background-color: var(--500);
+	box-shadow: 0px -2px 4px rgba(0,0,0,.5);
 
 	height: 12px;
 	width: 100%;
@@ -266,6 +238,45 @@ header {
 	width: 100%;
 }
 
+/*.group input {
+    display: none;
+}*/
+
+.slider {
+    top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+    background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+.slider::before {
+	position: absolute;
+	content: "asdfasdf";
+	height: 26px;
+	width: 26px;
+	/*left: 4px;*/
+	/*bottom: 4px;*/
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s; 
+}
+
+input:checked + .slider + * {
+	background-color: #2196f3;
+    display: block;
+    height: 200px;
+}
+
+input:focus + .slider::before {
+	-webkit-transform: translateX(50px);
+	-ms-transform: translateZ(50px);
+	transform: translate(0px,50px);
+}
+
 /*.group * {
 	display: none;
 }*/
@@ -298,6 +309,10 @@ header {
 	box-shadow: 5px 5px 5px 2px #888888;
 	display: inherit;
 	padding: 10px;
+}
+
+#loginButton {
+	float: right;
 }
 
 #settings {
@@ -363,64 +378,4 @@ header {
 
 #settings input {
 	display: none;
-}
-
-/* Portrait layout (default) */
-.app {
-    background: center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-/*     left:50%; */
-/*     top:50%; */
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-/*     padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */ */
-/*     margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */ */
-                                   /* offset horizontal: half of text area width */
-}
-
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-/*         padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */ */
-/*         margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */ */
-                                      /* offset horizontal: half of image width and text area width */
-    }
-}
-
-.event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-/*     margin:0px 30px; */
-    padding:2px 0px;
-}
-
-.event.listening {
-    background-color:#333333;
-    display:block;
-}
-
-.event.received {
-    background-color:#4B946A;
-    display:none;
-}
-
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-@-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
 }

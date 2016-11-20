@@ -1,0 +1,117 @@
+/* Z-Index Guidelines!
+ * 24 - Dialog Picker
+ * 16 - Nav drawer, right drawer, modal bottom sheet
+ * 12 - Floating action:pressed
+ * 9  - Submenu
+ * 8  - Raised button:presed, menu, card:active, bottom nav bar
+ * 6  - Snackbar, floatin action button resting
+ * 4  - App bar
+ * 3  - Refresh indicator, search bar scrolled state
+ * 2  - Card resting, raised button resting, search bar resting
+ * 1  - Switch
+ */
+
+:root {
+	--main-bg-color: rgba(76,175,80, 1);
+	--dark-text: rgba(27,94,32, 1);
+	--light-text: rgb(232,245,233);
+	--50: rgb(232,245,233); /* Light text */
+	--100: rgb(200,230,201);
+	--200: rgb(165,214,167);
+	--300: rgb(129,199,132); /* 300 ~ are for secondary information*/
+	--400: rgb(102,187,106);
+	--500: rgb(76,175,80); /* 500 ~ are for dominant colors, aka toolbars*/
+	--600: rgb(67,160,71);
+	--700: rgb(56,142,60); /* 700 ~ are for status bars*/
+	--800: rgb(46,125,50);
+	--900: rgb(27,94,32); /* Dark text */
+	--A100: rgb(137,246,202);
+	--A200: rgb(105,240,174);
+	--A400: rgb(0,230,118);
+	--A700: rgb(0,200,83);
+	--box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+}
+
+/* ------ Material Designs ------ */
+
+.MDialog, .MPicker {
+	box-shadow: 24px 24px 48px rgba(0,0,0,.5);
+}
+
+.MNavDrawer, .MRightDrawer, .MModalBottomSheet {
+	box-shadow: 16px 16px 32px rgba(0,0,0,.5);
+    z-index: 16;
+}
+
+.MFloatingActionButton:active {
+	box-shadow: 12px 12px 24px rgba(0,0,0,.5);
+}
+
+/* +1 depth for each sub-menu */
+.MSubMenu {
+	box-shadow: 9px 9px 18px rgba(0,0,0,.5);
+}
+
+.MBottomNavBar, .MMenu, .MCard:active, .MButton:active {
+	box-shadow: 8px 8px 16px rgba(0,0,0,.5);
+}
+
+.MFloatingActionButton, .MSnackbar {
+	box-shadow: 6px 6px 12px rgba(0,0,0,.5);
+}
+
+.MAppBar, .MSearchBar:focus {
+	box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+}
+
+.MRefreshIndicator {
+	box-shadow: 3px 3px 6px rgba(0,0,0,.5);
+}
+
+.MCard, .MButton, .MSearchBar {
+	box-shadow: 2px 2px 4px rgba(0,0,0,.5);
+}
+
+.MSwitch {
+	box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+}
+
+.MAppBar {
+    z-index: 6;
+}
+
+.MButton {
+    background-color: var(--A400);
+    box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+    display: inline-block;
+    text-align: center;
+    
+    padding: 8px;
+}
+
+.MButton:hover {
+
+}
+
+.MCard {
+    background-color: #e7e7e7;
+    display: block;
+    text-align: center;
+
+    margin: auto;
+    padding: 16px 16px;
+
+    height: auto;
+    width: 80%;
+}
+
+.MFloatingActionButton {
+    background-color: var(--A700);
+    border-radius: 50%;
+    color: var(--light-text);
+
+    height: 96px;
+    width: 96px;
+}
+
+/* ------ End Material Designs ------ */

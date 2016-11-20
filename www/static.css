@@ -1,87 +1,30 @@
-:root {
-	--main-bg-color: #4caf50;
-	--dark-text: #1b5e20;
-	--light-text: #e8f5e9;
-	--50: #e8f5e9;	/* Light text */
-	--100: #c8e6c9;
-	--200: #a5d6a7;
-	--300: #81c784; /* 300 ~ are for secondary information*/
-	--400: #66bb6a;
-	--500: #4caf50; /* 500 ~ are for dominant colors, aka toolbars*/
-	--600: #43a047;
-	--700: #388e3c; /* 700 ~ are for status bars*/
-	--800: #2e7d32;
-	--900: #1b5e20; /* Dark text */
-	--A100: #89f6ca;
-	--A200: #69f0ae;
-	--A400: #00e676;
-	--A700: #00c853;
-	--box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
-}
-
-/* ------ Material Designs ------ */
-
-.MDialog, .MPicker {
-	box-shadow: 24px 24px 48px #000000;
-}
-
-.MNavDrawer, .MRightDrawer, .MModalBottomSheet {
-	box-shadow: 16px 16px 32px #000000;
-}
-
-.MFloatingActionButton:active {
-	box-shadow: 12px 12px 24px #000000;
-}
-
-/* +1 depth for each sub-menu */
-.MSubMenu {
-	box-shadow: 9px 9px 18px #000000;
-}
-
-.MBottomNavBar, .MMenu, .MCard:active, .MButton:active {
-	box-shadow: 8px 8px 16px #000000;
-}
-
-.MFloatingActionButton, .MSnackbar {
-	box-shadow: 6px 6px 12px #000000;
-}
-
-.MAppBar, .MSearchBar:focus {
-	box-shadow: 4px 4px 8px #000000;
-}
-
-.MRefreshIndicator {
-	box-shadow: 3px 3px 6px #000000;
-}
-
-.MCard .MButton, .MSearchBar {
-	box-shadow: 2px 2px 4px #000000;
-}
-
-.MSwitch {
-	box-shadow: 1px 1px 2px #000000;
-}
-/* ------ End Material Designs ------ */
-
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: text;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    user-select: text;
-
 	background-attachment:fixed;
 	background-color: var(--50);
 	color: black;
     font-family:'Roboto', 'Noto', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    width:100%;
+}
+
+fieldset {
+	margin: auto;
+	overflow: hidden;
+	padding: 2px;
+}
+
+fieldset *:not(legend) {
+	width: 100%;
+}
+
+fieldset td:nth-child(odd) {
+	width: 25%;
+}
+
+fieldset td:nth-child(even) {
+	width: auto;
 }
 
 h1 {
@@ -96,16 +39,52 @@ h2 {
 }
 
 header {
-	background-color: var(--main-bg-color);
+	background-color: var(--500);
 	/*box-shadow: 0px 2px 5px #888888;*/
 	box-shadow: var(--box-shadow);
 	color: var(--light-text);
+	display: inline-block;
 	font-family: Roboto;
 	font-size: 20px;
 	font-style: normal;
 	padding: 10px 0px;
+	position: relative;
+
 	height: auto;
 	width: 100%;
+}
+
+header h1 {
+	/*display: inline;*/
+	font-size: 25px;
+	text-shadow: 4px 4px 8px rgba(0,0,0,0.55);
+
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+table, tr {
+	border: none;
+	border-bottom: 1px solid var(--500);
+}
+
+.loginForm {
+	display: inline;
+}
+
+.loginForm > * {
+	padding: 8px;
+	text-align: center;
+}
+
+.loginForm input {
+	border: none;
+	border-bottom: 2px solid blue;
+
+	padding: 8px;
+
+	height: 30px;
+	width: 80%;
 }
 
 .exitButton {
@@ -115,7 +94,7 @@ header {
 	background-repeat: no-repeat;
 	border-radius: 50%;
 	box-shadow: var(--box-shadow);
-	display: none;
+	/*display: none;*/
 	opacity: .75;
 
 	position: absolute;
@@ -154,19 +133,88 @@ header {
     width: 32px;
 }
 
+.gcard {
+	background-color: #e7e7e7;
+	box-shadow: 0px 6px 12px rgba(0,0,0,.5);
+	color: black;
+	
+	margin: 16px auto;
+	padding: 8px 12px;
+
+	height: auto;
+	width: 90%;
+}
+
+.gcontent {
+	display: block;
+	outline-style: none;
+	overflow: hidden;
+
+	max-height: 0px;
+	padding: 0px;
+
+	transition: .4s ease-in-out;
+	transition-delay: .2s;
+	transition-property: max-height;
+	-webkit-transition: .4s ease-in-out;
+	-webkit-transition-delay: .2s;
+	-webkit-transition-property: max-height;
+}
+
+.group:hover .gcontent {
+	max-height: 300px;
+}
+
+.gdesc {
+	color: var(--dark-text);
+}
+
+.gfooter {
+	background-color: var(--500);
+
+	height: 12px;
+	width: 100%;
+}
+
 .gname {
+	background-color: var(--A400);
+    box-shadow: 0px 8px 16px rgba(0,0,0,0);
+	color: var(--light-text);
     font-size: 24px;
     text-align: center;
     text-transform: uppercase;
+
+    padding: 8px 0px;
+
+	height: auto; 
+	width: 100%;
 
     transition: .4s ease-in-out, height .4s ease-in-out;
     -webkit-transition: .4s ease-in-out .4s ease-in-out;
 }
 
+.group:hover .gname {
+	box-shadow: 0px 8px 16px rgba(0,0,0,.5);
+}
+
+.gmem {
+	margin: auto;
+	padding: 16px 0px;
+	text-align: center;
+}
+
+.gmem button {
+	background-color: var(--50);
+	border-radius: 5px;
+
+	height: 35px;
+	width: 220px;
+}
+
 .group {
-	background-color: var(--900);
+	background-color: var(--50);
     box-shadow: var(--box-shadow);
-	color: var(--light-text);
+	color: black;
 
     position: relative;
     display: inline-block;
@@ -178,43 +226,27 @@ header {
 	width: 100%;
 }
 
+.group:nth-child(odd) .gname {
+	background-color: var(--A700);
+}
+
 /*.group input {
     display: none;
 }*/
 
-.slider {
-    top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+.profilePicture::after{
+	background: no-repeat;
+	background-image: url("img/ic_photo_camera_3x.png");
+	content: "";
+	opacity: 0;
+	z-index: 25;
 
-    background-color: #ccc;
-	-webkit-transition: .4s;
-	transition: .4s;
+	height: auto;
+	width: 100%;
 }
 
-.slider::before {
-	position: absolute;
-	content: "asdfasdf";
-	height: 26px;
-	width: 26px;
-	/*left: 4px;*/
-	/*bottom: 4px;*/
-	background-color: white;
-	-webkit-transition: .4s;
-	transition: .4s; 
-}
-
-input:checked + .slider + * {
-	background-color: #2196f3;
-    display: block;
-    height: 200px;
-}
-
-input:focus + .slider::before {
-	-webkit-transform: translateX(50px);
-	-ms-transform: translateZ(50px);
-	transform: translate(0px,50px);
+.profilePicture:hover ::after {
+	opacity: .5;
 }
 
 /*.group * {
@@ -228,27 +260,36 @@ input:focus + .slider::before {
 	padding: 16px;
 }
 
-.usrInfo {
+.register {
 	display: none;
+}
+
+.userInfo {
 	text-align: center;
-}
-
-.usrPic {
-	border: 1px solid #888888;
-	border-radius: 50%;
-	box-shadow: 2px 2px 5px #888888;
-	display: inherit;
 	margin: auto;
-	margin-top: 16px;
-	padding: 10px 5px;
+	padding-top: 16px;
 }
 
-.usrPic:hover, .usrPic:focus, #settings:hover > .options li{
-	border: 4px solid #691A99;
+.userInfo table {
+	margin: auto;
+
+	width: 80%;
+}
+
+.userPanel img {
+	border: 4px inset var(--500);
 	border-radius: 50%;
-	box-shadow: 5px 5px 5px 2px #888888;
-	display: inherit;
-	padding: 10px;
+	box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+
+	width: 50%;
+	max-width: 200px;
+
+	transition: .4s;
+}
+
+.userPanel img:hover {
+	border: 20px inset var(--800);
+	box-shadow: 8px 8px 16px rgba(0,0,0,.5);
 }
 
 #settings {
@@ -277,41 +318,116 @@ input:focus + .slider::before {
 	background-color: #ffffff;
 }*/
 
-#settings:focus, #settings:hover {
-	background-color: #ffffff;
-	background-image: url("../img/ic_close_black_24dp_2x.png"); /* FIXME */
-	background-position: top right;
-	border-radius: 2px;
-	box-shadow: 15px 15px 10px #888888;
-	
-	right: 1%;
-	top: 1%;
-	
-	height: 98%;
-	width: 98%;
+#loginButton {
+	font-size: 25px;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-#settings:hover .usrInfo {
-	display: block;
-}
+#openDrawer {
+	background-color: var(--A100);
+	background-image: url("img/ic_menu_black_24dp_1x.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 0;
+	box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+	z-index: 8;
 
-/*#settings:focus, #settings:hover > .options li {
-	display: block;
-}*/
-
-#settingsOverlay {
-	display: none;
-	
+	/*padding: 8px;*/
+	/*margin: auto;*/
 	position: absolute;
-	
-	height: 100%;
-	width: 100%;
+	top: 25%;
+	left: 25%;
+
+	height: 48px;
+	width: 48px;
+
+	transition: .2s;
+	transition-property: background-color;
+	-webkit-transition: .2s;
+	-webkit-transition-property: background-color;
 }
 
-/*#settings:active #settingsOverlay {
-	display: inline;
-}*/
+#openDrawer:hover {
+	background-color: var(--100);
+	box-shadow: 2px 2px 4px rgba(0,0,0,.5);
+}
 
-#settings input {
-	display: none;
+#openDrawer::before {
+	background-color: var(--A400);
+	border-radius: 50%;
+	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+	content: "";
+	opacity: 0;
+	z-index: 7;
+
+	position: absolute;
+	margin-top: -4px;
+	margin-left: -4px;
+	/*top: 25%;*/
+	/*left: 25%;*/
+
+	height: 56px;
+	width: 56px;
+
+	transition: .2s;
+	transition-property: opacity;
+	-webkit-transition: .2s;
+	-webkit-transition-property: opacity;
+}
+
+#openDrawer:hover::before {
+	display: block;
+	opacity: .75;
+}
+
+#openDrawerContainer {
+	/*display: inline-block;*/
+	position: relative;
+	float: left;
+	top: 50%;
+
+	height: 90px;
+	width: 90px;
+}
+
+#sideNav {
+	background-color: var(--500);
+	overflow-x: hidden;
+
+	padding-top: 60px;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+
+	transition: 0.4s ease-in-out;
+	/*transition-property: width;*/
+	-webkit-transition: 0.4s ease-in-out;
+	/*-webkit-transition-property: width;*/
+}
+
+#sideNav a {
+	color: var(--light-text);
+	display: block;
+	font-size: 25px;
+	text-decoration: none;
+
+	padding: 8px 8px 8px 32px;
+
+	transition: 0.4s ease-in-out;
+}
+
+#sideNav a:hover {
+	color: var(--200);
+}
+
+#sideNav .closeDrawer {
+	position: absolute;
+	top: 0px;
+	right: 25px;
+	margin-left: 50px;
 }
