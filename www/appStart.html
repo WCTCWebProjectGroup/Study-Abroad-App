@@ -19,7 +19,7 @@
         <h1>Trip My School</h1>
     </header>
     <img id="spinner" src="img/spinner.png">
-    <p>Please Wait...</p>
+    <p id="startMsg">Please Wait...</p>
     <!-- Templates go below here -->
 
     <!-- Try to keep all js files here -->
@@ -27,6 +27,9 @@
     <script type="text/javascript" src="js/index.js"></script>
 
     <script>
+        var replies = [];
+        var expectedReplies = 0;
+
         function isFirstTimeSet()
         {
             // Later this function will check if a file exists to determine
@@ -42,9 +45,10 @@
             window.location.assign("login.html");
         }
 
-        function checkIfDone(e, r) 
+        function checkIfDone() 
         {
-            if (r == e)
+            console.log("Is this running?");
+            if (replies.length == expectedReplies && expectedReplies != 0)
             {
                 finished();
             }
@@ -56,7 +60,7 @@
             http.onreadystatechange = function() {
                 if (http.readyState == 4 && http.status == 200)
                 {
-                    recievedReplies++;
+                    // recievedReplies++;
                     replies[position] = http.responseText;
                 }
             }
@@ -68,17 +72,18 @@
         {
             // TODO: Read usrGroupFile
             // Until then use parsedGroupFile in dummyJSON.js
-            var expectedReplies = parsedGroupFile.groups.length; // This is how many replies the client will recieve
-            var recievedReplies = 0;
+            expectedReplies = parsedGroupFile.groups.length; // This is how many replies the client will recieve
+            // var recievedReplies = 0;
             var replies = []; // Store replies in this array
             console.log(`Expecting ${expectedReplies} replies.`);
 
             for (var i = 0; i < expectedReplies; i++)
             {
-                httpGetAsync("http://index", i);
+                httpGetAsync("static.html", i);
             }
 
-            setInterval(checkIfDone(expectedReplies, recievedReplies), 3000);
+            document.getElementById("startMsg").innerHTML = "Updating";
+            setInterval(checkIfDone, 3000);
         }
 
         function finished()

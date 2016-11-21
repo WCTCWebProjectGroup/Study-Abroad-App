@@ -273,6 +273,20 @@ table, tr {
 	padding-top: 16px;
 }
 
+.userInfo input:not([type=submit]) {
+	background-color: white;
+	border: none;
+	border-bottom: 2px solid blue;
+	color: black;
+	text-align: center;
+
+	padding: 8px;
+}
+
+.userInfo input:not([type=submit]):focus {
+	border: 2px solid blue;
+}
+
 .userInfo table {
 	margin: auto;
 
