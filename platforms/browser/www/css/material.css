@@ -82,8 +82,13 @@
 
 .MButton {
     background-color: var(--A400);
+	border: none;
+	border-radius: 2px;
     box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+	color: var(--light-text);
     display: inline-block;
+	font-size: 18px;
+	outline: none;
     text-align: center;
     
     padding: 8px;

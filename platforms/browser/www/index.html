@@ -1,67 +1,139 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>KickMySchool</title>
-    </head>
-    <body>
-		<header>
-			<h1>Trip My School</h1>
-		</header>
-        <main>
-				<h2>Travel Groups</h2>
-                <div class="group">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <div class="slider round"></div>
-                        <div class="exitButton"></div>
-                    </label>
-                </div>
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/material.css">
+    <link rel="stylesheet" type="text/css" href="css/static.css">
 
-				<div id="groups">
-				</div>
+    <title>Loading</title>
 
-                <template>
-                    <div class="group">
+    <!-- All js files in the header are for JSON testing purposes only! -->
+    <script type="text/javascript" src="js/dummyJSON.js"></script>
+</head>
+<body>
+    <header class="MAppBar">
+        <h1>Trip My School</h1>
+    </header>
+    <img id="spinner" src="img/spinner.png">
+    <p id="startMsg">Please Wait...</p>
+    <!-- Templates go below here -->
 
-                    </div>
-                </template>
+    <!-- Try to keep all js files here -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/database.js"></script>
 
-        </main>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/userHandler.js"></script>
-    </body>
+    <script>
+        var expectedReplies = 0; // This is a counter that assures that all replies are recieved 
+        var replies = []; // This stores the replies
+        var updatesInstalled = 0; // Counter that checks to see if all the replies have been handeled before proceeding
+
+        function isFirstTimeSet()
+        {
+            // Later this function will check if a file exists to determine
+            // if this really is the first time this program is being run.
+            // This function MUST return a boolean.
+            // return true;
+            console.log("Hopefully this is called after the page is loaded.");
+            set();
+            var tableExists = get("SELECT * from [Users]");
+            if (tableExists === null)
+                return true;
+            else
+                return false;
+        }
+
+        function firstTimeSetUp ()
+        {
+            // TODO: Message saying first time setup
+            window.location.assign("login.html");
+        }
+
+        // This function is called on each reply once it finishes downloading. It is
+        // responsible for updating the local client with the information in replies.
+        function updateLocal(newData)
+        {
+            console.log("Updating the local DB.");
+            console.log("New info = " + newData);
+
+            // At the end of this function increment updatesInstalled var
+            updatesInstalled++;
+            checkIfDone();
+        }
+
+        function checkIfDone() 
+        {
+            console.log("Is this running?");
+            if (updatesInstalled == expectedReplies && updatesInstalled != 0)
+            {
+                finished();
+            }
+        }
+
+        function httpGetAsync (url, position)
+        {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function() {
+                if (http.readyState == 4 && http.status == 200)
+                {
+                    // recievedReplies++;
+                    replies[position] = http.responseText;
+                    updateLocal(replies[position]);
+                }
+            }
+            http.open("GET", url, true);
+            http.send(null);
+        }
+
+        function checkForUpdates () 
+        {
+            // TODO: Read usrGroupFile
+            // Until then use parsedGroupFile in dummyJSON.js
+            expectedReplies = parsedGroupFile.groups.length; // This is how many replies the client will recieve
+            console.log(`Expecting ${expectedReplies} replies.`);
+
+            for (var i = 0; i < expectedReplies; i++)
+            {
+                httpGetAsync("static.html", i);
+            }
+
+            document.getElementById("startMsg").innerHTML = "Updating";
+        }
+
+        function finished()
+        {
+            window.location.assign("static.html");
+        }
+
+        function afterPageLoad ()
+        {
+            console.log("The page is fully loaded.");
+            console.log("Checking if first time setup.");
+            // If it's first time, go to login page, else login & check for updates
+            if (isFirstTimeSet())
+                firstTimeSetUp();
+            else
+            {
+                console.log("Not first time running application.");
+                // There should exist a file that contains the uid
+                // for each group this user is a member of.
+                // Parse that file and run a GET request to check if
+                // the hashed time stamps match up. 
+                console.log("Now checking for updates.")
+                setTimeout(checkForUpdates,10000);
+            }
+            // 
+        } 
+
+        //window.addEventListener("load", afterPageLoad());
+    </script>
+
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
+    <!--<script type="text/javascript" src="js/drawer.js"></script>-->
+</body>
 </html>

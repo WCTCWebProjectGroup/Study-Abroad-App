@@ -316,7 +316,7 @@ table, tr {
 
 #openDrawer {
 	background-color: var(--A100);
-	background-image: url("img/ic_menu_black_24dp_1x.png");
+	background-image: url("../img/ic_menu_black_24dp_1x.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	border-radius: 50%;

@@ -33,16 +33,67 @@
                 Group Description: This is a the description of the group. It will eventually be
                 replaced with a rich text editor... But for now this is it.
             </p>
+            <h3>Group Owners</h3>
+            <ul>
+                <li>
+                    <a>Alex Hayes</a>
+                </li>
+                <li>
+                    <a>Bob Doe</a>
+                </li>
+            </ul>
+            <h3>Emergency Contacts</h3>
+            <ul>
+                <li>
+                    <a>Bob Doe</a>
+                </li>
+            </ul>
+            <h3>Local Authorities</h3>
+            <ul>
+                <li>
+                    <a>Police</a>
+                </li>
+                <li>
+                    <a>Embassy</a>
+                </li>
+            </ul>
+
         </div>
         <div class="MCard groupContacts">
             <h2 class="gname">Contacts</h2>
             <p>Feature Coming Soon</p>
+            
         </div>
         <div class="MCard groupSchedule">
             <h2 class="gname">Schedule</h2>
             <p>Feature Coming Soon</p>
         </div>
     </main>
+
+    <!-- Templates go below here -->
+    <template id="contactCardT" class="contactCard">
+        <div class="contact">
+            <h2 class="contactName"></h2>
+            <div class="contactInfo">
+                <div class="contactEmail">
+                    <ul></ul>
+                </div>
+                <div class="contactPhoneNos">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="contactEmail">
+        <a></a>
+    </template>
+
+    <template id="contactPhoneNo">
+        <a></a>
+    </template>
+
+    <!-- Try to keep all js files here -->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
