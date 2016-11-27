@@ -7,19 +7,20 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/material.css">
-    <link rel="stylesheet" type="text/css" href="css/static.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <title>Groups</title>
 
     <!-- Try to avoid including the js scripts here unless absolutely necessary -->
     <script type="text/javascript" src="js/w3data.js"></script>
+    <script type="text/javascript" src="js/dummyJSON.js"></script>
 </head>
 <body>
     <div w3-include-html="header.html"></div>
     <div w3-include-html="nav.html"></div>
     <main>
         <h2>Travel Groups</h2>
-
+        <div id="groupContainer">
             <div class="group">
                 <div class="gname">WCTC Travel Group</div>
                 <div class=gcontent>
@@ -28,7 +29,7 @@
                             Group Description: This is a the description of the group. It will eventually be
                             replaced with a rich text editor... But for now this is it.
                         </div>
-                        <div class="gmem"><a href="index.html"><button>Button to Members</button></a></div>
+                        <div class="gmem"><a href="group.html"><button>Button to Group</button></a></div>
                     </div>
                     <div class="gfooter"></div>
                 </div> 
@@ -42,7 +43,7 @@
                             Group Description: This is a the description of the group. It will eventually be
                             replaced with a rich text editor... But for now this is it.
                         </div>
-                        <div class="gmem"><a href="index.html"><button>Button to Members</button></a></div>
+                        <div class="gmem"><a href="group.html"><button>Button to Group</button></a></div>
                     </div>
                     <div class="gfooter"></div>
                 </div> 
@@ -56,7 +57,7 @@
                             Group Description: This is a the description of the group. It will eventually be
                             replaced with a rich text editor... But for now this is it.
                         </div>
-                        <div class="gmem"><a href="index.html"><button>Button to Members</button></a></div>
+                        <div class="gmem"><a href="group.html"><button>Button to Group</button></a></div>
                     </div>
                     <div class="gfooter"></div>
                 </div> 
@@ -64,8 +65,8 @@
         </div>
 
         <h2>Invitations</h2>
-        <div class="MCard">
-            <p>Feature coming soon</p>
+        <div id="invitations" class="MCard">
+            <!--<p>Feature coming soon</p>-->
             <p>This is where the user will recieve invitations to join a group. They 
                 will be able to accept or decline an invitation. This should also be 
                 hidden or placed at the bottom if there are no invitations.
@@ -73,8 +74,7 @@
         </div>
 
     </main>
-    <template>
-            <div id="groups">
+    <template id="groupsT">
             <div class="group">
                 <div class="gname"></div>
                 <div class=gcontent>
@@ -82,10 +82,23 @@
                         <div class="gdesc">
                             Group Description:
                         </div>
-                        <div class="gmem"><a href="index.html"><button>Button to Members</button></a></div>
+                        <div class="gmem"><a href="index.html"><button>Go to Group Page</button></a></div>
                     </div>
                     <div class="gfooter"></div>
                 </div> 
+            </div>
+        </template>
+
+        <template id="invitationT">
+            <div class="invitation">
+                <div class="gname"></div>
+                <form action="">
+                    <label>Accept Invite</label>
+                    <input type="checkbox">
+
+                    <label>Submit</label>
+                    <input class="MButton" type="submit">
+                </form>
             </div>
         </template>
 
@@ -95,6 +108,7 @@
             w3IncludeHTML();
         </script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/groups.js"></script>
         <!--<script type="text/javascript" src="js/index.js"></script>-->
         <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
         <script type="text/javascript" src="js/drawer.js"></script>

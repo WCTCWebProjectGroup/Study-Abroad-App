@@ -40,7 +40,22 @@ var serverSideGroupFile = [
 		uid: "KLM123",
 		hashkey: "68ASD4F3AS1DFA68DF4"
 	}
-]
+];
+
+var invitations = [
+	{
+		name: "Travel Group A"
+	},
+	{
+		name: "Travel Group B"
+	},
+	{
+		name: "Travel Group C"
+	},
+	{
+		name: "Travel Group D"
+	}
+];
 
 var cUser = {
 	uid: "ABC125",

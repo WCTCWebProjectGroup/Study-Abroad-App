@@ -3,12 +3,18 @@
  * 
  */
 
-function group()
+// Global Vars, FIXME: Eventually remove all global vars, using them now for convenience
+var NoContacts = 0;
+
+function group(uid)
 {
+    // TODO: Look up group info on the uid from the DB
+
+    this.uid = uid;
     this.name = "WCTC Travel Group";
     this.desc = "Group Description: This is a the description of the group. It will eventually be replaced with a rich text editor... But for now this is it.";
     this.owners = [
-        "ALex Hayes",
+        "Alex Hayes",
         "Bob Doe"
     ];
 
@@ -24,7 +30,15 @@ function group()
     ];
 
     this.contacts = [
-        "Some UID"
+        "Some UID",
+        "Another UID",
+        "Another UID",
+        "Another UID",
+        "Another UID",
+        "Another UID",
+        "Another UID",
+        "Another UID",
+        "Another UID"
     ];
 }
 
@@ -45,47 +59,68 @@ function contact (uid)
     ];
 }
 
+function doneLoadingContacts ()
+{
+    var NoLoaded = document.querySelectorAll("#groupContacts > div").length;
+    if (NoLoaded == NoContacts)
+    {
+        document.querySelector(".groupContacts .loadingMsg").style.display = "none";
+        console.log("Done loading contacts");
+    }
+}
+
 function lazyLoadContacts(obj)
 {
-    foreach (uid in obj)
+    NoContacts = obj.length;
+
+    var loadingMsg = document.querySelector(".groupContacts");
+    loadingMsg = loadingMsg.querySelector(".loadingMsg");
+    loadingMsg.innerHTML = "Loading more contacts...";
+
+    obj.forEach ( function(uid)
     {
         var el = document.getElementById("contactCardT");
         var clone = document.importNode(el.content, true);
 
         // Populate template
         // Create obj from DB look-ups
+        console.log(uid);
+        var person = new contact(uid.toString());
 
-        var contact = contact(uid); 
+        clone.querySelector(".contactName").innerHTML = (person.fname.toString() + " " + person.lname.toString());
+        clone.querySelector(".contactEmail").innerHTML = (person.emails[0].toString());
+        clone.querySelector(".contactPhoneNos").innerHTML = (person.phoneNos[0].toString());
 
         document.getElementById("groupContacts").appendChild(clone);
-    }
+        doneLoadingContacts();
+    });
 }
 
 function setGroupInfo ()
 {
-    var obj = group();
+    var obj = new group("123456789");
 
     // Set group name
-    document.getElementById("gname").innerHTML = obj.name;
+    document.getElementById("gname").innerHTML = obj.name.toString();
 
     // Set group desc
-    document.getElementById("gdesc").innerHTML = obj.desc;
+    document.getElementById("gdesc").innerHTML = obj.desc.toString();
 
     // Set group owners
-    foreach (owner in obj.owners)
+    obj.owners.forEach (function(owner)
     {
         var liObj = document.createElement("li");
-        liObj.innerHTML = owner;
+        liObj.innerHTML = owner.toString();
         document.getElementById("groupOwn").appendChild(liObj);
-    }
+    });
 
     // Set group emergency contacts
-    foreach (emer in obj.emergency)
+    obj.emergency.forEach (function (emer)
     {
         liObj = document.createElement("li");
-        liObj.innerHTML = emer;
+        liObj.innerHTML = emer.name.toString() + " : " + emer.number.toString();
         document.getElementById("emergency").appendChild(liObj);
-    }
+    });
 
     lazyLoadContacts(obj.contacts);
 }

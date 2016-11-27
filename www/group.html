@@ -7,7 +7,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/material.css">
-    <link rel="stylesheet" type="text/css" href="css/static.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <title>Groups</title>
 
@@ -19,45 +19,28 @@
     <div w3-include-html="nav.html"></div>
     <main>
         <div class="MCard groupHeader">
-            <h2 id="gname">WCTC Travel Group</h2>
+            <h2 id="gname" class="gname">WCTC Travel Group</h2>
             <p id="gdesc">
                 Group Description: This is a the description of the group. It will eventually be
                 replaced with a rich text editor... But for now this is it.
             </p>
-            <h3>Group Owners</h3>
-            <ul id="groupOwn">
-                <li>
-                    <a>Alex Hayes</a>
-                </li>
-                <li>
-                    <a>Bob Doe</a>
-                </li>
-            </ul>
-            <h3>Emergency Contacts</h3>
-            <ul id="emergency">
-                <li>
-                    <a>Bob Doe</a>
-                </li>
-            </ul>
-            <h3>Local Authorities</h3>
-            <ul>
-                <li>
-                    <a>Police</a>
-                </li>
-                <li>
-                    <a>Embassy</a>
-                </li>
-            </ul>
-
-        </div>
-        <div class="MCard groupContacts">
-            <h2 class="gname">Contacts</h2>
-            <p>Feature Coming Soon</p>
             
+            <h3>Group Owners</h3>
+            <ul id="groupOwn"></ul>
+
+            <h3>Emergency Contacts</h3>
+            <ul id="emergency"></ul>
+
         </div>
         <div class="MCard groupSchedule">
             <h2 class="gname">Schedule</h2>
             <p>Feature Coming Soon</p>
+        </div>
+        <div class="MCard groupContacts">
+            <h2 class="gname">Contacts</h2>
+            <div id="groupContacts"></div>
+            <p class="loadingMsg">Loading...</p>
+            
         </div>
     </main>
 
@@ -89,6 +72,7 @@
             w3IncludeHTML();
     </script>
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/group.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
     <script type="text/javascript" src="js/drawer.js"></script>
