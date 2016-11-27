@@ -268,6 +268,92 @@ table, tr {
 	display: none;
 }
 
+.sliderContainer {
+	display: block;
+	margin: auto;
+	position: relative;
+	margin-bottom: 40px;
+	
+	height: 72px;
+	width: 144px;
+}
+
+.sliderContainer .slider {
+	background-color: #ccc;
+	border-radius: 32px;
+
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+
+	transition: .4s;
+	-webkit-transition: .4s;
+}
+
+.sliderContainer .slider:before {
+	background-color: red;
+	border-color: black;
+	border-width: 4px;
+	border-radius: 32px;
+	color: red;
+	content: "";
+	justify-content: center;
+	vertical-align: -50%;
+
+	position: absolute;
+	left: 4px;
+	bottom: 4px;
+
+	height: 64px;
+	width: 64px;
+	
+	transition: .4s;
+	-webkit-transition: .4s;
+}
+
+.sliderContainer .slider::after {
+	background-color: white;
+	border: none;
+	border-bottom: 2px solid blue;
+	content: "Decline";
+	display: block;
+	margin: auto;
+	/*margin-top: 4px;*/
+	/*margin-bottom: 4px;*/
+	padding: 4px;
+	
+	position: absolute;
+	bottom: -35px;
+	left: 50px;
+}
+
+.sliderContainer input:not([type=submit]) {
+	display: none;
+}
+
+/*.sliderContainer input:checked:not([type=submit]) + .slider {
+	background-color: #2196f3;
+}*/
+
+.sliderContainer input:focus:not([type=submit]) + .slider {
+	box-shadow: 0 0 1px #2196f3;
+}
+
+.sliderContainer input:checked:not([type=submit]) + .slider::before {
+	background-color: green;
+	color: green;
+	content: "";
+	
+	transform: translateX(68px);
+	-webkit-transform: translateX(68px);
+}
+
+input:checked:not([type=submit]) + .slider::after {
+	content: "Accept";
+}
+
 .userInfo {
 	text-align: center;
 	margin: auto;
