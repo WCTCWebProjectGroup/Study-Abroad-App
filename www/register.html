@@ -19,10 +19,10 @@
     <div w3-include-html="header.html"></div>
     <div w3-include-html="nav.html"></div>
     <main>
-        <h2>Login/Register</h2>
+        <h2>Register</h2>
         <div class="card MCard">
             <form>
-                <div class="loginForm">
+                <div class="registerForm">
                     <div>
                         <input id="email" type="email" placeholder="Email">
                     </div>
@@ -31,26 +31,39 @@
                         <input id="password" type="password" placeholder="Password">
                     </div>
 
-                    <div class="register">
+                    <div>
                         <input id="confirmPass" type="password" placeholder="Please re-enter your password">
+                    </div>
+
+                    <div>
+                        <input id="fname" type="text" placeholder="First Name">
+                    </div>
+                    <div>
+                        <input id="lname" type="text" placeholder="Last Name">
+                    </div>
+
+                    <div>
+                        <input id="school" type="text" placeholder="School">
+                    </div>
+
+                    <div>
+                        <input id="picture" type="button" value="Upload Picture">
+                    </div>
+
+                    <div>
+                        <input id="picture" type="button" value="Take New Picture">
                     </div>
                 </div>
 
-                <input id="loginButton" class="MFloatingActionButton" type="submit">
+                <input id="registerButton" class="MFloatingActionButton" type="submit">
             </form>
-            <p>New user? Then click <a href="register.html"><div class="MButton">Register</div></a></p>
-        </div>
-        
-        <div class="MCard">
-            <h2>Login with Google/Microsoft/Facebook</h2>
-            <p>Feature Coming Soon</p>
         </div>
     </main>
 
     <!-- JS includes go below here -->
     <script>
-        w3IncludeHTML();
-    </script>
+            w3IncludeHTML();
+        </script>
     <script type="text/javascript" src="cordova.js"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
