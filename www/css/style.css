@@ -27,6 +27,16 @@ fieldset td:nth-child(even) {
 	width: auto;
 }
 
+form input:not([type=button]):not([type=submit]) {
+	border: none;
+	border-bottom: 2px solid blue;
+
+	padding: 8px;
+
+	height: 30px;
+	width: 80%;
+}
+
 h1 {
 /* 	box-shadow: 2px 2px 5px #888888; */
 	text-align: center;
@@ -70,6 +80,43 @@ header h1 {
 table, tr {
 	border: none;
 	border-bottom: 1px solid var(--500);
+}
+
+.contact {
+	border: 2px solid var(--A44);
+	border-radius: 20px;
+	box-shadow: var(--box-shadow);
+	margin: auto;
+	margin-top: 4px;
+	padding: 2px;
+}
+
+.contact h2 {
+	display: inline-block;
+	margin: 0px;
+}
+
+.contact .contactInfo {
+	display: none;
+	/*margin: 0px;*/
+	height: 0px;
+	transition: height ease .4s;
+	-webkit-transition: height ease .4s;
+}
+
+.contact:hover .contactInfo {
+	display: block;
+	height: 45px;
+}
+
+.contact img {
+	display: inline-block;
+	border-radius: 50%;
+	border: 2px solid var(--A400);
+	/*float: left;*/
+	
+	height: 50px;
+	width: 50px;
 }
 
 .loginForm {

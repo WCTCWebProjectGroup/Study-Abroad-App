@@ -64,7 +64,7 @@ function doneLoadingContacts ()
     var NoLoaded = document.querySelectorAll("#groupContacts > div").length;
     if (NoLoaded == NoContacts)
     {
-        document.querySelector(".groupContacts .loadingMsg").style.display = "none";
+        document.querySelector(".loadingMsg").style.display = "none";
         console.log("Done loading contacts");
     }
 }
@@ -73,8 +73,7 @@ function lazyLoadContacts(obj)
 {
     NoContacts = obj.length;
 
-    var loadingMsg = document.querySelector(".groupContacts");
-    loadingMsg = loadingMsg.querySelector(".loadingMsg");
+    var loadingMsg = document.querySelector(".loadingMsg");
     loadingMsg.innerHTML = "Loading more contacts...";
 
     obj.forEach ( function(uid)

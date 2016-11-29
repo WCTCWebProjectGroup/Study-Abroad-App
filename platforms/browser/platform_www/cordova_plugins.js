@@ -84,6 +84,14 @@ module.exports = [
         "clobbers": [
             "SQLitePlugin"
         ]
+    },
+    {
+        "file": "plugins/com.dbaq.cordova.contactsPhoneNumbers/www/contactsPhoneNumbers.js",
+        "id": "com.dbaq.cordova.contactsPhoneNumbers.contactsPhoneNumbers",
+        "pluginId": "com.dbaq.cordova.contactsPhoneNumbers",
+        "clobbers": [
+            "navigator.contactsPhoneNumbers"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -92,7 +100,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.0",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-contacts": "2.2.0",
-    "cordova-sqlite-storage": "1.5.0"
+    "cordova-sqlite-storage": "1.5.0",
+    "com.dbaq.cordova.contactsPhoneNumbers": "0.0.8"
 }
 // BOTTOM OF METADATA
 });

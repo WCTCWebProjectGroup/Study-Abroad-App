@@ -15,6 +15,9 @@
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.alex.TripMySchoolApp"
+        },
+        "com.dbaq.cordova.contactsPhoneNumbers": {
+            "PACKAGE_NAME": "com.alex.TripMySchoolApp"
         }
     },
     "dependent_plugins": {

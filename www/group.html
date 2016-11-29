@@ -38,24 +38,31 @@
         </div>
         <div class="MCard groupContacts">
             <h2 class="gname">Contacts</h2>
-            <div id="groupContacts"></div>
-            <p class="loadingMsg">Loading...</p>
-            
+            <form action="javascript:void(0);">
+                <input type="text" placeholder="Search Contacts">
+                <input class="MButton" type="submit" value="Search">
+            </form>
         </div>
+
+        <div id="groupContacts"></div>
+        <p class="loadingMsg">Loading...</p>
     </main>
 
     <!-- Templates go below here -->
     <template id="contactCardT" class="contactCard">
-        <div class="contact">
-            <h2 class="contactName"></h2>
-            <div class="contactInfo">
-                <div class="contactEmail">
-                    <ul></ul>
+        <div class="MCard contact">
+            
+                <img src="img/Bloo.jpg">
+                <h2 class="contactName"></h2>
+                <div class="contactInfo">
+                    <div class="contactEmail">
+                        <ul></ul>
+                    </div>
+                    <div class="contactPhoneNos">
+                        <ul></ul>
+                    </div>
                 </div>
-                <div class="contactPhoneNos">
-                    <ul></ul>
-                </div>
-            </div>
+            
         </div>
     </template>
 
