@@ -59,26 +59,26 @@ var invitations = [
 
 var cUser = {
 	uid: "ABC125",
-		hashkey: "123ABC",
-		username: "Joe@gmail.com",
-		fname: "Joe",
-		lname: "Doe",
-		phoneNo: [
-			2624421666,
-			2526508372
-		], 
-		pictureUrl: "",
-		school: "WCTC",
-		groups: [
-			"EFG123",
-			"HIJ123",
-			"KLM123"
-		]
+	hashkey: "123ABC",
+	username: "Joe@gmail.com",
+	fname: "John",
+	lname: "Doe",
+	phoneNo: [
+		2624421666,
+		2526508372
+	], 
+	pictureUrl: "",
+	school: "WCTC",
+	groups: [
+		"EFG123",
+		"HIJ123",
+		"KLM123"
+	]
 };
 
-var groupList = [
+const groupList = [
 	{
-		guid: "ASDF789ASD0F8ASDF8A",
+		uid: "ASDF789ASD0F8ASDF8A",
 		hashkey: "68ASD4F3AS1DFA68DF4",
 		name: "WCTC Travel Group",
 		desc: "This is a tmp group. And this is its description.",
@@ -92,7 +92,7 @@ var groupList = [
 		school: "WCTC"
 	},
 	{
-		guid: "ASDF789ASD0F8ASDF8A",
+		uid: "ASDF789ASD0F8ASDF8B",
 		hashkey: "68ASD4F3AS1DFA68DF4",
 		name: "Madison Travel Group",
 		desc: "This is a tmp group. And this is its description.",
@@ -106,7 +106,7 @@ var groupList = [
 		school: "Madison"
 	},
 	{
-		guid: "ASDF789ASD0F8ASDF8A",
+		uid: "ASDF789ASD0F8ASDF8C",
 		hashkey: "68ASD4F3AS1DFA68DF4",
 		name: "Platteville Travel Group",
 		desc: "This is a tmp group. And this is its description.",
@@ -134,13 +134,11 @@ var userList = [
 			2526508372,
 			1234567890
 		],
+		email: [
+			"alex.c.hayes08@gmail.com"
+		],
 		pictureUrl: "",
-		school: "WCTC",
-		groups: [
-			"EFG123",
-			"HIJ123",
-			"KLM23"
-		]
+		school: "WCTC"
 	},
 	{
 		uid: "ABC124",
@@ -152,13 +150,11 @@ var userList = [
 			2624421666,
 			2526508372
 		],
+		email: [
+			"alex.c.hayes08@gmail.com"
+		],
 		pictureUrl: "",
-		school: "WCTC",
-		groups: [
-			"EFG123",
-			"HIJ123",
-			"KLM23"
-		]
+		school: "WCTC"
 	},
 	{
 		uid: "ABC125",
@@ -170,12 +166,60 @@ var userList = [
 			2624421666,
 			2526508372
 		],
+		email: [
+			"alex.c.hayes08@gmail.com"
+		],
 		pictureUrl: "",
-		school: "WCTC",
-		groups: [
-			"EFG123",
-			"HIJ123",
-			"KLM23"
-		]
-	}
+		school: "WCTC"
+	},
+	{
+		uid: "ABC126",
+		hashkey: "123ABC",
+		username: "tim@gmail.com",
+		fname: "Tim",
+		lname: "Doe",
+		phoneNo: [
+			2624421666,
+			2526508372
+		],
+		email: [
+			"alex.c.hayes08@gmail.com"
+		],
+		pictureUrl: "",
+		school: "WCTC"
+	},
+	{
+		uid: "ABC127",
+		hashkey: "123ABC",
+		username: "tim@gmail.com",
+		fname: "Tim",
+		lname: "Doe",
+		phoneNo: [
+			2624421666,
+			2526508372
+		],
+		email: [
+			"alex.c.hayes08@gmail.com"
+		],
+		pictureUrl: "",
+		school: "WCTC"
+	},
+	{
+		uid: "ABC128",
+		hashkey: "123ABC",
+		username: "tim@gmail.com",
+		fname: "Tim",
+		lname: "Doe",
+		phoneNo: [
+			2624421666,
+			2526508372
+		],
+		email: [
+			"alex.c.hayes08@gmail.com"
+		],
+		pictureUrl: "",
+		school: "WCTC"
+	},
 ];
+
+userList.uid = "ASDF789ASD0F8ASDF8A";

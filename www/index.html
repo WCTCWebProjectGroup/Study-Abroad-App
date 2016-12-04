@@ -13,6 +13,7 @@
 
     <!-- All js files in the header are for JSON testing purposes only! -->
     <script type="text/javascript" src="js/dummyJSON.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
 </head>
 <body>
     <header class="MAppBar">
@@ -20,10 +21,13 @@
     </header>
     <img id="spinner" src="img/spinner.png">
     <p id="startMsg">Please Wait...</p>
+    <div id="db">
+        Testing DB
+    </div>
     <!-- Templates go below here -->
 
     <!-- Try to keep all js files here -->
-    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
     <script type="text/javascript" src="js/SQLitePlugin.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
 
@@ -39,12 +43,12 @@
             // This function MUST return a boolean.
             // return true;
             console.log("Hopefully this is called after the page is loaded.");
-            set();
-            var tableExists = get("SELECT * from [Users]");
-            if (tableExists === null)
-                return true;
-            else
-                return false;
+            //set();
+            //var tableExists = get("SELECT * from [Users]");
+            // if (tableExists === null)
+            //     return true;
+            // else
+            //     return false;
         }
 
         function firstTimeSetUp ()
@@ -111,25 +115,26 @@
 
         function afterPageLoad ()
         {
-            // Test SQLitePlugin
+            // Check db
             testDB();
+            
             // If it's first time, go to login page, else login & check for updates
-            if (isFirstTimeSet())
-                firstTimeSetUp();
-            else
-            {
-                console.log("Not first time running application.");
-                // There should exist a file that contains the uid
-                // for each group this user is a member of.
-                // Parse that file and run a GET request to check if
-                // the hashed time stamps match up. 
-                console.log("Now checking for updates.")
-                setTimeout(checkForUpdates,10000);
-            }
+            // if (isFirstTimeSet())
+            //     firstTimeSetUp();
+            // else
+            // {
+            //     console.log("Not first time running application.");
+            //     // There should exist a file that contains the uid
+            //     // for each group this user is a member of.
+            //     // Parse that file and run a GET request to check if
+            //     // the hashed time stamps match up. 
+            //     console.log("Now checking for updates.")
+            //     setTimeout(checkForUpdates,10000);
+            // }
             // 
         } 
 
-        //window.addEventListener("load", afterPageLoad());
+        window.addEventListener("load", afterPageLoad());
     </script>
 
     <script type="text/javascript" src="js/index.js"></script>
