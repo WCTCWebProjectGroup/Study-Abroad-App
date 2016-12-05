@@ -25,7 +25,7 @@ function DB_exists () {
     var tmp_db = new Dexie(DB_name()).open().then(function (db) {
         console.log("Found database.");
         exists = true;
-        // db.close();
+        db.close();
     }).catch('NoSuchDatabaseError', function (e) {
         console.log("Did not find database.");
     }).catch( function (e) {
@@ -161,5 +161,7 @@ function testDB () {
         bunchOfTrips.forEach( function (trip) {
             DB_addTrip(trip);
         });
+        console.log(string);
     });
+    db.close();
 }
