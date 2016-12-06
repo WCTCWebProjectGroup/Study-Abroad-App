@@ -2,6 +2,9 @@
 // The app will use only ONE database, for now it will be called KickMySchoolDB
 // Needs to be included before index.js!
 
+// *The database currently has two tables; 'Users' and 'Trips'.
+// *The first entry in the 'Users' table is the user who logged in. Their 'uid' is 1 
+
 // ----- New API using Dexie ----- //
 // Global Vars - TODO: Put in function
 var db;
@@ -54,7 +57,9 @@ function DB_init () {
 
 // Add user obj to database
 function DB_addUser (user) {
-    db.Users.add({
+    var transaction = db.transaction(["Users"], "readwrite");
+    var objectstore = transaction.objectstore("Users");
+    objectstore.add({
         uid: user.uid,
         lastUpdate: user.lastUpdate,
         fname: user.fname,
@@ -67,7 +72,9 @@ function DB_addUser (user) {
 }
 
 function DB_addTrip (trip) {
-    db.Trips.add({
+    var transaction = db.transaction(["Trips"], "readwrite");
+    var objectstore = transaction.objectstore("Trips");
+    objectstore.Trips.add({
         uid: trip.uid,
         lastUpdate: trip.lastUpdate,
         name: trip.name,
@@ -150,18 +157,20 @@ function testDB () {
         i++;
     });
 
-    Promise.resolve("foo").then( function (string) {
+    Promise.resolve("first").then( function (string) {
+        console.log(string)
         bunchOfUsers.forEach( function (user) {
             DB_addUser(user);
         });
         return new Promise(function (resolve, reject) {
-            resolve(string);
+            resolve("second");
         });
     }).then( function (string) {
+        console.log(string);
         bunchOfTrips.forEach( function (trip) {
             DB_addTrip(trip);
         });
         console.log(string);
     });
-    db.close();
+    // db.close();
 }
