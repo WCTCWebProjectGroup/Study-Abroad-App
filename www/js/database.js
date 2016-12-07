@@ -22,72 +22,44 @@ function DB_Tables () {
     ];
 }
 
-// Check if the db exists
-function DB_exists () {
-    var exists = false;
-    var tmp_db = new Dexie(DB_name()).open().then(function (db) {
-        console.log("Found database.");
-        exists = true;
-        db.close();
-    }).catch('NoSuchDatabaseError', function (e) {
-        console.log("Did not find database.");
-    }).catch( function (e) {
-        console.log("Critical Error: " + e);
-    });
-    
-    return exists;
-}
-
 function DB_init () {
-    if (DB_exists()) {
-        db = new Dexie(DB_name()).open();
-    } else {
-        db = new Dexie(DB_name());
-        db.version(1).stores({
-            Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo',
-            Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events'
-        });
+    db = new Dexie(DB_name());
 
-        db.open().catch(function (e) {
-            console.log("Failed to open database " + DB_name());
-            console.log("Error Msg: " + e);
-        });
-    }
+    db.version(1).stores({
+        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo',
+        Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events'
+    });
 }
 
 // Add user obj to database
 function DB_addUser (user) {
-    var transaction = db.transaction(["Users"], "readwrite");
-    var objectstore = transaction.objectstore("Users");
-    objectstore.add({
-        uid: user.uid,
-        lastUpdate: user.lastUpdate,
-        fname: user.fname,
-        lname: user.lname,
-        phoneNo: user.phoneNo,
-        email: user.email,
-        school: user.school,
-        photo: user.photo
+    db.transaction("rw", db.Users, function() {
+        db.Users.add({
+            uid: user.uid,
+            lastUpdate: user.lastUpdate,
+            fname: user.fname,
+            lname: user.lname,
+            phoneNo: user.phoneNo,
+            email: user.email,
+            school: user.school,
+            photo: user.photo
+        }); 
     });
 }
 
 function DB_addTrip (trip) {
-    var transaction = db.transaction(["Trips"], "readwrite");
-    var objectstore = transaction.objectstore("Trips");
-    objectstore.Trips.add({
-        uid: trip.uid,
-        lastUpdate: trip.lastUpdate,
-        name: trip.name,
-        desc: trip.desc,
-        members: trip.members,
-        owners: trip.owners,
-        activeInvitations: trip.activeInvitations,
-        events: trip.events
+    db.transaction("rw", db.Trips, function() {
+        db.Trips.add({
+            uid: trip.uid,
+            lastUpdate: trip.lastUpdate,
+            name: trip.name,
+            desc: trip.desc,
+            members: trip.members,
+            owners: trip.owners,
+            activeInvitations: trip.activeInvitations,
+            events: trip.events
+        });
     });
-}
-
-function DB_bulkAddTrip (tripArray) {
-    db.Trips.bulkAdd(tripArray);
 }
 
 // ----- Constructors for JS objects ----- //
@@ -157,20 +129,28 @@ function testDB () {
         i++;
     });
 
-    Promise.resolve("first").then( function (string) {
-        console.log(string)
-        bunchOfUsers.forEach( function (user) {
-            DB_addUser(user);
-        });
-        return new Promise(function (resolve, reject) {
-            resolve("second");
-        });
-    }).then( function (string) {
-        console.log(string);
-        bunchOfTrips.forEach( function (trip) {
-            DB_addTrip(trip);
-        });
-        console.log(string);
+    bunchOfUsers.forEach(function(user) {
+        DB_addUser(user);
     });
+
+    bunchOfTrips.forEach(function(trip) {
+        DB_addTrip(trip);
+    });
+
+    // Promise.resolve("first").then( function (string) {
+    //     console.log(string)
+    //     bunchOfUsers.forEach( function (user) {
+    //         DB_addUser(user);
+    //     });
+    //     return new Promise(function (resolve, reject) {
+    //         resolve("second");
+    //     });
+    // }).then( function (string) {
+    //     console.log(string);
+    //     bunchOfTrips.forEach( function (trip) {
+    //         DB_addTrip(trip);
+    //     });
+    //     console.log(string);
+    // });
     // db.close();
 }
