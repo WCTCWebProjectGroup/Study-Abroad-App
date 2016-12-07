@@ -19,8 +19,7 @@
     <header class="MAppBar">
         <h1>Trip My School</h1>
     </header>
-    <img id="spinner" src="img/spinner.png">
-    <p id="startMsg">Please Wait...</p>
+    <div w3-include-html="loadingScreen.html"></div>
     <div id="db">
         Testing DB
     </div>
@@ -115,8 +114,19 @@
 
         function afterPageLoad ()
         {
-            // Check db
-            testDB();
+            DB_init();
+            getCurrentUser()
+                .then(function(entry){
+                    if (entry !== null) {
+                        console.log("Currently logged in as " + entry.fname + " " + entry.lname);
+                    }
+                    else {
+                        // If the user is null then this is first time setup
+                        console.log("Not currently logged in");
+                        console.log("Navigating to the login page.");
+                        firstTimeSetUp();
+                    }
+        });
             
             // If it's first time, go to login page, else login & check for updates
             // if (isFirstTimeSet())

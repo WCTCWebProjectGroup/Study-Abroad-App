@@ -19,7 +19,7 @@ function testDB () {
                 db.transaction('rw', db.Users, function()
                 {
                     db.Users.add({
-                        uid: "123ABC1",
+                        uid: "1",
                         lastUpdate: Date.now(),
                         fname: "Alex",
                         lname: "Hayes",

@@ -18,10 +18,11 @@
 <body>
     <div w3-include-html="header.html"></div>
     <div w3-include-html="nav.html"></div>
+    <div w3-include-html="loadingScreen.html"></div>
     <main>
         <h2>Register</h2>
         <div class="card MCard">
-            <form>
+            <form action="javascript:void(0)">
                 <div class="registerForm">
                     <div>
                         <input id="email" type="email" placeholder="Email">
@@ -44,7 +45,7 @@
                     </div>
 
                     <div>
-                        <input id="lname" type="tel" placeholder="Phone No">
+                        <input id="phone" type="tel" placeholder="Phone No">
                     </div>
 
                     <div>
@@ -73,5 +74,76 @@
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
     <script type="text/javascript" src="js/drawer.js"></script>
+    <script type="text/javascript" src="js/database.js"></script>
+    <script>
+        function toggleLoadingScreen() {
+            var loadEl = document.getElementById("loadingBg") 
+            
+            if (loadEl.style.display == "none")
+                loadEl.style.display = "block";
+            else
+                loadEl.style.display = "none";
+        }
+
+        window.onload = function () {
+            setTimeout(toggleLoadingScreen, 1000);
+
+            function showSrvMsg(msg) {
+                alert(msg);
+            }
+
+            var email;
+            var fname;
+            var lname;
+            var school;
+            var picture;
+            var phone;
+
+            function handleFormData () {
+                toggleLoadingScreen();
+                var emailEl = document.getElementById("email");
+                var fnameEl = document.getElementById("fname");
+                var lnameEl = document.getElementById("lname");
+                var schoolEl = document.getElementById("school");
+                var pictureEl = document.getElementById("picture");
+                var phoneEl = document.getElementById("phone");
+                email = emailEl.value;
+                fname = fnameEl.value;
+                lname = lnameEl.value;
+                school = schoolEl.value;
+                picture = pictureEl.value;
+                phone = phoneEl.value;
+                console.log("Email: " + email);
+                console.log("Name: " + fname + " " + lname);
+                console.log("School: " + school);
+                console.log("Picture: " + picture);
+                console.log("Phone No: " + phone);
+
+                sendForm();
+            }
+
+            function sendForm() {
+                // Do stuff
+                var formData = true;
+                if (formData) {
+                    console.log("The form data was good.");
+                    // function to add user to db
+                    var usr = new Group_user(fname, lname, phone, picture, school);
+                    setCurrentUser(usr);
+
+                    window.location.assign("groups.html");
+                } else {
+                    showSrvMsg("Bad data");
+                }
+            }
+
+            function badData() {
+                toggleLoadingScreen();
+            }
+
+            var submitBtn = document.getElementsByTagName("form")[0];
+            submitBtn.addEventListener("submit", handleFormData);
+        };
+    </script>
 </body>
 </html>

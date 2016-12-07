@@ -443,6 +443,18 @@ input:checked:not([type=submit]) + .slider::after {
 	box-shadow: 8px 8px 16px rgba(0,0,0,.5);
 }
 
+#loadingBg {
+	background-color: white;
+	opacity: .75;
+	
+	margin: 0;
+	position: fixed;
+	z-index: 50;
+
+	height: 100%;
+	width: 100%;
+}
+
 #loginButton {
 	font-size: 25px;
 	text-shadow: 2px 2px 4px rgba(0,0,0,0.5);

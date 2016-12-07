@@ -31,6 +31,33 @@ function DB_init () {
     });
 }
 
+function getCurrentUser() {
+    return db.Users
+        .where('uid')
+        .equals(0)
+        .toArray()
+        .then(function(entry){
+            // console.log(entry);
+            return entry[0] === undefined ? null : entry[0];
+        });
+}
+
+// Sets/updates the current users info
+function setCurrentUser(userObj) {
+    db.transaction("rw", db.Users, function() {
+        db.Users.add({
+            uid: 1,
+            lastUpdate: user.lastUpdate,
+            fname: user.fname,
+            lname: user.lname,
+            phoneNo: user.phoneNo,
+            email: user.email,
+            school: user.school,
+            photo: user.photo
+        }); 
+    });
+}
+
 // Add user obj to database
 function DB_addUser (user) {
     db.transaction("rw", db.Users, function() {
@@ -47,6 +74,7 @@ function DB_addUser (user) {
     });
 }
 
+// Add trip obj to database
 function DB_addTrip (trip) {
     db.transaction("rw", db.Trips, function() {
         db.Trips.add({
@@ -101,7 +129,17 @@ function Group_event (name, desc, startTimeStamp, endTimeStamp, location) {
 // ----- Test functions ----- //
 function testDB () {
     DB_init();
-    
+
+    getCurrentUser()
+        .then(function(entry){
+            if (entry !== null)
+                console.log("Currently logged in as " + entry.fname + " " + entry.lname);
+            else
+                console.log("Not currently logged in");
+        });
+}
+
+function addDummyUsers () {
     var bunchOfUsers = [];
     var i = 0;
     userList.forEach ( function (user) {
@@ -113,10 +151,16 @@ function testDB () {
             "http://",
             user.school
         );
-        bunchOfUsers[i].uid = "ABC" + i;
+        bunchOfUsers[i].uid = i;
         i++;
     });
 
+    bunchOfUsers.forEach(function(user) {
+        DB_addUser(user);
+    });
+}
+
+function addDummyTrips () {
     var bunchOfTrips = [];
     var i = 0;
     groupList.forEach (function (trip) {
@@ -129,28 +173,8 @@ function testDB () {
         i++;
     });
 
-    bunchOfUsers.forEach(function(user) {
-        DB_addUser(user);
-    });
-
+    // Working block
     bunchOfTrips.forEach(function(trip) {
         DB_addTrip(trip);
     });
-
-    // Promise.resolve("first").then( function (string) {
-    //     console.log(string)
-    //     bunchOfUsers.forEach( function (user) {
-    //         DB_addUser(user);
-    //     });
-    //     return new Promise(function (resolve, reject) {
-    //         resolve("second");
-    //     });
-    // }).then( function (string) {
-    //     console.log(string);
-    //     bunchOfTrips.forEach( function (trip) {
-    //         DB_addTrip(trip);
-    //     });
-    //     console.log(string);
-    // });
-    // db.close();
 }
