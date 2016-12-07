@@ -32,6 +32,9 @@ function DB_init () {
 }
 
 function getCurrentUser() {
+    if (db === undefined)
+        DB_init();
+
     return db.Users
         .where('uid')
         .equals(0)
@@ -43,7 +46,10 @@ function getCurrentUser() {
 }
 
 // Sets/updates the current users info
-function setCurrentUser(userObj) {
+function setCurrentUser(user) {
+    if (db === undefined)
+        DB_init();
+
     db.transaction("rw", db.Users, function() {
         db.Users.add({
             uid: 1,
@@ -54,12 +60,36 @@ function setCurrentUser(userObj) {
             email: user.email,
             school: user.school,
             photo: user.photo
-        }); 
+        });
+    }).then(function() {
+        return true;
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error == "ConstraintError: Key already exists in the object store.") {
+            alert("The user already exists");
+        }
+        return false;
+    });
+}
+
+// This will log the user out and clear the database
+function logout() {
+    if (db === undefined)
+        DB_init();
+
+    return db.transaction("rw", db.Users, db.Trips, function() {
+        db.Users.clear();
+        db.Trips.clear();
+    }).then(function() {
+        console.log("Finished clearing the tables.");
     });
 }
 
 // Add user obj to database
 function DB_addUser (user) {
+    if (db === undefined)
+        DB_init();
+
     db.transaction("rw", db.Users, function() {
         db.Users.add({
             uid: user.uid,
@@ -71,11 +101,16 @@ function DB_addUser (user) {
             school: user.school,
             photo: user.photo
         }); 
+    }).then(function() {
+        console.log("done");
     });
 }
 
 // Add trip obj to database
 function DB_addTrip (trip) {
+    if (db === undefined)
+        DB_init();
+
     db.transaction("rw", db.Trips, function() {
         db.Trips.add({
             uid: trip.uid,

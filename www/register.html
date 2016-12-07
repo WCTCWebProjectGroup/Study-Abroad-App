@@ -75,6 +75,7 @@
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
     <script type="text/javascript" src="js/drawer.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
+    <script type="text/javascript" src="js/dexie.js"></script>
     <script>
         function toggleLoadingScreen() {
             var loadEl = document.getElementById("loadingBg") 
@@ -129,9 +130,10 @@
                     console.log("The form data was good.");
                     // function to add user to db
                     var usr = new Group_user(fname, lname, phone, picture, school);
-                    setCurrentUser(usr);
+                    if (!setCurrentUser(usr))
+                        toggleLoadingScreen();
 
-                    window.location.assign("groups.html");
+                    // window.location.assign("groups.html");
                 } else {
                     showSrvMsg("Bad data");
                 }
