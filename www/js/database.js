@@ -2,8 +2,8 @@
 // The app will use only ONE database, for now it will be called KickMySchoolDB
 // Needs to be included before index.js!
 
-// *The database currently has two tables; 'Users' and 'Trips'.
-// *The first entry in the 'Users' table is the user who logged in. Their 'uid' is 1 
+// *The database currently has the tables; 'Users', 'Trips', 'CUser'.
+// *The entry in the 'CUsers' table is the user who logged in. 
 
 // ----- New API using Dexie ----- //
 // Global Vars - TODO: Put in function
@@ -36,18 +36,22 @@ function getCurrentUser() {
     if (db === undefined)
         DB_init();
 
-    var cuid = db.CUser
-        .where('isCurrentUser')
-        .equals(true);
-
-    return db.Users
-        .where('uid')
-        .equals(0)
-        .toArray()
-        .then(function(entry){
-            // console.log(entry);
-            return entry[0] === undefined ? null : entry[0];
-        });
+    // FIXME!
+    // This should first check to see if
+    db.transaction("r", db.Users, db.CUser, function () {
+        return db.Users
+            .where('uid')
+            .equals(
+                db.CUser.first(function (entry) {
+                    console.log("The current users id is - " + entry.uid);
+                    return entry.uid;
+                }))
+            .toArray()
+            .then(function(entry){
+                // console.log(entry);
+                return entry[0] === undefined ? null : entry[0];
+            });
+    });
 }
 
 // Sets the current users info. Returns false if the user already
@@ -56,7 +60,7 @@ function setCurrentUser(user) {
     if (db === undefined)
         DB_init();
 
-    db.transaction("rw", db.Users, function() {
+    db.transaction("rw", db.Users, db.CUser, function() {
         db.Users.add({
             uid: 123,
             lastUpdate: user.lastUpdate,
@@ -68,13 +72,17 @@ function setCurrentUser(user) {
             photo: user.photo,
             isCurrentUser: true
         });
+
+        db.CUser.add({ uid: 123 });
     }).then(function() {
         // TODO: Add another promise here for checking to see if the
         // server then also approves the new account.
         console.log("Logged in successfully");
+        (function() {document.getElementsById("logout").style.display = "block"});
         return true;
     }).catch(function(error) {
         console.log("Error: " + error);
+        (function() {document.getElementsById("logout").style.display = "none"});
         if (error == "ConstraintError: Key already exists in the object store.") {
             alert("The user already exists");
         }
