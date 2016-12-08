@@ -26,14 +26,19 @@ function DB_init () {
     db = new Dexie(DB_name());
 
     db.version(1).stores({
-        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo',
-        Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events'
+        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo, isCurrentUser',
+        Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events',
+        CUser: 'uid'
     });
 }
 
 function getCurrentUser() {
     if (db === undefined)
         DB_init();
+
+    var cuid = db.CUser
+        .where('isCurrentUser')
+        .equals(true);
 
     return db.Users
         .where('uid')
@@ -45,23 +50,28 @@ function getCurrentUser() {
         });
 }
 
-// Sets/updates the current users info
+// Sets the current users info. Returns false if the user already
+// exists and returns true if the operation succeeded.
 function setCurrentUser(user) {
     if (db === undefined)
         DB_init();
 
     db.transaction("rw", db.Users, function() {
         db.Users.add({
-            uid: 1,
+            uid: 123,
             lastUpdate: user.lastUpdate,
             fname: user.fname,
             lname: user.lname,
             phoneNo: user.phoneNo,
             email: user.email,
             school: user.school,
-            photo: user.photo
+            photo: user.photo,
+            isCurrentUser: true
         });
     }).then(function() {
+        // TODO: Add another promise here for checking to see if the
+        // server then also approves the new account.
+        console.log("Logged in successfully");
         return true;
     }).catch(function(error) {
         console.log("Error: " + error);
@@ -138,6 +148,7 @@ function Group_user (fname, lname, phoneNo, email, photo, school) {
     this.photo = photo;
     this.school = school;
     this.lastUpdate = Date.now();
+    this.isCurrentUser = false;
 }
 
 // Trip

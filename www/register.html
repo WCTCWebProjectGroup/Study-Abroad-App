@@ -130,8 +130,10 @@
                     console.log("The form data was good.");
                     // function to add user to db
                     var usr = new Group_user(fname, lname, phone, picture, school);
-                    if (!setCurrentUser(usr))
+                    if (!setCurrentUser(usr)) {
                         toggleLoadingScreen();
+                        console.log("User already exists.");
+                    }
 
                     // window.location.assign("groups.html");
                 } else {
