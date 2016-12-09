@@ -81,8 +81,10 @@ const groupList = [
 			"ABC124"
 		],
 		members: [
-			"ABC123",
-			"ABC125"
+			0,
+			1,
+			2,
+			6
 		],
 		school: "WCTC"
 	},

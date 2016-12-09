@@ -44,6 +44,10 @@
             <input id="testInp9" class="MButton" placeholder="Search Trip By UID" type="input">
             <input id="testBtn10" class="MButton" value="Print Out Trips" type="button">
             <br>
+            <input id="testBtn14" class="MButton" value="Print Out Members of Trip 1" type="button">
+            <br>
+            <input id="testBtn17" class="MButton" value="Check if there are updates to Trip 1" type="button">
+            <br>
         </div>
 
         <h2>Testing Current User</h2>
@@ -53,6 +57,9 @@
             <input id="testBtn12" class="MButton" value="Logout" type="button">
             <br>
             <input id="testBtn13" class="MButton" value="Print Current User Obj" type="button">
+            <br>
+            <input id="testInp16" class="MButton" placeholder="FName" type="input">
+            <input id="testBtn15" class="MButton" value="Change CUser FName" type="button">
             <br>
         </div>
     </main>
@@ -82,10 +89,13 @@
         document.getElementById("testBtn7").addEventListener("click", clearTripsTable);
         document.getElementById("testBtn8").addEventListener("click", printOutTrips);
         document.getElementById("testBtn10").addEventListener("click", searchTrips);
+        document.getElementById("testBtn14").addEventListener("click", getTripMembers);
+        document.getElementById("testBtn17").addEventListener("click", checkTripsForUpdates);
 
         document.getElementById("testBtn11").addEventListener("click", testLogin);
         document.getElementById("testBtn12").addEventListener("click", logout);
         document.getElementById("testBtn13").addEventListener("click", testGetCUserInfo);
+        document.getElementById("testBtn15").addEventListener("click", updateCUserName);
     </script>
 </body>
 </html>

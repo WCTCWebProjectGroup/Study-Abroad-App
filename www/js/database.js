@@ -105,7 +105,7 @@ function logout() {
         DB_init();
 
     db.CUser.clear();
-    console.log("Finished clearing CUser.");
+    console.log("Logged Out.");
 }
 
 // Add user obj to database
@@ -170,7 +170,7 @@ function Group_trip (name, desc, ownerUid) {
     this.desc = desc;
     this.ownerUid = ownerUid;
     this.lastUpdate = Date.now();
-    this.members = [ownerUid];
+    // this.members = [ownerUid];
     this.owners = [ownerUid];
     this.invitations = []; 
 }
@@ -261,6 +261,7 @@ function addDummyTrips () {
             userList[i].uid
         );
         bunchOfTrips[i].uid = i + "ABC";
+        bunchOfTrips[i].members = trip.members;
         i++;
     });
 
@@ -314,9 +315,10 @@ function testGetCUserInfo () {
     if (db === undefined)
         DB_init();
 
-    if (db.CUser.toArray.length == 1) {
-        db.CUser
-            .toArray(function (list) {
+    // var tmp = db.CUser.toArray();
+    db.CUser
+        .toArray(function (list) {
+            if (list.length > 0) {
                 list.forEach(function (entry) {
                     console.log(entry.uid);
                     db.Users
@@ -324,8 +326,50 @@ function testGetCUserInfo () {
                             console.log(cuserObj);
                         });
                 });
+            } else {
+                console.log("Unable to print usr info because not logged in");
+            }
+        });
+}
+
+function updateCUserName () {
+    if (db === undefined)
+        DB_init();
+
+    var newFname = document.getElementById("testInp16").value;
+    db.CUser
+        .toArray(function (list) {
+            list.forEach(function (entry) {
+                db.Users
+                    .where("uid") //{uid: entry.uid, fname: "Charlie"});
+                    .equals(entry.uid)
+                    .modify({fname: newFname});
             });
-    } else {
-        console.log("Unable to print usr info because not logged in");
-    }
+        }).then(testGetCUserInfo);
+} 
+
+function getTripMembers () {
+    if (db === undefined)
+        DB_init();
+
+    db.Trips.get('0ABC')
+        .then(function (trip) {
+            console.log(trip.members);
+            trip.members.forEach(function (entry) {
+                db.Users.get(entry)
+                    .then(function (usr) {
+                        console.log(usr);
+                    });
+            });
+        });
+}
+
+function checkTripsForUpdates () {
+    db.Trips.get('0ABC')
+}
+
+function getTripLastUpdate(uid) {
+    //XMLHttpRequest();
+    serverLU = 123456;
+    return serverLU;
 }
