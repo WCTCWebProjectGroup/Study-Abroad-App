@@ -62,23 +62,27 @@ function setCurrentUser(user) {
         DB_init();
 
     db.transaction("rw", db.Users, db.CUser, function() {
-        db.CUser.add({ uid: 123 });
+        db.CUser.add({ uid: user.uid });
         var cusrReg = false;
-        var tmp = db.Users.get(123)
-            .then(function () {
-                console.log("Don't need to add the user to table Users because it already exists");
+        var tmp = db.Users.get(user.uid)
+            .then(function (obj) {
+                if (obj === undefined) {
+                    db.Users.add({
+                        uid: user.uid,
+                        lastUpdate: user.lastUpdate,
+                        fname: user.fname,
+                        lname: user.lname,
+                        phoneNo: user.phoneNo,
+                        email: user.email,
+                        school: user.school,
+                        photo: user.photo
+                    });
+                } else {
+                    console.log("Don't need to add the user to table Users because it already exists");
+                }
             }).catch(function (err) {
-            db.Users.add({
-                uid: 123,
-                lastUpdate: user.lastUpdate,
-                fname: user.fname,
-                lname: user.lname,
-                phoneNo: user.phoneNo,
-                email: user.email,
-                school: user.school,
-                photo: user.photo
+                console.log("Error: " + err);
             });
-        });
     }).then(function() {
         // TODO: Add another promise here for checking to see if the
         // server then also approves the new account.
@@ -239,7 +243,7 @@ function searchUsers () {
     var fname = document.getElementById("testInp4").value;
     db.Users
         .where("fname")
-        .anyOfIgnoreCase(fname)
+        .startsWith(fname)
         .toArray(function (list) {
             list.forEach(function (entry) {
                 console.log(entry.email);
@@ -302,6 +306,7 @@ function searchTrips () {
 
 function testLogin () {
     var new_usr = new Group_user("Darth", "Vader", "2624421666", "test@gmail.com", "~/Pictures/test.svg", "WCTC");
+    new_usr.uid = 6;
     setCurrentUser(new_usr);
 }
 
