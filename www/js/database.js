@@ -18,7 +18,8 @@ function DB_name () {
 function DB_Tables () {
     var tables = [
         "Users",
-        "Trips"
+        "Trips",
+        "CUser"
     ];
 }
 
@@ -26,7 +27,7 @@ function DB_init () {
     db = new Dexie(DB_name());
 
     db.version(1).stores({
-        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo, isCurrentUser',
+        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo',
         Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events',
         CUser: 'uid'
     });
@@ -61,19 +62,23 @@ function setCurrentUser(user) {
         DB_init();
 
     db.transaction("rw", db.Users, db.CUser, function() {
-        db.Users.add({
-            uid: 123,
-            lastUpdate: user.lastUpdate,
-            fname: user.fname,
-            lname: user.lname,
-            phoneNo: user.phoneNo,
-            email: user.email,
-            school: user.school,
-            photo: user.photo,
-            isCurrentUser: true
-        });
-
         db.CUser.add({ uid: 123 });
+        var cusrReg = false;
+        var tmp = db.Users.get(123)
+            .then(function () {
+                console.log("Don't need to add the user to table Users because it already exists");
+            }).catch(function (err) {
+            db.Users.add({
+                uid: 123,
+                lastUpdate: user.lastUpdate,
+                fname: user.fname,
+                lname: user.lname,
+                phoneNo: user.phoneNo,
+                email: user.email,
+                school: user.school,
+                photo: user.photo
+            });
+        });
     }).then(function() {
         // TODO: Add another promise here for checking to see if the
         // server then also approves the new account.
@@ -95,12 +100,8 @@ function logout() {
     if (db === undefined)
         DB_init();
 
-    return db.transaction("rw", db.Users, db.Trips, function() {
-        db.Users.clear();
-        db.Trips.clear();
-    }).then(function() {
-        console.log("Finished clearing the tables.");
-    });
+    db.CUser.clear();
+    console.log("Finished clearing CUser.");
 }
 
 // Add user obj to database
@@ -155,8 +156,6 @@ function Group_user (fname, lname, phoneNo, email, photo, school) {
     this.email = email;
     this.photo = photo;
     this.school = school;
-    this.lastUpdate = Date.now();
-    this.isCurrentUser = false;
 }
 
 // Trip
@@ -214,6 +213,40 @@ function addDummyUsers () {
     });
 }
 
+function clearUserTables () {
+    if (db === undefined)
+        DB_init();
+
+    db.Users.clear();
+}
+
+function printOutUsers () {
+    if (db === undefined)
+        DB_init();
+
+    db.Users
+        .toArray(function (person) {
+            person.forEach(function (entry) {
+                console.log(entry.fname + " " + entry.lname);
+            });
+        });
+}
+
+function searchUsers () {
+    if (db === undefined)
+        DB_init();
+
+    var fname = document.getElementById("testInp4").value;
+    db.Users
+        .where("fname")
+        .anyOfIgnoreCase(fname)
+        .toArray(function (list) {
+            list.forEach(function (entry) {
+                console.log(entry.email);
+            });
+        });
+}
+
 function addDummyTrips () {
     var bunchOfTrips = [];
     var i = 0;
@@ -231,4 +264,63 @@ function addDummyTrips () {
     bunchOfTrips.forEach(function(trip) {
         DB_addTrip(trip);
     });
+}
+
+function clearTripsTable () {
+    if (db === undefined)
+        DB_init();
+
+    db.Trips.clear();
+}
+
+function printOutTrips () {
+    if (db === undefined)
+        DB_init();
+
+    db.Trips
+        .toArray(function (person) {
+            person.forEach(function (entry) {
+                console.log(entry.name);
+            });
+        });
+}
+
+function searchTrips () {
+    if (db === undefined)
+        DB_init();
+
+    var fname = document.getElementById("testInp9").value;
+    db.Trips
+        .where("name")
+        .startsWith(fname)
+        .toArray(function (list) {
+            list.forEach(function (entry) {
+                console.log(entry.name);
+            });
+        });
+}
+
+function testLogin () {
+    var new_usr = new Group_user("Darth", "Vader", "2624421666", "test@gmail.com", "~/Pictures/test.svg", "WCTC");
+    setCurrentUser(new_usr);
+}
+
+function testGetCUserInfo () {
+    if (db === undefined)
+        DB_init();
+
+    if (db.CUser.toArray.length == 1) {
+        db.CUser
+            .toArray(function (list) {
+                list.forEach(function (entry) {
+                    console.log(entry.uid);
+                    db.Users
+                        .get(entry.uid, function (cuserObj) {
+                            console.log(cuserObj);
+                        });
+                });
+            });
+    } else {
+        console.log("Unable to print usr info because not logged in");
+    }
 }

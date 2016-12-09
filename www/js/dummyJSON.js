@@ -69,11 +69,6 @@ var cUser = {
 	], 
 	pictureUrl: "",
 	school: "WCTC",
-	groups: [
-		"EFG123",
-		"HIJ123",
-		"KLM123"
-	]
 };
 
 const groupList = [

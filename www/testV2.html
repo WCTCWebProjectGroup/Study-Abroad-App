@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/material.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <title>TestV2</title>
+
+    <!-- Try to avoid including the js scripts here unless absolutely necessary -->
+    <script type="text/javascript" src="js/dummyJSON.js"></script>
+    <script type="text/javascript" src="js/w3data.js"></script>
+</head>
+<body>
+    <div w3-include-html="header.html"></div>
+    <div w3-include-html="nav.html"></div>
+    <div w3-include-html="loadingScreen.html"></div>
+    <main>
+        <h2>Testing Users Table</h2>
+        <div class="MCard">
+            <input id="testBtn1" class="MButton" value="Add Dummy Users" type="button">
+            <br>
+            <input id="testBtn2" class="MButton" value="Clear User Table" type="button">
+            <br>
+            <input id="testBtn3" class="MButton" value="Print Out Users" type="button">
+            <br>
+            <input id="testInp4" class="MButton" placeholder="Search User By First Name" type="input">
+            <input id="testBtn5" class="MButton" value="Print Out Users" type="button">
+            <br>
+        </div>
+
+        <h2>Testing Trips Table</h2>
+        <div class="MCard">
+            <input id="testBtn6" class="MButton" value="Add Dummy Trips" type="button">
+            <br>
+            <input id="testBtn7" class="MButton" value="Clear Trips Table" type="button">
+            <br>
+            <input id="testBtn8" class="MButton" value="Print Out Trips" type="button">
+            <br>
+            <input id="testInp9" class="MButton" placeholder="Search Trip By UID" type="input">
+            <input id="testBtn10" class="MButton" value="Print Out Trips" type="button">
+            <br>
+        </div>
+
+        <h2>Testing Current User</h2>
+        <div class="MCard">
+            <input id="testBtn11" class="MButton" value="Set Current User" type="button">
+            <br>
+            <input id="testBtn12" class="MButton" value="Logout" type="button">
+            <br>
+            <input id="testBtn13" class="MButton" value="Print Current User Obj" type="button">
+            <br>
+        </div>
+    </main>
+
+    <!-- JS includes go below here -->
+    <script>
+        w3IncludeHTML();
+    </script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/dexie.js"></script>
+    <script type="text/javascript" src="js/database.js"></script>
+    <!--<script type="text/javascript" src="js/index.js"></script>-->
+    <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
+    <script type="text/javascript" src="js/drawer.js"></script>
+    <script>
+        window.onload = function () {
+            setTimeout( function() { document.getElementById("loadingBg").style.display = "none"; }, 1000);
+        };
+        
+        document.getElementById("testBtn1").addEventListener("click", addDummyUsers);
+        document.getElementById("testBtn2").addEventListener("click", clearUserTables);
+        document.getElementById("testBtn3").addEventListener("click", printOutUsers);
+        document.getElementById("testBtn5").addEventListener("click", searchUsers);
+
+        document.getElementById("testBtn6").addEventListener("click", addDummyTrips);
+        document.getElementById("testBtn7").addEventListener("click", clearTripsTable);
+        document.getElementById("testBtn8").addEventListener("click", printOutTrips);
+        document.getElementById("testBtn10").addEventListener("click", searchTrips);
+
+        document.getElementById("testBtn11").addEventListener("click", testLogin);
+        document.getElementById("testBtn12").addEventListener("click", logout);
+        document.getElementById("testBtn13").addEventListener("click", testGetCUserInfo);
+    </script>
+</body>
+</html>
