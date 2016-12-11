@@ -33,34 +33,21 @@ function DB_init () {
     });
 }
 
+// Returns a Group_user obj of the currently logged in user
 function getCurrentUser() {
-    if (db === undefined)
-        DB_init();
-
-    // FIXME!
-    // This should first check to see if
-    db.transaction("r", db.Users, db.CUser, function () {
-        return db.Users
-            .where('uid')
-            .equals(
-                db.CUser.first(function (entry) {
-                    console.log("The current users id is - " + entry.uid);
-                    return entry.uid;
-                }))
-            .toArray()
-            .then(function(entry){
-                // console.log(entry);
-                return entry[0] === undefined ? null : entry[0];
-            });
-    });
+    var cuser = {};
+    return db.CUser
+        .toArray(function (list) {
+            if(list[0] !== undefined)
+                return db.Users.get(list[0].uid);
+            else
+                return null; 
+        });
 }
 
 // Sets the current users info. Returns false if the user already
 // exists and returns true if the operation succeeded.
 function setCurrentUser(user) {
-    if (db === undefined)
-        DB_init();
-
     db.transaction("rw", db.Users, db.CUser, function() {
         db.CUser.add({ uid: user.uid });
         var cusrReg = false;
@@ -101,39 +88,12 @@ function setCurrentUser(user) {
 
 // This will log the user out and clear the database
 function logout() {
-    if (db === undefined)
-        DB_init();
-
     db.CUser.clear();
     console.log("Logged Out.");
 }
 
-// Add user obj to database
-function DB_addUser (user) {
-    if (db === undefined)
-        DB_init();
-
-    db.transaction("rw", db.Users, function() {
-        db.Users.add({
-            uid: user.uid,
-            lastUpdate: user.lastUpdate,
-            fname: user.fname,
-            lname: user.lname,
-            phoneNo: user.phoneNo,
-            email: user.email,
-            school: user.school,
-            photo: user.photo
-        }); 
-    }).then(function() {
-        console.log("done");
-    });
-}
-
 // Add trip obj to database
 function DB_addTrip (trip) {
-    if (db === undefined)
-        DB_init();
-
     db.transaction("rw", db.Trips, function() {
         db.Trips.add({
             uid: trip.uid,
@@ -144,11 +104,123 @@ function DB_addTrip (trip) {
             owners: trip.owners,
             activeInvitations: trip.activeInvitations,
             events: trip.events
+        }).then(function () {
+            console.log("Added a trip");
         });
     });
 }
 
-// ----- Constructors for JS objects ----- //
+// ----- Level 0 - No Dependencies ----- //
+
+// Modifies an entry in the Users table
+function installUserUpdates (latestUsrJsonObj) {
+    db.transaction("rw", db.Users, function() {
+        db.Users
+            .where("uid")
+            .equals(latestUsrJsonObj.uid)
+            .modify({
+                lastUpdate: latestUsrJsonObj.lastUpdate,
+                fname: latestUsrJsonObj.fname,
+                lname: latestUsrJsonObj.lname,
+                phoneNo: latestUsrJsonObj.phoneNo,
+                email: latestUsrJsonObj.email,
+                pictureUrl: latestUsrJsonObj.pictureUrl,
+                school: latestUsrJsonObj.school,
+                funFacts: latestUsrJsonObj.funFacts
+            });
+            console.log("Updated user " + latestUsrJsonObj.uid);
+    });
+}
+
+// Checks if user exists in the database - WIP
+function usrExists (usrUid, resolve, reject) {
+    return db.Users
+        .where("uid")
+        .equals(usrUid)
+        .count(function (o) {
+            if (o > 0)
+                reject();
+            else
+                resolve();
+        }).catch(function (e) {
+            console.log("Error: " + e);
+        });
+}
+
+// ----- Level 1 - One Dependency ----- //
+
+// Add user obj to database
+function DB_addUser (user) {
+    usrExists(user.uid, addUsr, null);
+
+    function addUsr () {
+        db.transaction("rw", db.Users, function() {
+            db.Users.add({
+                uid: user.uid,
+                lastUpdate: user.lastUpdate,
+                fname: user.fname,
+                lname: user.lname,
+                phoneNo: user.phoneNo,
+                email: user.email,
+                school: user.school,
+                photo: user.photo
+            }); 
+        }).then(function() {
+            console.log("Added a user");
+        });
+    }
+}
+
+// ----- Level 2 - Two Dependencies ----- //
+
+// Adds a user from a json file
+function addUsrFromJson () {
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+        if (req.readyState === XMLHttpRequest.DONE) {
+            console.log("Finished downloading the json file.");
+            var jsonObj = JSON.parse(req.responseText);
+            console.log(jsonObj);
+
+            DB_addUser(jsonObj);
+        }
+    };
+
+    req.open('GET', 'http://sitec.localdomain/js/alex.json', true);
+    req.send(null);
+}
+
+// Checks if updates are needed
+function checkUsrForUpdates () { 
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+        if (req.readyState === XMLHttpRequest.DONE) {
+            console.log("Finished downloading latest");
+
+            var jsonObj = JSON.parse(req.responseText);
+            
+            db.transaction("rw", db.Users, function() {
+                db.Users
+                    .where("uid")
+                    .equals(jsonObj.uid)
+                    .each(function (o) {
+                        console.log("Local lastUpdate: " + o.lastUpdate + " Server lastUpdate: " + jsonObj.lastUpdate)
+                        if (o.lastUpdate != jsonObj.lastUpdate) {
+                            console.log("Update needed for uid " + jsonObj.uid);
+                            installUserUpdates(jsonObj);
+                        } else {
+                            console.log("No updated needed");
+                        }
+                    });
+            });
+        }
+    }
+
+    req.open('GET', 'http://sitec.localdomain/js/alexV2.json', true);
+    req.send(null);
+}
+
+// ----- Constructors for objects ----- //
 
 // User object
 function Group_user (fname, lname, phoneNo, email, photo, school) {
@@ -184,9 +256,8 @@ function Group_event (name, desc, startTimeStamp, endTimeStamp, location) {
 }
 
 // ----- Test functions ----- //
-function testDB () {
-    DB_init();
 
+function testDB () {
     getCurrentUser()
         .then(function(entry){
             if (entry !== null)
@@ -218,16 +289,10 @@ function addDummyUsers () {
 }
 
 function clearUserTables () {
-    if (db === undefined)
-        DB_init();
-
     db.Users.clear();
 }
 
 function printOutUsers () {
-    if (db === undefined)
-        DB_init();
-
     db.Users
         .toArray(function (person) {
             person.forEach(function (entry) {
@@ -237,9 +302,6 @@ function printOutUsers () {
 }
 
 function searchUsers () {
-    if (db === undefined)
-        DB_init();
-
     var fname = document.getElementById("testInp4").value;
     db.Users
         .where("fname")
@@ -272,16 +334,10 @@ function addDummyTrips () {
 }
 
 function clearTripsTable () {
-    if (db === undefined)
-        DB_init();
-
     db.Trips.clear();
 }
 
 function printOutTrips () {
-    if (db === undefined)
-        DB_init();
-
     db.Trips
         .toArray(function (person) {
             person.forEach(function (entry) {
@@ -291,9 +347,6 @@ function printOutTrips () {
 }
 
 function searchTrips () {
-    if (db === undefined)
-        DB_init();
-
     var fname = document.getElementById("testInp9").value;
     db.Trips
         .where("name")
@@ -311,10 +364,7 @@ function testLogin () {
     setCurrentUser(new_usr);
 }
 
-function testGetCUserInfo () {
-    if (db === undefined)
-        DB_init();
-
+function testGetCUserInfo (resolve, reject) {
     // var tmp = db.CUser.toArray();
     db.CUser
         .toArray(function (list) {
@@ -324,18 +374,17 @@ function testGetCUserInfo () {
                     db.Users
                         .get(entry.uid, function (cuserObj) {
                             console.log(cuserObj);
+                            //resolve(cuserObj);
                         });
                 });
             } else {
                 console.log("Unable to print usr info because not logged in");
+                //reject();
             }
         });
 }
 
 function updateCUserName () {
-    if (db === undefined)
-        DB_init();
-
     var newFname = document.getElementById("testInp16").value;
     db.CUser
         .toArray(function (list) {
@@ -349,9 +398,6 @@ function updateCUserName () {
 } 
 
 function getTripMembers () {
-    if (db === undefined)
-        DB_init();
-
     db.Trips.get('0ABC')
         .then(function (trip) {
             console.log(trip.members);
@@ -373,3 +419,7 @@ function getTripLastUpdate(uid) {
     serverLU = 123456;
     return serverLU;
 }
+
+// ----- Initialize the database ----- //
+
+DB_init();

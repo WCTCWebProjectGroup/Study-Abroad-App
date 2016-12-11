@@ -12,6 +12,7 @@
     <title>Loading</title>
 
     <!-- All js files in the header are for JSON testing purposes only! -->
+    <script type="text/javascript" src="js/w3data.js"></script>
     <script type="text/javascript" src="js/dummyJSON.js"></script>
     <script type="text/javascript" src="js/dexie.js"></script>
 </head>
@@ -20,16 +21,15 @@
         <h1>Trip My School</h1>
     </header>
     <div w3-include-html="loadingScreen.html"></div>
-    <div id="db">
-        Testing DB
-    </div>
     <!-- Templates go below here -->
 
     <!-- Try to keep all js files here -->
     <!--<script type="text/javascript" src="cordova.js"></script>-->
     <script type="text/javascript" src="js/SQLitePlugin.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
-
+    <script>
+        w3IncludeHTML();
+    </script>
     <script>
         var expectedReplies = 0; // This is a counter that assures that all replies are recieved 
         var replies = []; // This stores the replies
@@ -118,7 +118,9 @@
             getCurrentUser()
                 .then(function(entry){
                     if (entry !== null) {
+                        console.log(entry);
                         console.log("Currently logged in as " + entry.fname + " " + entry.lname);
+                        finished();
                     }
                     else {
                         // If the user is null then this is first time setup

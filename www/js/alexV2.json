@@ -1,0 +1,36 @@
+{
+    "uid": 1481395286486,
+    "lastUpdate": 1481397568268,
+    "fname": "Alex",
+    "lname": "Hayes",
+    "phoneNo": [
+        2624421666
+    ],
+    "email": [
+        "newEmailOfTestUserA@gmail.com"
+    ],
+    "pictureUrl": "http://",
+    "school": "WCTC",
+    "funFacts": [
+        {
+            "Title": "Custom title 1",
+            "Body": "Fun fact 1"
+        },
+        {
+            "Title": "Custom title 2",
+            "Body": "Fun fact 2"
+        },
+        {
+            "Title": "Custom title 3",
+            "Body": "Fun fact 3"
+        },
+        {
+            "Title": "Custom title 4",
+            "Body": "Fun fact 4"
+        },
+        {
+            "Title": "Added Custom Title 5",
+            "Body": "Added this fun fact of no. 5."
+        }
+    ]
+}

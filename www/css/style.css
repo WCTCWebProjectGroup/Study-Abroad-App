@@ -31,6 +31,7 @@ form input:not([type=button]):not([type=submit]) {
 	border: none;
 	border-bottom: 2px solid blue;
 
+	margin-bottom: 16px;
 	padding: 8px;
 
 	height: 30px;
@@ -124,7 +125,7 @@ table, tr {
 }
 
 .loginForm > * {
-	padding: 8px;
+	/*padding: 8px;*/
 	text-align: center;
 }
 
@@ -157,10 +158,6 @@ table, tr {
 
 	transition: .4s;
 	-webkit-transition: .4s;
-}
-
-.input:checked .exitButton {
-	display: block;
 }
 
 .exitButton:focus {
@@ -294,6 +291,14 @@ table, tr {
 
 	height: auto;
 	width: 100%;
+}
+
+.input:checked .exitButton {
+	display: block;
+}
+
+.inputFile {
+	display: none;
 }
 
 .profilePicture:hover ::after {
@@ -443,6 +448,29 @@ input:checked:not([type=submit]) + .slider::after {
 	box-shadow: 8px 8px 16px rgba(0,0,0,.5);
 }
 
+.VCenter {
+	margin-top: 50%;
+	transform: translateY(-25%);
+
+	/*height: 100%;*/
+	/*width: 100%;*/
+}
+
+.wip {
+	background-color: white;
+	border: 2px solid red;
+	color: red;
+}
+
+#drawerContent {
+	justify-content: center;
+	text-align: center;
+	vertical-align: middle;
+	
+	/*height: 100%;*/
+	width: 100%;
+}
+
 #loadingBg {
 	background-color: white;
 	opacity: .75;
@@ -500,10 +528,10 @@ input:checked:not([type=submit]) + .slider::after {
 	z-index: 7;
 
 	position: absolute;
-	margin-top: -4px;
-	margin-right: -4px;
-	/*top: 25%;*/
-	/*left: 25%;*/
+	/*margin-top: -4px;
+	margin-right: -4px;*/
+	top: -4px;
+	left: -4px;
 
 	height: 56px;
 	width: 56px;
@@ -621,7 +649,7 @@ input:checked:not([type=submit]) + .slider::after {
 	font-size: 25px;
 	text-decoration: none;
 
-	padding: 8px 8px 8px 32px;
+	padding: 8px 8px 8px 8px;
 
 	transition: 0.4s ease-in-out;
 }
@@ -630,7 +658,7 @@ input:checked:not([type=submit]) + .slider::after {
 	color: var(--200);
 }
 
-#sideNav a:not(:last-child):not(:first-child)::after {
+#sideNav .VCenter a:not(:last-child)::after {
 	background-color: white;
 	content: "";
 	display: block;

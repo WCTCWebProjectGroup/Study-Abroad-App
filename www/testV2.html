@@ -31,6 +31,8 @@
             <input id="testInp4" class="MButton" placeholder="Search User By First Name" type="input">
             <input id="testBtn5" class="MButton" value="Print Out Users" type="button">
             <br>
+            <input id="testBtn19" class="MButton" value="Add usr" type="button">
+            <input id="testBtn18" class="MButton" value="Check if usr has updates" type="button">
         </div>
 
         <h2>Testing Trips Table</h2>
@@ -69,7 +71,6 @@
         w3IncludeHTML();
     </script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/dexie.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>-->
@@ -84,6 +85,8 @@
         document.getElementById("testBtn2").addEventListener("click", clearUserTables);
         document.getElementById("testBtn3").addEventListener("click", printOutUsers);
         document.getElementById("testBtn5").addEventListener("click", searchUsers);
+        document.getElementById("testBtn19").addEventListener("click", addUsrFromJson);
+        document.getElementById("testBtn18").addEventListener("click", checkUsrForUpdates);
 
         document.getElementById("testBtn6").addEventListener("click", addDummyTrips);
         document.getElementById("testBtn7").addEventListener("click", clearTripsTable);
