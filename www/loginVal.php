@@ -4,9 +4,11 @@
     
     if ($good_email == $_POST["email"] && $good_pass == $_POST["password"]) {
         echo '{"credentialsValid":true, "uid":6}';
+        //echo '"email": "' . $_POST["email"] . '",';
+        //echo '"password": "' . $_POST["password"] . '"}'; 
     } else {
         echo '{"credentialsValid":false,';
-        echo '"email": "' + $_POST["email"] + '",';
-        echo '"password": "' + $_POST["password"] + '"}';
+        echo '"email": "' . $_POST["email"] . '",';
+        echo '"password": "' . $_POST["password"] . '"}';
     }
 ?>

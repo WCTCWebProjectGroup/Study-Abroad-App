@@ -169,6 +169,10 @@ function DB_addUser (user) {
             console.log("Added a user");
         });
     }
+
+    function failed () {
+        console.log("Failed to add user to the database");
+    }
 }
 
 // ----- Level 2 - Two Dependencies ----- //
