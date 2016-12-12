@@ -424,6 +424,13 @@ function getTripLastUpdate(uid) {
     return serverLU;
 }
 
+function checkIfUsrExists (uid) {
+    return db.Users
+        .where("uid")
+        .equals(uid)
+        .count();
+}
+
 // ----- Initialize the database ----- //
 
 DB_init();

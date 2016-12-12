@@ -58,9 +58,10 @@ header {
 	font-family: Roboto;
 	font-size: 20px;
 	font-style: normal;
-	/*padding: 10px 0px;*/
+	padding: 8px 0px;
 	position: relative;
 	margin-bottom: 12px;
+	min-height: 70px;
 
 	height: auto;
 	width: 100%;
@@ -81,6 +82,10 @@ header h1 {
 table, tr {
 	border: none;
 	border-bottom: 1px solid var(--500);
+}
+
+.alerts {
+	display: none;
 }
 
 .contact {
@@ -141,7 +146,7 @@ table, tr {
 
 .exitButton {
 	background-color: var(--A100);
-	background-image: url("../img/ic_close_black_24dp_2x.png");
+	background-image: url("../img/ic_close_white_24dp_2x.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	border-radius: 50%;
@@ -473,6 +478,7 @@ input:checked:not([type=submit]) + .slider::after {
 
 #loadingBg {
 	background-color: white;
+	display: none;
 	opacity: .75;
 	
 	margin: 0;
@@ -489,8 +495,8 @@ input:checked:not([type=submit]) + .slider::after {
 }
 
 #openAlert {
-	background-color: var(--A100);
-	background-image: url("../img/ic_notifications_black_24dp_2x.png");
+	background-color: var(--A400);
+	background-image: url("../img/ic_notifications_white_24dp_2x.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	border-radius: 50%;
@@ -558,8 +564,8 @@ input:checked:not([type=submit]) + .slider::after {
 }
 
 #openDrawer {
-	background-color: var(--A100);
-	background-image: url("../img/ic_menu_black_24dp_1x.png");
+	background-color: var(--A400);
+	background-image: url("../img/ic_menu_white_24dp_1x.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	border-radius: 50%;

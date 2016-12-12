@@ -39,7 +39,11 @@
 
                 <input id="loginButton" class="MFloatingActionButton" type="button" value="Login">
             </form>
-            <p>New user? Then click <a href="register.html"><div class="MButton">Register</div></a></p>
+        </div>
+
+        <div class="MCard">
+            <h2>New user?</h2>
+            <p>Then click <a href="register.html"><div class="MButton">Register</div></a></p>
         </div>
         
         <div class="MCard">
@@ -52,17 +56,12 @@
     <script>
         w3IncludeHTML();
     </script>
-    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
     <script type="text/javascript" src="js/dexie.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
-    <script type="text/javascript" src="js/drawer.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <script>
-        window.onload = function () {
-            setTimeout( function() { document.getElementById("loadingBg").style.display = "none"; }, 1000);
-        };
-    </script>
 </body>
 </html>

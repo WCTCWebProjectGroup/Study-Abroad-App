@@ -114,19 +114,17 @@
 
         function afterPageLoad ()
         {
-            DB_init();
             getCurrentUser()
                 .then(function(entry){
                     if (entry !== null) {
                         console.log(entry);
                         console.log("Currently logged in as " + entry.fname + " " + entry.lname);
-                        finished();
-                    }
-                    else {
+                        // finished();
+                    } else {
                         // If the user is null then this is first time setup
                         console.log("Not currently logged in");
                         console.log("Navigating to the login page.");
-                        firstTimeSetUp();
+                        // firstTimeSetUp();
                     }
         });
             

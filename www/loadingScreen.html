@@ -2,3 +2,16 @@
     <img id="spinner" src="img/spinner.png">
     <p id="startMsg">Please Wait...</p>
 </div>
+<script>
+    window.onload = function () {
+        document.getElementById("loadingBg").style.display = "none";
+    };
+    
+    function toggleOnLoadingScreen () {
+        document.getElementById("loadingBg").style.display = "block";
+    }
+
+    function toggleOffLoadingScreen () {
+        document.getElementById("loadingBg").style.display = "none";
+    }
+</script>

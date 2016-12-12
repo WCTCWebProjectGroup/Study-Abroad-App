@@ -15,6 +15,7 @@
     var form = document.getElementById("loginForm");
 
     function submitForm () {
+        toggleOnLoadingScreen();
         var req = new XMLHttpRequest();
         var formData = new FormData(form);
 
@@ -24,6 +25,8 @@
                 var jsonObj = JSON.parse(req.responseText);
                 if (jsonObj.credentialsValid)
                     loginSuccesful();
+                else
+                    loginFailed();
             }
         };
 
@@ -45,10 +48,12 @@
     function loginSuccesful () {
         console.log("woot woot!");
         window.location.assign("groups.html");
+        toggleOffLoadingScreen();
     }
 
     function loginFailed () {
         console.log("boo...");
-        formSubmitBtn.reset();
+        form.reset();
+        toggleOffLoadingScreen();
     }
 })();
