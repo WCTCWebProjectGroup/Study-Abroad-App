@@ -112,6 +112,17 @@ function DB_addTrip (trip) {
 
 // ----- Level 0 - No Dependencies ----- //
 
+// Another function which checks if a user exists. The parameter is the uid of the user.
+function checkIfUsrExists (uid) {
+    return db.Users
+        .where("uid")
+        .equals(uid)
+        .count()
+        .then(function(co) {
+            return co > 0 ? true : false;
+        });    
+}
+
 // Modifies an entry in the Users table
 function installUserUpdates (latestUsrJsonObj) {
     db.transaction("rw", db.Users, function() {
@@ -424,11 +435,9 @@ function getTripLastUpdate(uid) {
     return serverLU;
 }
 
-function checkIfUsrExists (uid) {
-    return db.Users
-        .where("uid")
-        .equals(uid)
-        .count();
+function testingCheckIfUsrExists () {
+    var uid = parseInt(document.getElementById("testInp20").value);
+    checkIfUsrExists(uid).then(function(e){console.log(e);});
 }
 
 // ----- Initialize the database ----- //

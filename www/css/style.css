@@ -38,6 +38,11 @@ form input:not([type=button]):not([type=submit]) {
 	width: 80%;
 }
 
+form input[type=text]::-webkit-input-placeholder {
+	color: orange;
+	background-color: blue;
+}
+
 h1 {
 /* 	box-shadow: 2px 2px 5px #888888; */
 	text-align: center;
