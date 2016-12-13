@@ -23,10 +23,15 @@
             if (req.readyState === XMLHttpRequest.DONE) {
                 console.log(req.responseText);
                 var jsonObj = JSON.parse(req.responseText);
-                if (jsonObj.credentialsValid)
-                    loginSuccesful();
-                else
+                if (jsonObj.credentialsValid) {
+                    if (checkIfUsrExists(jsonObj.uid)) {
+                        loginAsLocalUser(jsonObj.uid);
+                    } else {
+                        loginAsNewUser(jsonObj.uid);
+                    }
+                } else {
                     loginFailed();
+                }
             }
         };
 
@@ -36,18 +41,24 @@
     }
 
     // TODO
-    function loginAsNewUser () {
-
+    function loginAsNewUser (uid) {
+        console.log("Logging in as new user with uid = " + uid);
+        console.log("This is still a WIP!");
     }
 
-    // TODO
-    function loginAsLocalUser () {
-
+    function loginAsLocalUser (uid) {
+        getUserByUid(uid)
+            .then(function (e) {
+                console.log(e);
+                setCurrentUser(e);
+            }).then(function () {
+                loginSuccesful();
+            });
     }
 
     function loginSuccesful () {
         console.log("woot woot!");
-        window.location.assign("groups.html");
+        // window.location.assign("groups.html");
         toggleOffLoadingScreen();
     }
 

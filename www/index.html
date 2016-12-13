@@ -14,19 +14,24 @@
     <!-- All js files in the header are for JSON testing purposes only! -->
     <script type="text/javascript" src="js/w3data.js"></script>
     <script type="text/javascript" src="js/dummyJSON.js"></script>
-    <script type="text/javascript" src="js/dexie.js"></script>
 </head>
 <body>
     <header class="MAppBar">
         <h1>Trip My School</h1>
     </header>
-    <div w3-include-html="loadingScreen.html"></div>
+    <div id="loadingBg">
+        <img id="spinner" src="img/spinner.png">
+        <p id="startMsg">Please Wait...</p>
+        <input id="doneButton" type="button" value="Finished">
+    </div>
     <!-- Templates go below here -->
 
     <!-- Try to keep all js files here -->
     <!--<script type="text/javascript" src="cordova.js"></script>-->
+    <script type="text/javascript" src="js/dexie.js"></script>
     <script type="text/javascript" src="js/SQLitePlugin.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script>
         w3IncludeHTML();
     </script>
@@ -114,16 +119,21 @@
 
         function afterPageLoad ()
         {
+            var btn = document.getElementById("doneButton");
+            toggleOnLoadingScreen();
             getCurrentUser()
                 .then(function(entry){
+                    btn.style.display = "block";
                     if (entry !== null) {
                         console.log(entry);
                         console.log("Currently logged in as " + entry.fname + " " + entry.lname);
+                        btn.addEventListener("click", finished);
                         // finished();
                     } else {
                         // If the user is null then this is first time setup
                         console.log("Not currently logged in");
                         console.log("Navigating to the login page.");
+                        btn.addEventListener("click", firstTimeSetUp);
                         // firstTimeSetUp();
                     }
         });

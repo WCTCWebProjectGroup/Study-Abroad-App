@@ -19,7 +19,8 @@ function DB_Tables () {
     var tables = [
         "Users",
         "Trips",
-        "CUser"
+        "CUser",
+        "Invitations"
     ];
 }
 
@@ -29,7 +30,8 @@ function DB_init () {
     db.version(1).stores({
         Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo',
         Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events',
-        CUser: 'uid'
+        CUser: 'uid',
+        Invitations: 'uid, status'
     });
 }
 
@@ -48,10 +50,10 @@ function getCurrentUser() {
 // Sets the current users info. Returns false if the user already
 // exists and returns true if the operation succeeded.
 function setCurrentUser(user) {
-    db.transaction("rw", db.Users, db.CUser, function() {
+    return db.transaction("rw", db.Users, db.CUser, function() {
         db.CUser.add({ uid: user.uid });
         var cusrReg = false;
-        var tmp = db.Users.get(user.uid)
+        return db.Users.get(user.uid)
             .then(function (obj) {
                 if (obj === undefined) {
                     db.Users.add({
@@ -90,6 +92,8 @@ function setCurrentUser(user) {
 function logout() {
     db.CUser.clear();
     console.log("Logged Out.");
+    console.log("Navigating to the login page");
+    window.location.assign("login.html");
 }
 
 // Add trip obj to database
@@ -111,6 +115,17 @@ function DB_addTrip (trip) {
 }
 
 // ----- Level 0 - No Dependencies ----- //
+
+// Returns the user by their uid
+function getUserByUid (uid) {
+    return db.Users
+        .where("uid")
+        .equals(uid)
+        .first(function (usr) {
+            // console.log (usr);
+            return usr;
+        });
+}
 
 // Another function which checks if a user exists. The parameter is the uid of the user.
 function checkIfUsrExists (uid) {

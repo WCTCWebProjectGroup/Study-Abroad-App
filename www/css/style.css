@@ -416,6 +416,30 @@ input:checked:not([type=submit]) + .slider::after {
 	content: "Accept";
 }
 
+.testingNav {
+	background-color: var(--A100);
+	display: block;
+
+	margin: auto;
+
+	height: 100%;
+	width: 80%;
+}
+
+.testingNav * {
+	color: #5421f3;
+	display: block;
+	font-size: 25px;
+}
+
+.testingNav a::after {
+	display: none;
+}
+
+.testingNav a::before {
+	display: none;
+}
+
 .userInfo {
 	text-align: center;
 	margin: auto;
@@ -470,6 +494,11 @@ input:checked:not([type=submit]) + .slider::after {
 	background-color: white;
 	border: 2px solid red;
 	color: red;
+}
+
+#doneButton {
+	display: none;
+	margin: auto;
 }
 
 #drawerContent {
@@ -654,7 +683,7 @@ input:checked:not([type=submit]) + .slider::after {
 	/*-webkit-transition-property: width;*/
 }
 
-#sideNav a {
+#sideNav > div > div > a {
 	color: var(--light-text);
 	display: block;
 	font-size: 25px;
@@ -665,11 +694,11 @@ input:checked:not([type=submit]) + .slider::after {
 	transition: 0.4s ease-in-out;
 }
 
-#sideNav a:hover {
+#sideNav > div > div > a:hover {
 	color: var(--200);
 }
 
-#sideNav .VCenter a:not(:last-child)::after {
+#sideNav .VCenter > a:not(:last-child)::after {
 	background-color: white;
 	content: "";
 	display: block;
