@@ -204,7 +204,7 @@ function DB_addUser (user) {
 // ----- Level 2 - Two Dependencies ----- //
 
 // Adds a user from a json file
-function addUsrFromJson () {
+function getAndAddUsrFromJson (formdata, callback) {
     var req = new XMLHttpRequest();
     req.onreadystatechange = function () {
         if (req.readyState === XMLHttpRequest.DONE) {
@@ -212,12 +212,12 @@ function addUsrFromJson () {
             var jsonObj = JSON.parse(req.responseText);
             console.log(jsonObj);
 
-            DB_addUser(jsonObj);
+            DB_addUser(jsonObj).then(callback());
         }
     };
 
     req.open('GET', 'http://sitec.localdomain/js/alex.json', true);
-    req.send(null);
+    req.send(formdata);
 }
 
 // Checks if updates are needed

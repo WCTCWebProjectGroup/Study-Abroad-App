@@ -49,7 +49,10 @@ function toggleOffLoadingScreen () {
             if (entry !== null) {
                 document.getElementById("loginNAV").style.display = "none";
                 console.log("Currently logged in as " + entry.fname + " " + entry.lname);
-                // finished();
+                if (window.location.pathname == "/login.html") {
+                    console.log("Since logged in, going to groups.html");
+                    // window.location.assign("groups.html");
+                }
             } else {
                 // If the user is null then this is first time setup
                 console.log("Not currently logged in");

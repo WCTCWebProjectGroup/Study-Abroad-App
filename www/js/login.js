@@ -24,11 +24,13 @@
                 console.log(req.responseText);
                 var jsonObj = JSON.parse(req.responseText);
                 if (jsonObj.credentialsValid) {
-                    if (checkIfUsrExists(jsonObj.uid)) {
-                        loginAsLocalUser(jsonObj.uid);
-                    } else {
-                        loginAsNewUser(jsonObj.uid);
-                    }
+                    checkIfUsrExists(jsonObj.uid)
+                        .then(function (e) {
+                            if (e)
+                                loginAsLocalUser(jsonObj.uid);
+                            else
+                                loginAsNewUser(jsonObj.uid, formData);
+                        });
                 } else {
                     loginFailed();
                 }
@@ -41,9 +43,19 @@
     }
 
     // TODO
-    function loginAsNewUser (uid) {
-        console.log("Logging in as new user with uid = " + uid);
+    function loginAsNewUser (uid, formData) {
         console.log("This is still a WIP!");
+        getAndAddUsrFromJson(formData, function () {
+            getUserByUID(uid).then(function (e) {
+                console.log(e);
+            });
+            getUserByUid(uid).then(function(usr) {
+                setCurrentUser(usr).then(function () {
+                    loginSuccesful();
+                });
+            });
+        });
+        //setCurrentUser();
     }
 
     function loginAsLocalUser (uid) {
