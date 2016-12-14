@@ -55,7 +55,7 @@
                 });
             });
         });
-        //setCurrentUser();
+        //setCurrentUser();        
     }
 
     function loginAsLocalUser (uid) {

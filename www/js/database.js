@@ -204,7 +204,7 @@ function DB_addUser (user) {
 // ----- Level 2 - Two Dependencies ----- //
 
 // Adds a user from a json file
-function getAndAddUsrFromJson (formdata, callback) {
+function getAndAddUsrFromJson (formdata) {
     var req = new XMLHttpRequest();
     req.onreadystatechange = function () {
         if (req.readyState === XMLHttpRequest.DONE) {
@@ -212,7 +212,7 @@ function getAndAddUsrFromJson (formdata, callback) {
             var jsonObj = JSON.parse(req.responseText);
             console.log(jsonObj);
 
-            DB_addUser(jsonObj).then(callback());
+            DB_addUser(jsonObj);
         }
     };
 
