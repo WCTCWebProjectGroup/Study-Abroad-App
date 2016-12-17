@@ -417,26 +417,6 @@ input:checked:not([type=submit]) + .slider::after {
 }
 
 .testingNav {
-	background-color: var(--A100);
-	display: block;
-
-	margin: auto;
-
-	height: 100%;
-	width: 80%;
-}
-
-.testingNav * {
-	color: #5421f3;
-	display: block;
-	font-size: 25px;
-}
-
-.testingNav a::after {
-	display: none;
-}
-
-.testingNav a::before {
 	display: none;
 }
 

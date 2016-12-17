@@ -16,7 +16,6 @@
  * 
  */
 
-
 function openDrawer() {    
     document.querySelector("#sideNav .alerts").style.display = "none";
     document.getElementById("drawerContent").style.display = "block";
@@ -59,8 +58,8 @@ function toggleOffLoadingScreen () {
                 document.getElementById("logoutNAV").style.display = "none";
                 document.getElementById("openDrawerContainer").style.display = "none";
                 document.getElementById("openAlertContainer").style.display = "none";
-                if (window.location.pathname != "/login.html")
-                    window.location.assign("login.html");
+                // if (window.location.pathname != "/login.html")
+                //     window.location.assign("login.html");
             }
         }).catch(function(e) {
             console.log("The nav elements are not available on this page");

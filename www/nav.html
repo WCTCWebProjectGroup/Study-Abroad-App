@@ -6,6 +6,12 @@
             <a href="groups.html">groups</a>
             <a href="user.html">user</a>
             <a href="javascript:void(0)" id="logoutNAV" onclick="logout()">logout</a>
+            <input id="Dev" class="MButton" type="button" value="Dev">
+            <script>
+                document.getElementById("Dev").addEventListener("click", function () {
+                    document.getElementsByClassName("testingNav")[0].style.display = "block";
+                });
+            </script>
             <div class="testingNav">
                 <p>Testing</p>
                 <a href="index.html">index</a>
