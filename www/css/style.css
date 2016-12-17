@@ -418,6 +418,15 @@ input:checked:not([type=submit]) + .slider::after {
 
 .testingNav {
 	display: none;
+<<<<<<< HEAD
+=======
+}
+
+.sliderContainer > input:checked ~ .testingNav {
+	display: block;
+	position: relative;
+	z-index: 25;
+>>>>>>> 596c9218e010d5254133fa2ae56bcb672d6334e2
 }
 
 .userInfo {

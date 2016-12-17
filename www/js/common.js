@@ -58,8 +58,13 @@ function toggleOffLoadingScreen () {
                 document.getElementById("logoutNAV").style.display = "none";
                 document.getElementById("openDrawerContainer").style.display = "none";
                 document.getElementById("openAlertContainer").style.display = "none";
+<<<<<<< HEAD
                 // if (window.location.pathname != "/login.html")
                 //     window.location.assign("login.html");
+=======
+                //if (window.location.pathname != "/login.html")
+                    //window.location.assign("login.html");
+>>>>>>> 596c9218e010d5254133fa2ae56bcb672d6334e2
             }
         }).catch(function(e) {
             console.log("The nav elements are not available on this page");
