@@ -12,22 +12,22 @@
  */
 
 :root {
-	--main-bg-color: rgba(76,175,80, 1);
-	--dark-text: rgba(27,94,32, 1);
-	--light-text: rgb(232,245,233);
-	--50: rgb(232,245,233); /* Light text */
-	--100: rgb(200,230,201);
-	--200: rgb(165,214,167);
-	--300: rgb(129,199,132); /* 300 ~ are for secondary information*/
-	--400: rgb(102,187,106);
-	--500: rgb(76,175,80); /* 500 ~ are for dominant colors, aka toolbars*/
-	--600: rgb(67,160,71);
-	--700: rgb(56,142,60); /* 700 ~ are for status bars*/
-	--800: rgb(46,125,50);
-	--900: rgb(27,94,32); /* Dark text */
-	--A100: rgb(137,246,202);
-	--A200: rgb(105,240,174);
-	--A400: rgb(0,230,118);
+	--main-bg-color: rgba(88, 107, 164, 1);
+	--dark-text: #0E1321;
+	--light-text: #ECEDF2;
+	--50: #ECEDF2; /* Light text */
+	--100: #C7CBD9;
+	--200: #A1A9C0;
+	--300: #7C87A7; /* 300 ~ are for secondary information*/
+	--400: #57658E;
+	--500: #324376; /* 500 ~ are for dominant colors, aka toolbars*/
+	--600: #293761;
+	--700: #202B4C; /* 700 ~ are for status bars*/
+	--800: #171F36;
+	--900: #0E1321; /* Dark text */
+	--A100: rgba(245, 221, 144, 1);
+	--A200: rgba(246, 142, 95, 1);
+	--A400: rgba(247, 108, 94, 1);
 	--A700: rgb(0,200,83);
 	--box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
 }
@@ -73,7 +73,7 @@
 	box-shadow: 3px 3px 6px rgba(0,0,0,.5);
 }
 
-.MCard, .MButton, .MSearchBar {
+.MCard, .MButton, .MCheckBoxButton, .MSearchBar {
 	box-shadow: 2px 2px 4px rgba(0,0,0,.5);
 }
 
@@ -85,8 +85,15 @@
     z-index: 6;
 }
 
+.MCheckBoxButton {
+	padding: 8px;
+
+	height: 25px;
+	width: 25px;
+}
+
 .MButton {
-    background-color: var(--A400);
+    background-color: var(--A200);
 	border: none;
 	border-radius: 2px;
     box-shadow: 4px 4px 8px rgba(0,0,0,.5);
@@ -118,7 +125,7 @@
 }
 
 .MFloatingActionButton {
-    background-color: var(--A700);
+    background-color: var(--A400);
     border-radius: 50%;
 	border-width: 4px;
     color: var(--light-text);

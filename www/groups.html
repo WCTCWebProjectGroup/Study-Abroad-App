@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/material.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <title>Groups</title>
+    <title>Trips</title>
 
     <!-- Try to avoid including the js scripts here unless absolutely necessary -->
     <script type="text/javascript" src="js/w3data.js"></script>
@@ -21,7 +21,10 @@
     <main>
         <h2>Travel Groups</h2>
         <div id="groupContainer">
-            <div class="group">
+            <p id="noGroupsMsg">
+                You're not part of any groups yet!
+            </p>
+            <!--<div class="group">
                 <div class="gname">WCTC Travel Group</div>
                 <div class=gcontent>
                     <div class="gcard">
@@ -61,16 +64,7 @@
                     </div>
                     <div class="gfooter"></div>
                 </div> 
-            </div>
-        </div>
-
-        <h2>Invitations</h2>
-        <div id="invitations" class="MCard">
-            <!--<p>Feature coming soon</p>-->
-            <p>This is where the user will recieve invitations to join a group. They 
-                will be able to accept or decline an invitation. This should also be 
-                hidden or placed at the bottom if there are no invitations.
-            </p>
+            </div>-->
         </div>
 
     </main>
@@ -82,25 +76,10 @@
                         <div class="gdesc">
                             Group Description:
                         </div>
-                        <div class="gmem"><a href="index.html"><button>Go to Group Page</button></a></div>
+                        <div class="gmem"><a data-uid="" onclick="setCTripAndGoToTrip()" href="#"><input type="button" class="MButton" value="View Trip"></input></a></div>
                     </div>
                     <div class="gfooter"></div>
                 </div> 
-            </div>
-        </template>
-
-        <template id="invitationT">
-            <div class="invitation">
-                <div class="gname"></div>
-                <form action="javascript:void(0);" method="POST">
-                    <p class="inviteDesc">Accept invite from ABC</p>
-                    <label class="sliderContainer">
-                        <input type="checkbox">
-                        <div class="slider"></div>
-                    </label>
-
-                    <input class="MButton" type="submit">
-                </form>
             </div>
         </template>
 

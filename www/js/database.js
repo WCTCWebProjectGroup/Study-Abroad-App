@@ -1,5 +1,5 @@
 // Database functions and vars
-// The app will use only ONE database, for now it will be called KickMySchoolDB
+// The app will use only ONE database, for now it will be called TripMySchoolDB
 // Needs to be included before index.js!
 
 // *The database currently has the tables; 'Users', 'Trips', 'CUser'.
@@ -11,7 +11,7 @@ var db;
 
 // Return the database name
 function DB_name () {
-    return "KickMySchoolDB";
+    return "TripMySchoolDB";
 }
 
 // Return an array of all the tables to be used - I don't think this is needed
@@ -20,6 +20,7 @@ function DB_Tables () {
         "Users",
         "Trips",
         "CUser",
+        "CTrip",
         "Invitations"
     ];
 }
@@ -28,9 +29,10 @@ function DB_init () {
     db = new Dexie(DB_name());
 
     db.version(1).stores({
-        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo',
+        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo, password',
         Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events',
         CUser: 'uid',
+        CTrip: 'uid',
         Invitations: 'uid, status'
     });
 }
@@ -309,7 +311,7 @@ function addDummyUsers () {
             "http://",
             user.school
         );
-        bunchOfUsers[i].uid = i;
+        bunchOfUsers[i].uid = user.uid;
         i++;
     });
 

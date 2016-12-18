@@ -19,17 +19,17 @@
 function openDrawer() {    
     document.querySelector("#sideNav .alerts").style.display = "none";
     document.getElementById("drawerContent").style.display = "block";
-    document.getElementById("sideNav").style.width = "80%";
+    document.getElementById("sideNav").style.left = "0";
 }
 
 function closeDrawer() {
-    document.getElementById("sideNav").style.width = "0";
+    document.getElementById("sideNav").style.left = "-100%";
 }
 
 function openAlerts () {
     document.getElementById("drawerContent").style.display = "none";
     document.querySelector("#sideNav .alerts").style.display = "block";
-    document.getElementById("sideNav").style.width = "80%";
+    document.getElementById("sideNav").style.left = "0";
 } 
 
 function toggleOnLoadingScreen () {
@@ -58,13 +58,8 @@ function toggleOffLoadingScreen () {
                 document.getElementById("logoutNAV").style.display = "none";
                 document.getElementById("openDrawerContainer").style.display = "none";
                 document.getElementById("openAlertContainer").style.display = "none";
-<<<<<<< HEAD
                 // if (window.location.pathname != "/login.html")
                 //     window.location.assign("login.html");
-=======
-                //if (window.location.pathname != "/login.html")
-                    //window.location.assign("login.html");
->>>>>>> 596c9218e010d5254133fa2ae56bcb672d6334e2
             }
         }).catch(function(e) {
             console.log("The nav elements are not available on this page");

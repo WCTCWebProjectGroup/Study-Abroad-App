@@ -121,8 +121,8 @@ const groupList = [
 
 var userList = [
 	{
-		uid: "ABC123",
-		hashkey: "123ABC",
+		uid: "1482024710156",
+		lastUpdate: "1482024710156",
 		username: "alex.c.hayes08@gmail.com",
 		fname: "Alex",
 		lname: "Hayes",
@@ -138,8 +138,8 @@ var userList = [
 		school: "WCTC"
 	},
 	{
-		uid: "ABC124",
-		hashkey: "123ABC",
+		uid: "1482024762447",
+		lastUpdate: "1482024762447",
 		username: "bob@gmail.com",
 		fname: "Bob",
 		lname: "Doe",
@@ -154,8 +154,8 @@ var userList = [
 		school: "WCTC"
 	},
 	{
-		uid: "ABC125",
-		hashkey: "123ABC",
+		uid: "1482024775993",
+		lastUpdate: "1482024775993",
 		username: "tim1@gmail.com",
 		fname: "Tim",
 		lname: "Doe",
@@ -170,49 +170,49 @@ var userList = [
 		school: "WCTC"
 	},
 	{
-		uid: "ABC126",
-		hashkey: "123ABC",
+		uid: "1482024793118",
+		lastUpdate: "1482024793118",
 		username: "tim2@gmail.com",
-		fname: "Tim",
+		fname: "Joe",
 		lname: "Doe",
 		phoneNo: [
 			2624421666,
 			2526508372
 		],
 		email: [
-			"alex.c.hayes08@gmail.com"
+			"Joe@gmail.com"
 		],
 		pictureUrl: "",
 		school: "WCTC"
 	},
 	{
-		uid: "ABC127",
-		hashkey: "123ABC",
+		uid: "1482024806110",
+		lastUpdate: "1482024806110",
 		username: "tim3@gmail.com",
-		fname: "Tim",
+		fname: "Clark",
 		lname: "Doe",
 		phoneNo: [
 			2624421666,
 			2526508372
 		],
 		email: [
-			"alex.c.hayes08@gmail.com"
+			"Clark@gmail.com"
 		],
 		pictureUrl: "",
 		school: "WCTC"
 	},
 	{
-		uid: "ABC128",
-		hashkey: "123ABC",
+		uid: "1482024818559",
+		lastUpdate: "1482024818559",
 		username: "tim4@gmail.com",
-		fname: "Tim",
-		lname: "Doe",
+		fname: "Charlie",
+		lname: "Brown",
 		phoneNo: [
 			2624421666,
 			2526508372
 		],
 		email: [
-			"alex.c.hayes08@gmail.com"
+			"Charlie@gmail.com"
 		],
 		pictureUrl: "",
 		school: "WCTC"

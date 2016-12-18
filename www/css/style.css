@@ -228,7 +228,7 @@ table, tr {
 }
 
 .gfooter {
-	background-color: var(--500);
+	background-color: var(--A400);
 
 	height: 12px;
 	width: 100%;
@@ -270,9 +270,9 @@ table, tr {
 }
 
 .group {
-	background-color: var(--50);
+	background-color: var(--A100);
     box-shadow: var(--box-shadow);
-	color: black;
+	/*color: var(--A300);*/
 
     position: relative;
     display: inline-block;
@@ -284,8 +284,9 @@ table, tr {
 	width: 100%;
 }
 
-.group:nth-child(odd) .gname {
-	background-color: var(--A700);
+.group:nth-child(odd) .gname, .group:nth-child(odd) .gfooter {
+	background-color: var(--200);
+	/*color: var(--A200);*/
 }
 
 /*.group input {
@@ -418,15 +419,13 @@ input:checked:not([type=submit]) + .slider::after {
 
 .testingNav {
 	display: none;
-<<<<<<< HEAD
-=======
+	background-color: var(--A400);
 }
 
 .sliderContainer > input:checked ~ .testingNav {
 	display: block;
 	position: relative;
 	z-index: 25;
->>>>>>> 596c9218e010d5254133fa2ae56bcb672d6334e2
 }
 
 .userInfo {
@@ -517,6 +516,10 @@ input:checked:not([type=submit]) + .slider::after {
 	text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
+#noGroupsMsg {
+	text-align: center;
+}
+
 #openAlert {
 	background-color: var(--A400);
 	background-image: url("../img/ic_notifications_white_24dp_2x.png");
@@ -554,7 +557,7 @@ input:checked:not([type=submit]) + .slider::after {
 	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
 	content: "";
 	opacity: 0;
-	z-index: 7;
+	z-index: -1;
 
 	position: absolute;
 	/*margin-top: -4px;
@@ -574,6 +577,8 @@ input:checked:not([type=submit]) + .slider::after {
 #openAlert:hover::before {
 	display: block;
 	opacity: .75;
+
+	z-index: -1;
 }
 
 #openAlertContainer {
@@ -653,8 +658,13 @@ input:checked:not([type=submit]) + .slider::after {
 	width: 90px;
 }
 
+#showDevOptions:checked + .testingNav {
+	display: block;
+}
+
 #sideNav {
 	background-color: var(--500);
+	border-right: 4px solid var(--A700);
 	overflow-x: hidden;
 	text-align: center;
 
@@ -662,9 +672,9 @@ input:checked:not([type=submit]) + .slider::after {
 
 	position: fixed;
 	top: 0;
-	left: 0;
+	left: -100%;
 	height: 100%;
-	width: 0;
+	width: 80%;
 
 	transition: 0.4s ease-in-out;
 	/*transition-property: width;*/
@@ -672,7 +682,7 @@ input:checked:not([type=submit]) + .slider::after {
 	/*-webkit-transition-property: width;*/
 }
 
-#sideNav > div > div > a {
+#sideNav a {
 	color: var(--light-text);
 	display: block;
 	font-size: 25px;
@@ -683,7 +693,17 @@ input:checked:not([type=submit]) + .slider::after {
 	transition: 0.4s ease-in-out;
 }
 
-#sideNav > div > div > a:hover {
+#sideNav label {
+	color: var(--light-text);
+	font-size: 25px;
+	text-decoration: underline;
+
+	padding: 8px 8px 8px 8px;
+
+	transition: 0.4s ease-in-out;
+}
+
+#sideNav  a:hover {
 	color: var(--200);
 }
 
@@ -699,7 +719,7 @@ input:checked:not([type=submit]) + .slider::after {
 }
 
 #sideNav .closeDrawer {
-	background-image: url("../img/ic_close_black_24dp_2x.png");
+	background-image: url("../img/ic_close_white_24dp_2x.png");
 	background-position: center;
 	background-repeat: no-repeat; 
 	
@@ -710,6 +730,22 @@ input:checked:not([type=submit]) + .slider::after {
 
 	height: 48px;
 	width: 48px;
+}
+
+#sideNav .closeDrawer:hover::before {
+	background-color: var(--A400);
+	border: 4px solid var(--A400);
+	border-radius: 50%;
+	content: "";
+	opacity: .75;
+
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+
+	height: 56px;
+	width: 56px;
 }
 
 #spinner {

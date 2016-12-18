@@ -12,32 +12,33 @@ function invitation (sender) {
 }
 
 function loadGroups() {
-    parsedGroupFile.groups.forEach( function(entry) {
-        // console.log(entry);
+    db.Trips
+        .toArray(function(e){
+            if (e.length > 0) {
+                document.getElementById("noGroupsMsg").style.display = "none";
+                e.forEach(function(entry) {
+                    console.log(entry);
+                    let elem = document.getElementById("groupsT");
+                    let clone = document.importNode(elem.content, true);
 
-        // TODO: Create group obj from DB calls
-        var newGroup = new group();
+                    clone.querySelector(".gname").innerHTML = entry.name;
+                    clone.querySelector(".gdesc").innerHTML = entry.desc;
+                    clone.querySelector("a").setAttribute("onclick", "setCTripAndGoToTrip(\"" + entry.uid + "\");");
 
-        var elem = document.getElementById("groupsT");
-        var clone = document.importNode(elem.content, true);
-
-        clone.querySelector(".gname").innerHTML = newGroup.name;
-        clone.querySelector(".gdesc").innerHTML = newGroup.desc;
-
-        document.getElementById("groupContainer").appendChild(clone);
-    });
-}
-
-function loadInvites() {
-    invitations.forEach( function (inv) {
-        var el = document.getElementById("invitationT");
-        var clone = document.importNode(el.content, true);
-
-        clone.querySelector(".gname").innerHTML = inv.name;
-
-        document.getElementById("invitations").appendChild(clone);
-    });
+                    document.getElementById("groupContainer").appendChild(clone);
+                });
+            }
+        });
 }
 
 loadGroups();
-loadInvites();
+
+function setCTripAndGoToTrip (newUid) {
+    db.CTrip
+        .clear()
+        .then(function () {
+            db.CTrip.add({uid: newUid})
+        }).then(function () {
+            window.location.assign("group.html");
+        });
+}
