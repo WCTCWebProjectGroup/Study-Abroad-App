@@ -79,4 +79,7 @@
         form.reset();
         toggleOffLoadingScreen();
     }
+
+    var demoLogEl = document.getElementById("demoLogin");
+    demoLogEl.addEventListener("click", testLogin);
 })();

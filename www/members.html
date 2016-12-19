@@ -13,34 +13,15 @@
 
     <!-- Try to avoid including the js scripts here unless absolutely necessary -->
     <script type="text/javascript" src="js/w3data.js"></script>
-    <script type="text/javascript" src="js/dummyJSON.js"></script>
 </head>
 <body>
     <div w3-include-html="header.html"></div>
     <div w3-include-html="nav.html"></div>
     <main>
-        <div class="MCard groupHeader">
-            <h2 id="gname" class="gname">WCTC Travel Group</h2>
-            <p id="gdesc">
-                Group Description: This is a the description of the group. It will eventually be
-                replaced with a rich text editor... But for now this is it.
-            </p>
-            
-            <h3>Group Owners</h3>
-            <div id="groupOwn"></div>
-
-            <h3>Emergency Contacts</h3>
-            <ul id="emergency"></ul>
-
-        </div>
-        <div class="MCard groupSchedule">
-            <h2 class="gname">Schedule</h2>
-            <div id="eventContainer"></div>
-        </div>
-        <div class="MCard groupContacts">
-            <h2 class="gname">Contacts</h2>
-            <a href="members.html"><input class="MButton" type="button" value="View Members"></a>
-        </div>
+        <h2>Trip Contacts</h2>
+        
+        <div id="groupContacts"></div>
+        <p class="loadingMsg">Loading...</p>
     </main>
 
     <!-- Templates go below here -->
@@ -48,7 +29,7 @@
         <div class="MCard contact">
             
                 <img src="img/Bloo.jpg">
-                <h2 class="contactName"></h2>
+                <div class="contactName"></div>
                 <div class="contactInfo">
                     <div class="contactEmail">
                         <ul></ul>
@@ -58,14 +39,6 @@
                     </div>
                 </div>
             
-        </div>
-    </template>
-
-    <template id="eventT">
-        <div class="MCard event">
-            <h2 class="ename"></h2>
-            <div class="eloc"></div>
-            <div class="etimestamp"></div>
         </div>
     </template>
 
@@ -85,7 +58,7 @@
     <script type="text/javascript" src="js/dexie.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/group.js"></script>
+    <script type="text/javascript" src="js/members.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
 </body>

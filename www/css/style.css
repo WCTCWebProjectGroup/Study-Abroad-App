@@ -94,12 +94,24 @@ table, tr {
 }
 
 .contact {
-	border: 2px solid var(--A44);
-	border-radius: 20px;
+	border: 2px solid var(--A400);
+	border-radius: 50px;
 	box-shadow: var(--box-shadow);
+	display: inline-block;
+
 	margin: auto;
 	margin-top: 4px;
-	padding: 2px;
+	padding: 0 25px;
+
+	line-height: 50px;
+	/*height: 50px;*/
+
+	transition: height ease .4s;
+	-webkit-transition: height ease .4s;
+}
+
+.contactName {
+	display: inherit;
 }
 
 .contact h2 {
@@ -117,14 +129,17 @@ table, tr {
 
 .contact:hover .contactInfo {
 	display: block;
+
+	line-height: normal;
 	height: 45px;
 }
 
 .contact img {
-	display: inline-block;
 	border-radius: 50%;
 	border: 2px solid var(--A400);
-	/*float: left;*/
+	float: left;
+
+	margin: 0 10px 0 -25px;
 	
 	height: 50px;
 	width: 50px;
@@ -422,6 +437,10 @@ input:checked:not([type=submit]) + .slider::after {
 	background-color: var(--A400);
 }
 
+.testingNav *:hover {
+	background-color: var(--A200);
+}
+
 .sliderContainer > input:checked ~ .testingNav {
 	display: block;
 	position: relative;
@@ -690,13 +709,12 @@ input:checked:not([type=submit]) + .slider::after {
 
 	padding: 8px 8px 8px 8px;
 
-	transition: 0.4s ease-in-out;
+	transition: 0s ease-in-out;
 }
 
 #sideNav label {
 	color: var(--light-text);
 	font-size: 25px;
-	text-decoration: underline;
 
 	padding: 8px 8px 8px 8px;
 

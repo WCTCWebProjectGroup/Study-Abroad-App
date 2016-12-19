@@ -59,16 +59,6 @@ function contact (uid)
     ];
 }
 
-function doneLoadingContacts ()
-{
-    var NoLoaded = document.querySelectorAll("#groupContacts > div").length;
-    if (NoLoaded == NoContacts)
-    {
-        document.querySelector(".loadingMsg").style.display = "none";
-        console.log("Done loading contacts");
-    }
-}
-
 function lazyLoadContacts(obj)
 {
     NoContacts = obj.length;
@@ -97,31 +87,56 @@ function lazyLoadContacts(obj)
 
 function setGroupInfo ()
 {
-    var obj = new group("123456789");
-
-    // Set group name
-    document.getElementById("gname").innerHTML = obj.name.toString();
-
-    // Set group desc
-    document.getElementById("gdesc").innerHTML = obj.desc.toString();
-
-    // Set group owners
-    obj.owners.forEach (function(owner)
-    {
-        var liObj = document.createElement("li");
-        liObj.innerHTML = owner.toString();
-        document.getElementById("groupOwn").appendChild(liObj);
-    });
 
     // Set group emergency contacts
-    obj.emergency.forEach (function (emer)
-    {
-        liObj = document.createElement("li");
-        liObj.innerHTML = emer.name.toString() + " : " + emer.number.toString();
-        document.getElementById("emergency").appendChild(liObj);
-    });
+    // obj.emergency.forEach (function (emer)
+    // {
+    //     liObj = document.createElement("li");
+    //     liObj.innerHTML = emer.name.toString() + " : " + emer.number.toString();
+    //     document.getElementById("emergency").appendChild(liObj);
+    // });
 
-    lazyLoadContacts(obj.contacts);
+    db.CTrip
+        .toArray(function(a){
+            return a[0].uid;
+        }).then(function(cuid){
+            db.Trips
+                .where("uid")
+                .equals(cuid)
+                .first(function(entry){
+                    // Set gname and gdesc
+                    document.getElementById("gname").innerHTML = entry.name.toString();
+                    document.getElementById("gdesc").innerHTML = entry.desc.toString();
+
+                    // Set gowners
+                    entry.owners.forEach (function (per) {
+                        db.Users
+                            .where("uid")
+                            .equals(per)
+                            .first(function (o) {
+                                var liObj = document.createElement("div");
+                                liObj.innerHTML = o.fname + " " + o.lname;
+                                document.getElementById("groupOwn").appendChild(liObj);
+                            });
+                    });
+
+                    entry.events.forEach (function (eve) {
+                        let el = document.getElementById("eventT");
+                        let clone = document.importNode(el.content, true);
+
+                        clone.querySelector(".ename").innerHTML = eve.name;
+                        clone.querySelector(".eloc").innerHTML = eve.location;
+                        clone.querySelector(".etimestamp").innerHTML = eve.timestamp;
+
+                        document.getElementById("eventContainer").appendChild(clone);
+                    });
+
+                    // entry.emergency.forEach (function (emer) {
+                    //     var liObj = document.createElement("li");
+                    //     liObj.innerHTML = emer.name.toString() + " : " + emer.number.toString();
+                    // });
+                });
+        });
 }
 
 setGroupInfo();

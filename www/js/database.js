@@ -30,7 +30,7 @@ function DB_init () {
 
     db.version(1).stores({
         Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo, password',
-        Trips: 'uid, lastUpdate, name, desc, members, owners, activeInvitations, events',
+        Trips: 'uid, lastUpdate, name, desc, members, owners, emergency, activeInvitations, events',
         CUser: 'uid',
         CTrip: 'uid',
         Invitations: 'uid, status'
@@ -53,26 +53,32 @@ function getCurrentUser() {
 // exists and returns true if the operation succeeded.
 function setCurrentUser(user) {
     return db.transaction("rw", db.Users, db.CUser, function() {
-        db.CUser.add({ uid: user.uid });
-        var cusrReg = false;
-        return db.Users.get(user.uid)
-            .then(function (obj) {
-                if (obj === undefined) {
-                    db.Users.add({
-                        uid: user.uid,
-                        lastUpdate: user.lastUpdate,
-                        fname: user.fname,
-                        lname: user.lname,
-                        phoneNo: user.phoneNo,
-                        email: user.email,
-                        school: user.school,
-                        photo: user.photo
+        db.CUser
+            .clear()
+            .then(function () {
+                db.CUser.add({ uid: user.uid });
+                var cusrReg = false;
+                
+                return db.Users.get(user.uid)
+                    .then(function (obj) {
+                        if (obj === undefined) {
+                            db.Users.add({
+                                uid: user.uid,
+                                lastUpdate: user.lastUpdate,
+                                fname: user.fname,
+                                lname: user.lname,
+                                phoneNo: user.phoneNo,
+                                email: user.email,
+                                school: user.school,
+                                photo: user.photo,
+                                password: user.password == null ? "" : user.password
+                            });
+                        } else {
+                            console.log("Don't need to add the user to table Users because it already exists");
+                        }
+                    }).catch(function (err) {
+                        console.log("Error: " + err);
                     });
-                } else {
-                    console.log("Don't need to add the user to table Users because it already exists");
-                }
-            }).catch(function (err) {
-                console.log("Error: " + err);
             });
     }).then(function() {
         // TODO: Add another promise here for checking to see if the
@@ -117,6 +123,18 @@ function DB_addTrip (trip) {
 }
 
 // ----- Level 0 - No Dependencies ----- //
+
+// Simple NON-SECURE hash function (for storing passwords) // TODO: Replace with secure hash function
+String.prototype.hashCode = function(){
+	var hash = 0;
+	if (this.length == 0) return hash;
+	for (i = 0; i < this.length; i++) {
+		char = this.charCodeAt(i);
+		hash = ((hash<<5)-hash)+char;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+	return hash;
+}
 
 // Returns the user by their uid
 function getUserByUid (uid) {
@@ -264,6 +282,7 @@ function Group_user (fname, lname, phoneNo, email, photo, school) {
     this.email = email;
     this.photo = photo;
     this.school = school;
+    this.password = "";
 }
 
 // Trip
@@ -308,9 +327,10 @@ function addDummyUsers () {
             user.lname,
             user.phoneNo[0],
             user.email[0],
-            "http://",
+            user.pictureUrl,
             user.school
         );
+        bunchOfUsers[i].password = user.password;
         bunchOfUsers[i].uid = user.uid;
         i++;
     });
@@ -356,6 +376,7 @@ function addDummyTrips () {
         );
         bunchOfTrips[i].uid = i + "ABC";
         bunchOfTrips[i].members = trip.members;
+        bunchOfTrips[i].events = trip.events;
         i++;
     });
 
@@ -391,9 +412,14 @@ function searchTrips () {
 }
 
 function testLogin () {
-    var new_usr = new Group_user("Darth", "Vader", "2624421666", "test@gmail.com", "~/Pictures/test.svg", "WCTC");
-    new_usr.uid = 6;
-    setCurrentUser(new_usr);
+    console.log("Demo login");
+    var new_usr = new Group_user("Tester", "McTester", "2624421666", "test@gmail.com", "~/Pictures/test.svg", "WCTC");
+    new_usr.uid = "1482024710156";
+    new_usr.password = "1216985755";
+    setCurrentUser(new_usr)
+        .then(function (e) {
+            window.location.assign("groups.html");
+        });
 }
 
 function testGetCUserInfo (resolve, reject) {
