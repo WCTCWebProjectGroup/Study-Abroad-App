@@ -8,8 +8,45 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/material.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="pignose.calendar.min.css">
+    <style rel="text/css">
+        body {
+            height: 100%;
+            margin: 0;
+        }
 
-    <title>Groups</title>
+        a {
+            text-decoration: none;
+        }
+
+        #ca {
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        #ca ul,
+        #ca ol,
+        #ca li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        input {
+            margin: 10px 0;
+            height: 28px;
+            width: 200px;
+            padding: 0 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+    </style>
+
+    <title>Groups V2</title>
 
     <!-- Try to avoid including the js scripts here unless absolutely necessary -->
     <script type="text/javascript" src="js/w3data.js"></script>
@@ -34,30 +71,48 @@
 
         </div>
         <div class="MCard groupSchedule">
-            <h2 class="gname">Schedule</h2>
-            <div id="eventContainer"></div>
+            <h2 class="gname">Calendar</h2>
+            <div class="calendar"></div>
         </div>
         <div class="MCard groupContacts">
             <h2 class="gname">Contacts</h2>
-            <a href="members.html"><input class="MButton" type="button" value="View Members"></a>
+            <a href="members.html">
+                <button class="MButton" type="button" value="View Members">View Members</button>
+            </a>
+        </div>
+
+        <div id="eventPanel">
+            <a href="javascript:void(0)" id="closeEvent" onclick="closeEvent()"></a>
+            <div id="eventInfoContainer">
+                <div id="eventContainer"></div>
+            </div>
+        </div>
+
+        <div id="usrPanel">
+            <a href="javascript:void(0)" id="closeEvent" onclick="closeUsrPanel()"></a>
+            
+            <h2 id="usrName">Bloo</h2>
+            <img id="usrImage" src="img/Bloo.jpg">
+            <div class="MLabel">Phone:</div>
+            <a id="usrPhoneNo" href="tel:262442166">
+                <button class="MButtonFaint">2624421666</button>
+            </a>
+            <div class="MLabel">Email: </div>
+            <a id="usrEmail" href="mailto:alex.c.hayes08@gmail.com">
+                <button class="MButtonFaint">alex.c.hayes08@gmail.com</button>
+            </a>
+            
+            <table id=usrFunFacts>
+                <caption><div class="MLabel">Fun Facts</div></caption>
+            </table>
         </div>
     </main>
 
     <!-- Templates go below here -->
     <template id="contactCardT" class="contactCard">
         <div class="MCard contact">
-            
-                <img src="img/Bloo.jpg">
-                <h2 class="contactName"></h2>
-                <div class="contactInfo">
-                    <div class="contactEmail">
-                        <ul></ul>
-                    </div>
-                    <div class="contactPhoneNos">
-                        <ul></ul>
-                    </div>
-                </div>
-            
+            <img src="img/Bloo.jpg">
+            <div class="contactName"></div>
         </div>
     </template>
 
@@ -87,6 +142,115 @@
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/group.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/pignose.calendar.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
+    <script>
+        $(function() {
+            $('#wrapper .version strong').text('v' + pignoseCalendar.VERSION);
+            function onClickHandler(date, obj) {
+                /**
+                 * @date is an array which be included dates(clicked date at first index)
+                 * @obj is an object which stored calendar interal data.
+                 * @obj.calendar is an element reference.
+                 * @obj.storage.activeDates is all toggled data, If you use toggle type calendar.
+                 */
+
+                var $calendar = obj.calendar;
+                var $box = $calendar.parent().siblings('.box').show();
+                var text = 'You choose date ';
+
+                if(date[0] !== null) {
+                    text += date[0].format('YYYY-MM-DD');
+                }
+
+                if(date[0] !== null && date[1] !== null) {
+                    text += ' ~ ';
+                } else if(date[0] === null && date[1] == null) {
+                    text += 'nothing';
+                }
+
+                if(date[1] !== null) {
+                    text += date[1].format('YYYY-MM-DD');
+                }
+
+                $box.text(text);
+            }
+
+            var goodDates = [];
+
+            db.CTrip
+                .toArray(function(a){
+                    return a[0].uid;
+                }).then(function(cuid){
+                    db.Trips
+                        .where("uid")
+                        .equals(cuid)
+                        .first(function(entry){
+                            var i = 0;
+                            entry.events.forEach (function (eve) {
+                                let theDate = new Date(eve.timestamp);
+                                let theDateStr = "";
+                                theDateStr += theDate.getFullYear() + "-";
+                                let theMonth = (theDate.getMonth() + 1).toString();
+                                if (theMonth.length == 1)
+                                    theMonth = "0" + theMonth;
+                                theDateStr += theMonth + "-";
+                                let theDay = theDate.getDate().toString();
+                                if (theDay.length == 1)
+                                    theDay = "0" + theDay;
+                                theDateStr += theDay;
+                                goodDates[i] = theDateStr;
+                                i++;
+                            });
+                            createCalendar();
+                        });
+                });
+            
+            function createCalendar() {
+                // Default Calendar
+                $('.calendar').pignoseCalendar({
+                    select: onClickHandler,
+                    enabledDates: goodDates
+                });
+
+                // Calendar event popup
+                var events = document.querySelectorAll(".pignose-calendar-unit-date:not(.pignose-calendar-unit-disabled)");
+                events.forEach(function (e) {
+                    // console.log(e);
+                    var d = e.getAttribute("data-date");
+                    // console.log(d);
+                    // Custom js event for each event
+                    // var newClickEvent = new Event("eventClicked");
+                    var dateEvent = new CustomEvent('dateEvent', {'detail': d});
+                    // Emit dateEvent with data from elem
+                    e.querySelector("a").addEventListener('click', function() {
+                        // console.log("Fired event");
+                        e.dispatchEvent(dateEvent);
+                    });
+                    e.addEventListener('dateEvent', function (theEventsDate) {
+                        // Using the events date/time, lookup the event from the db
+                        var panel = document.getElementById("eventPanel");
+                        panel.style.top = "5%";
+                        document.querySelectorAll("#eventContainer .event").forEach(function(htmlEvent) {
+                            // console.log(theEventsDate.detail);
+                            var selectedDate = new Date(theEventsDate.detail);
+                            var eventsDate = new Date(htmlEvent.querySelector(".etimestamp").innerHTML.split(" ")[0]);
+                            //console.log(eventsDate);
+                            // Check to see if the year/month/day are equal
+                            if (selectedDate.getFullYear() == eventsDate.getFullYear() &&
+                                selectedDate.getMonth() == eventsDate.getMonth() &&
+                                selectedDate.getDate() + 1 == eventsDate.getDate())
+                                {
+                                    htmlEvent.style.display = "block";
+                                }
+                        });
+                        // console.log("Caught event");
+                    });
+                });
+            } // End of function createCalendar
+        });
+    </script>
 </body>
 </html>

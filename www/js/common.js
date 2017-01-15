@@ -83,3 +83,42 @@ function hashCode () {
   }
   return hash;
 };
+
+function showUsrPanel(usrInfoObj) {
+    let panel = document.getElementById("usrPanel");
+    document.getElementById("usrName").innerHTML = usrInfoObj.fullName;
+    document.getElementById("usrImage").setAttribute("src", usrInfoObj.image);
+    document.getElementById("usrEmail").setAttribute("href", "tel:" + usrInfoObj.email);
+    document.getElementById("usrEmail").querySelector("button").innerHTML = usrInfoObj.email;
+    document.getElementById("usrPhoneNo").setAttribute("href", "tel:" + usrInfoObj.phoneNo);
+    document.getElementById("usrPhoneNo").querySelector("button").innerHTML = usrInfoObj.phoneNo;
+    let funFactsEl = document.getElementById("usrFunFacts");
+    if (usrInfoObj.funFacts != null)
+    {
+        usrInfoObj.funFacts.forEach(function(fact) {
+        let row = document.createElement("tr");
+        let col1 = document.createElement("td");
+        let col2 = document.createElement("td");
+
+        col1.innerHTML = fact.title
+        col2.innerHTML = fact.body
+
+        row.appendChild(col1);
+        row.appendChild(col2);
+        document.getElementById("usrFunFacts").appendChild(row);
+    });
+    }
+    panel.style.top = "5%";
+}
+
+function closeUsrPanel () {
+    let panel = document.getElementById("usrPanel");
+    panel.style.top = "100%";
+    let rows = document.querySelectorAll("#usrFunFacts tr");
+    if (rows.length > 0)
+    {
+        rows.forEach(function (row) {
+            document.getElementById("usrFunFacts").removeChild(row);
+        })        
+    }
+}

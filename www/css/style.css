@@ -615,6 +615,9 @@ input:checked:not([type=submit]) + .slider::after {
 	border-style: solid;
 	border-width: 0;
 	box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+
+	display: none;
+
 	z-index: 8;
 
 	/*padding: 8px;*/
@@ -689,7 +692,7 @@ input:checked:not([type=submit]) + .slider::after {
 	z-index: 8;
 
 	/*padding: 8px;*/
-	/*margin: auto;*/
+	margin-left: 8px;
 	position: absolute;
 	top: 25%;
 	left: 25%;
@@ -742,6 +745,44 @@ input:checked:not([type=submit]) + .slider::after {
 	float: left;
 
 	width: 90px;
+}
+
+#searchContacts {
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url("../img/ic_search_black_24dp_2x.png");
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: 30px 30px;
+	border: none;
+	border-radius: 15px 15px;
+	box-shadow: none;
+	color: rgba(0, 0, 0, 0);
+	outline: none;
+
+	padding-left: 100px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	position: absolute;
+
+	top: 125px;
+	right: 20px;
+
+	height: 30px;
+	width: 30px;
+
+	transition: 0.2s ease-in-out;
+	/*transition-property: width;*/
+	-webkit-transition: 0.2s ease-in-out;
+	/*-webkit-transition-property: width;*/
+}
+
+#searchContacts:focus {
+	background-color: var(--100);
+	color: var(--dark-text);
+
+	padding-left: 12px;
+
+	width: 85%;
 }
 
 #showDevOptions:checked + .testingNav {

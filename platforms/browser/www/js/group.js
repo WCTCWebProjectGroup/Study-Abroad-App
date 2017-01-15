@@ -114,9 +114,21 @@ function setGroupInfo ()
                             .where("uid")
                             .equals(per)
                             .first(function (o) {
-                                var liObj = document.createElement("div");
-                                liObj.innerHTML = o.fname + " " + o.lname;
-                                document.getElementById("groupOwn").appendChild(liObj);
+                                let el = document.getElementById("contactCardT");
+                                let clone = document.importNode(el.content, true);
+                                clone.querySelector(".contactName").innerHTML = o.fname + " " + o.lname;
+                                document.getElementById("groupOwn").appendChild(clone);
+                                let usrInfoObj = {
+                                    fullName: o.fname + " " + o.lname,
+                                    image: o.photo,
+                                    email: o.email,
+                                    phoneNo: o.phoneNo,
+                                    funFacts: o.funFacts
+                                };
+
+                                document.querySelector("#groupOwn .contact:last-child").addEventListener("click", function () {
+                                    showUsrPanel(usrInfoObj)
+                                });
                             });
                     });
 
