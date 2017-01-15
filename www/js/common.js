@@ -122,3 +122,26 @@ function closeUsrPanel () {
         })        
     }
 }
+
+function doneLoadingContacts () {
+    document.querySelector(".loadingMsg").style.display = "none";
+    console.log("Done loading contacts");
+}
+
+function filterContacts() {
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("searchContacts");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("groupContacts");
+    tr = table.querySelectorAll(".contact");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector(".contactName");
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
