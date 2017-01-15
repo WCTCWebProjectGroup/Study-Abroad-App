@@ -133,7 +133,8 @@ const groupList = [
 			"ABC123",
 			"ABC125"
 		],
-		school: "Madison"
+		school: "Madison",
+		
 	},
 	{
 		uid: "ASDF789ASD0F8ASDF8C",
@@ -169,7 +170,29 @@ var userList = [
 			"test@gmail.com"
 		],
 		pictureUrl: "img/Bloo.jpg",
-		school: "WCTC"
+		school: "WCTC",
+		funFacts: [
+			{
+				title: "Age",
+				body: "22 years old"
+			},
+			{
+				title: "From",
+				body: "Waukesha, WI"
+			},
+			{
+				title: "Program",
+				body: "Web and Digital Media Design"
+			},
+			{
+				title: "Hobbies",
+				body: "Video games, photography"
+			},
+			{
+				title: "Favorite Book",
+				body: "Hunger Games"
+			}
+		]
 	},
 	{
 		uid: "1482024762447",
@@ -186,7 +209,29 @@ var userList = [
 			"Bob@gmail.com"
 		],
 		pictureUrl: "",
-		school: "WCTC"
+		school: "WCTC",
+		funFacts: [
+			{
+				title: "Age",
+				body: "22 years old"
+			},
+			{
+				title: "From",
+				body: "Waukesha, WI"
+			},
+			{
+				title: "Program",
+				body: "Web and Digital Media Design"
+			},
+			{
+				title: "Hobbies",
+				body: "Video games, photography"
+			},
+			{
+				title: "Favorite Book",
+				body: "Hunger Games"
+			}
+		]
 	},
 	{
 		uid: "1482024775993",
@@ -203,7 +248,29 @@ var userList = [
 			"tim1@gmail.com"
 		],
 		pictureUrl: "",
-		school: "WCTC"
+		school: "WCTC",
+		funFacts: [
+			{
+				title: "Age",
+				body: "22 years old"
+			},
+			{
+				title: "From",
+				body: "Waukesha, WI"
+			},
+			{
+				title: "Program",
+				body: "Web and Digital Media Design"
+			},
+			{
+				title: "Hobbies",
+				body: "Video games, photography"
+			},
+			{
+				title: "Favorite Book",
+				body: "Hunger Games"
+			}
+		]
 	},
 	{
 		uid: "1482024793118",
@@ -220,7 +287,29 @@ var userList = [
 			"Joe@gmail.com"
 		],
 		pictureUrl: "",
-		school: "WCTC"
+		school: "WCTC",
+		funFacts: [
+			{
+				title: "Age",
+				body: "22 years old"
+			},
+			{
+				title: "From",
+				body: "Waukesha, WI"
+			},
+			{
+				title: "Program",
+				body: "Web and Digital Media Design"
+			},
+			{
+				title: "Hobbies",
+				body: "Video games, photography"
+			},
+			{
+				title: "Favorite Book",
+				body: "Hunger Games"
+			}
+		]
 	},
 	{
 		uid: "1482024806110",
@@ -237,7 +326,29 @@ var userList = [
 			"Clark@gmail.com"
 		],
 		pictureUrl: "",
-		school: "WCTC"
+		school: "WCTC",
+		funFacts: [
+			{
+				title: "Age",
+				body: "22 years old"
+			},
+			{
+				title: "From",
+				body: "Waukesha, WI"
+			},
+			{
+				title: "Program",
+				body: "Web and Digital Media Design"
+			},
+			{
+				title: "Hobbies",
+				body: "Video games, photography"
+			},
+			{
+				title: "Favorite Book",
+				body: "Hunger Games"
+			}
+		]
 	},
 	{
 		uid: "1482024818559",
@@ -254,7 +365,29 @@ var userList = [
 			"Charlie@gmail.com"
 		],
 		pictureUrl: "",
-		school: "WCTC"
+		school: "WCTC",
+		funFacts: [
+			{
+				title: "Age",
+				body: "22 years old"
+			},
+			{
+				title: "From",
+				body: "Waukesha, WI"
+			},
+			{
+				title: "Program",
+				body: "Web and Digital Media Design"
+			},
+			{
+				title: "Hobbies",
+				body: "Video games, photography"
+			},
+			{
+				title: "Favorite Book",
+				body: "Hunger Games"
+			}
+		]
 	},
 	{
 		uid: "1482101447778",

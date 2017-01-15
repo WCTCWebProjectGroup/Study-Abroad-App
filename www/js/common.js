@@ -40,6 +40,13 @@ function toggleOffLoadingScreen () {
     document.getElementById("loadingBg").style.display = "none";
 }
 
+function closeEvent () {
+    document.getElementById("eventPanel").style.top = "100%";
+    document.querySelectorAll("#eventContainer .event").forEach(function(htmlEvent) {
+        htmlEvent.style.display = "none";
+    });
+}
+
 // This function will be what populates the nav
 // AKA decides if the 'login' or 'logout' entry appears in the nav
 (function () {

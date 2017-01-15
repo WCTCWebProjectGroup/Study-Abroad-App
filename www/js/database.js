@@ -209,7 +209,8 @@ function DB_addUser (user) {
                 phoneNo: user.phoneNo,
                 email: user.email,
                 school: user.school,
-                photo: user.photo
+                photo: user.photo,
+                funFacts: user.funFacts
             }); 
         }).then(function() {
             console.log("Added a user");
@@ -273,7 +274,7 @@ function checkUsrForUpdates () {
 // ----- Constructors for objects ----- //
 
 // User object
-function Group_user (fname, lname, phoneNo, email, photo, school) {
+function Group_user (fname, lname, phoneNo, email, photo, school, funFactsAboutUsr) {
     this.uid = "";
     this.lastUpdate = Date.now();
     this.fname = fname;
@@ -283,6 +284,7 @@ function Group_user (fname, lname, phoneNo, email, photo, school) {
     this.photo = photo;
     this.school = school;
     this.password = "";
+    this.funFacts = funFactsAboutUsr;
 }
 
 // Trip
@@ -328,7 +330,8 @@ function addDummyUsers () {
             user.phoneNo[0],
             user.email[0],
             user.pictureUrl,
-            user.school
+            user.school,
+            user.funFacts
         );
         bunchOfUsers[i].password = user.password;
         bunchOfUsers[i].uid = user.uid;
@@ -413,7 +416,7 @@ function searchTrips () {
 
 function testLogin () {
     console.log("Demo login");
-    var new_usr = new Group_user("Tester", "McTester", "2624421666", "test@gmail.com", "~/Pictures/test.svg", "WCTC");
+    var new_usr = new Group_user("Tester", "McTester", "2624421666", "test@gmail.com", "img/Bloo.jpg", "WCTC", [{title: "Favorite Book", body: "Hunger Games"}]);
     new_usr.uid = "1482024710156";
     new_usr.password = "1216985755";
     setCurrentUser(new_usr)

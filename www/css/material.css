@@ -100,16 +100,44 @@
 	color: var(--light-text);
     display: inline-block;
 	font-size: 18px;
+	line-height: 40px;
 	margin-bottom: 8px;
 	outline: none;
     text-align: center;
     
     padding: 8px;
+
+	min-height: 40px;
 }
 
 .MButton:hover {
 	background-color: var(--A400);
 	box-shadow: 8px 8px 16px rgba(0,0,0,.5);
+}
+
+.MButtonFaint {    
+	background-color: rgba(0,0,0,0);
+	border: none;
+	border-radius: 2px;
+	box-shadow: none;
+	color: var(--light-text);
+	display: block;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 30px;
+	outline: none;
+	text-align: center;
+
+	margin: auto;
+	padding: 8px;
+
+	min-height: 30px;
+}
+
+.MButtonFaint:active:hover {
+	background-color: var(--100);
+	box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+	color: var(--dark-text);
 }
 
 .MCard {
@@ -135,6 +163,24 @@
 
     height: 96px;
     width: 96px;
+}
+
+.MLabel {
+	background-color: rgba(0,0,0,0);
+	color: var(--light-text);
+	display: block;
+	font-weight: bold;
+	line-height: 30px;
+	text-align: center;
+
+	margin: 8px;
+
+	min-height: 30px;
+}
+
+.MLabel:focus:hover:active {
+	background-color: var(--100);
+	color: var(--dark-text);
 }
 
 /* ------ End Material Designs ------ */
