@@ -789,3 +789,5 @@ app.get('/api/gettravellers', function (req, res) {
 
 var port = process.env.PORT || 8080;
 app.listen(port);
+
+module.exports = app;
