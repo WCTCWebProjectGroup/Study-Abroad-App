@@ -59,7 +59,11 @@
         function firstTimeSetUp ()
         {
             // TODO: Message saying first time setup
-            window.location.assign("login.html");
+            // window.location.assign("login.html");
+            testLogin();
+            addDummyUsers();
+            addDummyTrips();
+            setCTripAndGoToTrip("0ABC");
         }
 
         // This function is called on each reply once it finishes downloading. It is
@@ -115,7 +119,7 @@
 
         function finished()
         {
-            window.location.assign("groups.html");
+            window.location.assign("group.html");
         }
 
         function afterPageLoad ()
@@ -129,13 +133,13 @@
                         console.log(entry);
                         console.log("Currently logged in as " + entry.fname + " " + entry.lname);
                         btn.addEventListener("click", finished);
-                        // finished();
+                        finished();
                     } else {
                         // If the user is null then this is first time setup
                         console.log("Not currently logged in");
                         console.log("Navigating to the login page.");
                         btn.addEventListener("click", firstTimeSetUp);
-                        // firstTimeSetUp();
+                        firstTimeSetUp();
                     }
         });
             

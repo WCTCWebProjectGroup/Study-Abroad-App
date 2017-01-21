@@ -421,7 +421,8 @@ function testLogin () {
     new_usr.password = "1216985755";
     setCurrentUser(new_usr)
         .then(function (e) {
-            window.location.assign("groups.html");
+            // window.location.assign("groups.html");
+            window.location.assign("group.html");
         });
 }
 

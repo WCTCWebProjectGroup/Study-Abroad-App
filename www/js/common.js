@@ -145,3 +145,13 @@ function filterContacts() {
         }
     }
 }
+
+function setCTripAndGoToTrip (newUid) {
+    db.CTrip
+        .clear()
+        .then(function () {
+            db.CTrip.add({uid: newUid})
+        }).then(function () {
+            window.location.assign("group.html");
+        });
+}
