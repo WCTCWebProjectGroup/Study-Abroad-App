@@ -7,7 +7,6 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="manifest"  href="manifest.json">
-    <link rel="stylesheet" type="text/css" href="css/material.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <title>Loading</title>
@@ -80,7 +79,6 @@
 
         function checkIfDone() 
         {
-            console.log("Is this running?");
             if (updatesInstalled == expectedReplies && updatesInstalled != 0)
             {
                 finished();
@@ -119,7 +117,7 @@
 
         function finished()
         {
-            window.location.assign("group.html");
+            window.location.assign("itinerary.html");
         }
 
         function afterPageLoad ()
@@ -141,23 +139,8 @@
                         btn.addEventListener("click", firstTimeSetUp);
                         firstTimeSetUp();
                     }
-        });
-            
-            // If it's first time, go to login page, else login & check for updates
-            // if (isFirstTimeSet())
-            //     firstTimeSetUp();
-            // else
-            // {
-            //     console.log("Not first time running application.");
-            //     // There should exist a file that contains the uid
-            //     // for each group this user is a member of.
-            //     // Parse that file and run a GET request to check if
-            //     // the hashed time stamps match up. 
-            //     console.log("Now checking for updates.")
-            //     setTimeout(checkForUpdates,10000);
-            // }
-            // 
-        } 
+            });
+        }
 
         window.addEventListener("load", afterPageLoad());
     </script>
