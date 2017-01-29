@@ -248,6 +248,9 @@ h2 {
 header {
 	/*background: linear-gradient(to bottom right, var(--700), var(--400), var(--100));*/
 	background-color: var(--500);
+	background-image: url("../img/tmslogo.jpeg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 
 	box-shadow: var(--box-shadow);
 	color: var(--light-text);
@@ -336,6 +339,26 @@ table, tr {
 	
 	height: 50px;
 	width: 50px;
+}
+
+.contactPhoneNo {
+	background-color: var(--100);
+	border: 2px solid var(--A700)	;
+	border-radius: 25px 25px;
+	box-shadow: var(--box-shadow);
+	color: blue;
+	display: block;
+	
+	margin: auto;
+	margin-bottom: 4px;
+	padding: 0px;
+
+	width: 50%;
+}
+
+.contactPhoneNo:hover {
+	background-color: var(--A200);
+	border-color: var(--A300);
 }
 
 .loginForm {
@@ -433,6 +456,8 @@ table, tr {
 
 .group:hover .gcontent {
 	max-height: 300px;
+
+	overflow-y: scroll;
 }
 
 .gdesc {
@@ -494,6 +519,10 @@ table, tr {
 
 	height: auto;
 	width: 100%;
+}
+
+.group:hover .event {
+	display: block;
 }
 
 .group:nth-child(odd) .gname, .group:nth-child(odd) .gfooter {
@@ -749,6 +778,22 @@ input:checked:not([type=submit]) + .slider::after {
 	width: 100%;
 }
 
+#emergency {
+	padding-left: 0px;
+}
+
+#emegencyContactCardT *{
+	font-weight: bold;
+}
+
+#emegencyContactCardT a {
+	color: blue;
+}
+
+#emergency .MCard {
+	margin-bottom: 12px;
+}
+
 #eventInfoContainer {
 	margin: 25% 8px;
 }
@@ -951,7 +996,7 @@ input:checked:not([type=submit]) + .slider::after {
 	padding-bottom: 4px;
 	position: absolute;
 
-	top: 125px;
+	top: 100px;
 	right: 20px;
 
 	height: 30px;
@@ -1094,11 +1139,12 @@ input:checked:not([type=submit]) + .slider::after {
 
 #tmsLogo {
 	background-image: url("../img/TMSLogo.png");
+	/*background-image: url("../img/tmslogo.jpeg");*/
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 200px 100%;
 	/*box-shadow: 0px 2px 5px #888888;*/
-	display: flex;
+	display: none;
 
 	width: 200px;
 }

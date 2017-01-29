@@ -49,7 +49,6 @@
 
     <!-- Try to avoid including the js scripts here unless absolutely necessary -->
     <script type="text/javascript" src="js/w3data.js"></script>
-    <script type="text/javascript" src="js/dummyJSON.js"></script>
 </head>
 <body>
     <div w3-include-html="header.html"></div>
@@ -57,12 +56,9 @@
     <main>
         <div class="MCard groupHeader">
             <h2 id="gname" class="gname">WCTC Travel Group</h2>
-            <p id="gdesc">
-                Group Description: This is a the description of the group. It will eventually be
-                replaced with a rich text editor... But for now this is it.
-            </p>
+            <p id="gdesc"></p>
             
-            <h3>Group Owners</h3>
+            <h3>Supervisor Contacts</h3>
             <div id="groupOwn"></div>
 
             <h3>Emergency Contacts</h3>
@@ -72,12 +68,6 @@
         <div class="MCard groupSchedule">
             <h2 class="gname">Calendar</h2>
             <div class="calendar"></div>
-        </div>
-        <div class="MCard groupContacts">
-            <h2 class="gname">Contacts</h2>
-            <a href="members.html">
-                <button class="MButton" type="button" value="View Members">View Members</button>
-            </a>
         </div>
 
         <div id="eventPanel">
@@ -93,9 +83,7 @@
             <h2 id="usrName">Bloo</h2>
             <img id="usrImage" src="img/Bloo.jpg">
             <div class="MLabel">Phone:</div>
-            <a id="usrPhoneNo" href="tel:262442166">
-                <button class="MButtonFaint">2624421666</button>
-            </a>
+            <a id="usrPhoneNo" href=""></a>
             <div class="MLabel">Email: </div>
             <a id="usrEmail" href="mailto:alex.c.hayes08@gmail.com">
                 <button class="MButtonFaint">alex.c.hayes08@gmail.com</button>
@@ -115,20 +103,20 @@
         </div>
     </template>
 
-    <template id="eventT">
-        <div class="MCard event">
-            <h2 class="ename"></h2>
-            <div class="eloc"></div>
-            <div class="etimestamp"></div>
+    <template id="emegencyContactCardT" class="contactCard">
+        <div class="MCard contact">
+            <div class="contactName"></div>
+            <a class="contactPhoneNo"></a>
         </div>
     </template>
 
-    <template id="contactEmail">
-        <a></a>
-    </template>
-
-    <template id="contactPhoneNo">
-        <a></a>
+    <template id="eventT">
+        <div class="MCard event">
+            <h2 class="ename"></h2>
+            <div class="edesc"></div>
+            <div class="eloc"></div>
+            <div class="etimestamp"></div>
+        </div>
     </template>
 
     <!-- JS includes go below here -->
@@ -179,32 +167,26 @@
 
             var goodDates = [];
 
-            db.CTrip
-                .toArray(function(a){
-                    return a[0].uid;
-                }).then(function(cuid){
-                    db.Trips
-                        .where("uid")
-                        .equals(cuid)
-                        .first(function(entry){
-                            var i = 0;
-                            entry.events.forEach (function (eve) {
-                                let theDate = new Date(eve.timestamp);
-                                let theDateStr = "";
-                                theDateStr += theDate.getFullYear() + "-";
-                                let theMonth = (theDate.getMonth() + 1).toString();
-                                if (theMonth.length == 1)
-                                    theMonth = "0" + theMonth;
-                                theDateStr += theMonth + "-";
-                                let theDay = theDate.getDate().toString();
-                                if (theDay.length == 1)
-                                    theDay = "0" + theDay;
-                                theDateStr += theDay;
-                                goodDates[i] = theDateStr;
-                                i++;
-                            });
-                            createCalendar();
-                        });
+            db.Trips
+                .toCollection()
+                .first(function(entry){
+                    var i = 0;
+                    entry.events.forEach (function (eve) {
+                        let theDate = new Date(eve.timestamp);
+                        let theDateStr = "";
+                        theDateStr += theDate.getFullYear() + "-";
+                        let theMonth = (theDate.getMonth() + 1).toString();
+                        if (theMonth.length == 1)
+                            theMonth = "0" + theMonth;
+                        theDateStr += theMonth + "-";
+                        let theDay = theDate.getDate().toString();
+                        if (theDay.length == 1)
+                            theDay = "0" + theDay;
+                        theDateStr += theDay;
+                        goodDates[i] = theDateStr;
+                        i++;
+                    });
+                    createCalendar();
                 });
             
             function createCalendar() {

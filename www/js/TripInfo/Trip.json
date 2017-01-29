@@ -1,0 +1,434 @@
+{
+    "groupInfo": {
+		"name": "WCTC Travel Group",
+		"desc": "This is a tmp group. And this is its description.",
+		"supervisors": [
+			1,
+			2
+		],
+        "emergencyContacts": [
+            {
+                "name": "Emergency Services",
+                "phoneNo": 911
+            },
+            {
+                "name": "Embassy",
+                "phoneNo": 1234567890
+            }
+        ],
+		"members": [
+			3,
+			4,
+			5,
+			6,
+			7,
+			8,
+			9,
+			10,
+            11
+		],
+		"school": "WCTC",
+		"events": [
+			{
+				"name": "Meet at the Airport",
+				"desc": "Meet at the Airportc",
+				"location": "General Mitchell International Airport",
+				"timestamp": "1/5/2017 9:00 am"
+			},
+			{
+				"name": "Check-In at Hotel",
+				"desc": "Check-In at Hotel etc...",
+				"location": "Le General Hotel",
+				"timestamp": "1/5/2017 5:00 pm"
+			},
+			{
+				"name": "Visit Eiffel Tower",
+				"desc": "Visit Eiffel Tower etc...",
+				"location": "Eiffel Tower, Avenue Anatole France, Paris, France",
+				"timestamp": "1/6/2017 3:00 pm"
+			},
+			{
+				"name": "Movie",
+				"desc": "Movie etc...",
+				"location": "Le Grand Rex",
+				"timestamp": "1/6/2017 6:00 pm"
+			}
+		]
+	},
+    "userList": [
+        {
+            "uid": "1",
+            "email": "testUser1@gmail.com",
+            "fname": "FirstName1",
+            "lname": "Lastname1",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar1.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "22 years old"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games, photography"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Hunger Games"
+                }
+            ]
+        },
+        {
+            "uid": "2",
+            "email": "testUser2@gmail.com",
+            "fname": "FirstName2",
+            "lname": "Lastname2",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar2.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "3",
+            "email": "testUser3@gmail.com",
+            "fname": "FirstName3",
+            "lname": "Lastname3",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar1.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "4",
+            "email": "testUser4@gmail.com",
+            "fname": "FirstName4",
+            "lname": "Lastname4",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar2.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "5",
+            "email": "testUser5@gmail.com",
+            "fname": "FirstName5",
+            "lname": "Lastname5",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar1.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "6",
+            "email": "testUser6@gmail.com",
+            "fname": "FirstName6",
+            "lname": "Lastname6",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar2.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "7",
+            "email": "testUser7@gmail.com",
+            "fname": "FirstName7",
+            "lname": "Lastname7",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar1.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "8",
+            "email": "testUser8@gmail.com",
+            "fname": "FirstName8",
+            "lname": "Lastname8",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar2.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "9",
+            "email": "testUser9@gmail.com",
+            "fname": "FirstName9",
+            "lname": "Lastname9",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar1.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "10",
+            "email": "testUser10@gmail.com",
+            "fname": "FirstName10",
+            "lname": "Lastname10",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar2.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        },
+        {
+            "uid": "11",
+            "email": "testUser11@gmail.com",
+            "fname": "FirstName11",
+            "lname": "Lastname11",
+            "phoneNo": [
+                1234567890,
+                9876543210,
+                7894561230
+            ],
+            "pictureUrl": "img/ProfilePictures/generic-avatar1.png",
+            "funFacts": [
+                {
+                    "title": "Age",
+                    "body": "20"
+                },
+                {
+                    "title": "From",
+                    "body": "Waukesha, WI"
+                },
+                {
+                    "title": "Program",
+                    "body": "Web and Digital Media Design"
+                },
+                {
+                    "title": "Hobbies",
+                    "body": "Video games and reading"
+                },
+                {
+                    "title": "Favorite Book",
+                    "body": "Enders game"
+                }
+            ]
+        }
+    ]
+}

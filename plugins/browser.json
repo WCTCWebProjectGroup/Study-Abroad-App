@@ -9,20 +9,7 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.alex.TripMySchoolApp"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.alex.TripMySchoolApp"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "com.alex.TripMySchoolApp"
-        },
-        "com.dbaq.cordova.contactsPhoneNumbers": {
-            "PACKAGE_NAME": "com.alex.TripMySchoolApp"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.alex.TripMySchoolApp"
-        }
-    }
+    "dependent_plugins": {}
 }

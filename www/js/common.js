@@ -26,12 +26,6 @@ function closeDrawer() {
     document.getElementById("sideNav").style.left = "-100%";
 }
 
-function openAlerts () {
-    document.getElementById("drawerContent").style.display = "none";
-    document.querySelector("#sideNav .alerts").style.display = "block";
-    document.getElementById("sideNav").style.left = "0";
-} 
-
 function toggleOnLoadingScreen () {
     document.getElementById("loadingBg").style.display = "block";
 }
@@ -47,51 +41,22 @@ function closeEvent () {
     });
 }
 
-// This function will be what populates the nav
-// AKA decides if the 'login' or 'logout' entry appears in the nav
-(function () {
-    getCurrentUser()
-        .then(function(entry){
-            if (entry !== null) {
-                document.getElementById("loginNAV").style.display = "none";
-                console.log("Currently logged in as " + entry.fname + " " + entry.lname);
-                if (window.location.pathname == "/login.html") {
-                    console.log("Since logged in, going to groups.html");
-                    // window.location.assign("groups.html");
-                }
-            } else {
-                // If the user is null then this is first time setup
-                console.log("Not currently logged in");
-                document.getElementById("logoutNAV").style.display = "none";
-                document.getElementById("openDrawerContainer").style.display = "none";
-                document.getElementById("openAlertContainer").style.display = "none";
-                // if (window.location.pathname != "/login.html")
-                //     window.location.assign("login.html");
-            }
-        }).catch(function(e) {
-            console.log("The nav elements are not available on this page");
-        });
-})();
-
-function hashCode () {
-  var hash = 0, i, chr, len;
-  if (this.length === 0) return hash;
-  for (i = 0, len = this.length; i < len; i++) {
-    chr   = this.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  return hash;
-};
-
 function showUsrPanel(usrInfoObj) {
     let panel = document.getElementById("usrPanel");
     document.getElementById("usrName").innerHTML = usrInfoObj.fullName;
     document.getElementById("usrImage").setAttribute("src", usrInfoObj.image);
     document.getElementById("usrEmail").setAttribute("href", "tel:" + usrInfoObj.email);
     document.getElementById("usrEmail").querySelector("button").innerHTML = usrInfoObj.email;
-    document.getElementById("usrPhoneNo").setAttribute("href", "tel:" + usrInfoObj.phoneNo);
-    document.getElementById("usrPhoneNo").querySelector("button").innerHTML = usrInfoObj.phoneNo;
+    let phoneHTML = "";
+    usrInfoObj.phoneNo.forEach(function (number) {
+        let el = document.createElement("a");
+        el.setAttribute("href", "tel:" + number);        
+        let btn = document.createElement("button");
+        btn.innerHTML = number
+        btn.setAttribute("class", "MButtonFaint");
+        el.appendChild(btn);
+        document.getElementById("usrPhoneNo").appendChild(el);
+    });
     let funFactsEl = document.getElementById("usrFunFacts");
     if (usrInfoObj.funFacts != null)
     {

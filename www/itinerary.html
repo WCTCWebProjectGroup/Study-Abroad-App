@@ -18,10 +18,56 @@
     <div w3-include-html="nav.html"></div>
     <main>
         <h2>Itinerary</h2>
-        <p class="loadingMsg">Loading...</p>
+        <p id="loadingMsg">Loading...</p>
+        
+        <div class="group">
+            <div class="gname">Previous Events</div>
+            <div class="gcontent">
+                <div id="previousEvents" class="gcard content">
+                    <span id="prevHoldingMsg">
+                        No previous events. Check current or upcoming events.
+                    </span>
+                </div>
+            </div>
+            <div class="gfooter"></div>
+        </div>
+
+        <div class="group">
+            <div class="gname">Today's Events</div>
+            <div class="gcontent">
+                <div id="eventContainer" class="gcard content">
+                    <span id="currentHoldingMsg">
+                        No events today. Check upcoming or previous events.
+                    </span>
+                </div>
+            </div>
+            <div class="gfooter"></div>
+        </div>
+
+        <div class="group">
+            <div class="gname">Upcoming Events</div>
+            <div class="gcontent">
+                <div id="upcomingEvents" class="gcard content">
+                    <span id="upcomingHoldingMsg">
+                        No upcoming events. Check today's or previous events.
+                    </span>
+                </div>
+            </div>
+
+            <div class="gfooter"></div>
+        </div>
+        
     </main>
 
     <!-- Templates go below here -->
+
+    <template id="eventT">
+        <div class="MCard event">
+            <h2 class="ename"></h2>
+            <div class="eloc"></div>
+            <div class="etimestamp"></div>
+        </div>
+    </template>
 
     <!-- JS includes go below here -->
     <script>
@@ -33,5 +79,6 @@
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <!--<script type="text/javascript" src="js/userHandler.js"></script>-->
+    <script type="text/javascript" src="js/itinerary.js"></script>
 </body>
 </html>

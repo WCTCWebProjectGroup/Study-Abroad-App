@@ -19,89 +19,16 @@ function DB_Tables () {
     var tables = [
         "Users",
         "Trips",
-        "CUser",
-        "CTrip",
-        "Invitations"
     ];
 }
 
 function DB_init () {
     db = new Dexie(DB_name());
 
-    db.version(1).stores({
-        Users: 'uid, lastUpdate, fname, lname, phoneNo, email, school, photo, password',
-        Trips: 'uid, lastUpdate, name, desc, members, owners, emergency, activeInvitations, events',
-        CUser: 'uid',
-        CTrip: 'uid',
-        Invitations: 'uid, status'
+    return db.version(1).stores({
+        Users: 'uid, fname, lname, phoneNo, email, photo',
+        Trips: 'name, desc, members, supervisors, emergencyContacs, events'
     });
-}
-
-// Returns a Group_user obj of the currently logged in user
-function getCurrentUser() {
-    var cuser = {};
-    return db.CUser
-        .toArray(function (list) {
-            if(list[0] !== undefined)
-                return db.Users.get(list[0].uid);
-            else
-                return null; 
-        });
-}
-
-// Sets the current users info. Returns false if the user already
-// exists and returns true if the operation succeeded.
-function setCurrentUser(user) {
-    return db.transaction("rw", db.Users, db.CUser, function() {
-        db.CUser
-            .clear()
-            .then(function () {
-                db.CUser.add({ uid: user.uid });
-                var cusrReg = false;
-                
-                return db.Users.get(user.uid)
-                    .then(function (obj) {
-                        if (obj === undefined) {
-                            db.Users.add({
-                                uid: user.uid,
-                                lastUpdate: user.lastUpdate,
-                                fname: user.fname,
-                                lname: user.lname,
-                                phoneNo: user.phoneNo,
-                                email: user.email,
-                                school: user.school,
-                                photo: user.photo,
-                                password: user.password == null ? "" : user.password
-                            });
-                        } else {
-                            console.log("Don't need to add the user to table Users because it already exists");
-                        }
-                    }).catch(function (err) {
-                        console.log("Error: " + err);
-                    });
-            });
-    }).then(function() {
-        // TODO: Add another promise here for checking to see if the
-        // server then also approves the new account.
-        console.log("Logged in successfully");
-        (function() {document.getElementsById("logout").style.display = "block"});
-        return true;
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        (function() {document.getElementsById("logout").style.display = "none"});
-        if (error == "ConstraintError: Key already exists in the object store.") {
-            alert("The user already exists");
-        }
-        return false;
-    });
-}
-
-// This will log the user out and clear the database
-function logout() {
-    db.CUser.clear();
-    console.log("Logged Out.");
-    console.log("Navigating to the login page");
-    window.location.assign("login.html");
 }
 
 // Add trip obj to database
@@ -113,7 +40,7 @@ function DB_addTrip (trip) {
             name: trip.name,
             desc: trip.desc,
             members: trip.members,
-            owners: trip.owners,
+            supervisors: trip.supervisors,
             activeInvitations: trip.activeInvitations,
             events: trip.events
         }).then(function () {
@@ -122,19 +49,22 @@ function DB_addTrip (trip) {
     });
 }
 
-// ----- Level 0 - No Dependencies ----- //
-
-// Simple NON-SECURE hash function (for storing passwords) // TODO: Replace with secure hash function
-String.prototype.hashCode = function(){
-	var hash = 0;
-	if (this.length == 0) return hash;
-	for (i = 0; i < this.length; i++) {
-		char = this.charCodeAt(i);
-		hash = ((hash<<5)-hash)+char;
-		hash = hash & hash; // Convert to 32bit integer
-	}
-	return hash;
+function DB_addTripV2 (trip) {
+    return db.transaction("rw", db.Trips, function() {
+        db.Trips.add({
+            name: trip.name,
+            desc: trip.desc,
+            members: trip.members,
+            emergencyContacts: trip.emergencyContacts,
+            supervisors: trip.supervisors,
+            events: trip.events
+        }).then(function () {
+            console.log("Added a trip");
+        });
+    });
 }
+
+// ----- Level 0 - No Dependencies ----- //
 
 // Returns the user by their uid
 function getUserByUid (uid) {
@@ -158,68 +88,23 @@ function checkIfUsrExists (uid) {
         });    
 }
 
-// Modifies an entry in the Users table
-function installUserUpdates (latestUsrJsonObj) {
-    db.transaction("rw", db.Users, function() {
-        db.Users
-            .where("uid")
-            .equals(latestUsrJsonObj.uid)
-            .modify({
-                lastUpdate: latestUsrJsonObj.lastUpdate,
-                fname: latestUsrJsonObj.fname,
-                lname: latestUsrJsonObj.lname,
-                phoneNo: latestUsrJsonObj.phoneNo,
-                email: latestUsrJsonObj.email,
-                pictureUrl: latestUsrJsonObj.pictureUrl,
-                school: latestUsrJsonObj.school,
-                funFacts: latestUsrJsonObj.funFacts
-            });
-            console.log("Updated user " + latestUsrJsonObj.uid);
-    });
-}
-
-// Checks if user exists in the database - WIP
-function usrExists (usrUid, resolve, reject) {
-    return db.Users
-        .where("uid")
-        .equals(usrUid)
-        .count(function (o) {
-            if (o > 0)
-                reject();
-            else
-                resolve();
-        }).catch(function (e) {
-            console.log("Error: " + e);
-        });
-}
-
 // ----- Level 1 - One Dependency ----- //
 
 // Add user obj to database
 function DB_addUser (user) {
-    usrExists(user.uid, addUsr, null);
-
-    function addUsr () {
-        db.transaction("rw", db.Users, function() {
-            db.Users.add({
-                uid: user.uid,
-                lastUpdate: user.lastUpdate,
-                fname: user.fname,
-                lname: user.lname,
-                phoneNo: user.phoneNo,
-                email: user.email,
-                school: user.school,
-                photo: user.photo,
-                funFacts: user.funFacts
-            }); 
-        }).then(function() {
-            console.log("Added a user");
-        });
-    }
-
-    function failed () {
-        console.log("Failed to add user to the database");
-    }
+    return db.transaction("rw", db.Users, function() {
+        db.Users.add({
+            uid: user.uid,
+            fname: user.fname,
+            lname: user.lname,
+            phoneNo: user.phoneNo,
+            email: user.email,
+            photo: user.photo,
+            funFacts: user.funFacts
+        }); 
+    }).then(function() {
+        console.log("Added a user");
+    });
 }
 
 // ----- Level 2 - Two Dependencies ----- //
@@ -241,36 +126,6 @@ function getAndAddUsrFromJson (formdata) {
     req.send(formdata);
 }
 
-// Checks if updates are needed
-function checkUsrForUpdates () { 
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState === XMLHttpRequest.DONE) {
-            console.log("Finished downloading latest");
-
-            var jsonObj = JSON.parse(req.responseText);
-            
-            db.transaction("rw", db.Users, function() {
-                db.Users
-                    .where("uid")
-                    .equals(jsonObj.uid)
-                    .each(function (o) {
-                        console.log("Local lastUpdate: " + o.lastUpdate + " Server lastUpdate: " + jsonObj.lastUpdate)
-                        if (o.lastUpdate != jsonObj.lastUpdate) {
-                            console.log("Update needed for uid " + jsonObj.uid);
-                            installUserUpdates(jsonObj);
-                        } else {
-                            console.log("No updated needed");
-                        }
-                    });
-            });
-        }
-    }
-
-    req.open('GET', 'http://sitec.localdomain/js/alexV2.json', true);
-    req.send(null);
-}
-
 // ----- Constructors for objects ----- //
 
 // User object
@@ -288,16 +143,14 @@ function Group_user (fname, lname, phoneNo, email, photo, school, funFactsAboutU
 }
 
 // Trip
-function Group_trip (name, desc, ownerUid) {
+function Group_trip (name, desc, supervisors) {
     this.uid = "";
-    this.lastUpdate = Date.now();
     this.name = name;
-    this.desc = desc;
-    this.ownerUid = ownerUid;
-    this.lastUpdate = Date.now();
-    // this.members = [ownerUid];
-    this.owners = [ownerUid];
-    this.invitations = []; 
+    this.desc = desc;        
+    this.supervisors = supervisors;
+    this.emergencyContacts = [];
+    this.members = [];
+    this.events = [];
 }
 
 function Group_event (name, desc, startTimeStamp, endTimeStamp, location) {
@@ -320,15 +173,15 @@ function testDB () {
         });
 }
 
-function addDummyUsers () {
+function addUsers (userList) {
     var bunchOfUsers = [];
     var i = 0;
     userList.forEach ( function (user) {
         bunchOfUsers[i] = new Group_user(
             user.fname,
             user.lname,
-            user.phoneNo[0],
-            user.email[0],
+            user.phoneNo,
+            user.email,
             user.pictureUrl,
             user.school,
             user.funFacts
@@ -341,6 +194,8 @@ function addDummyUsers () {
     bunchOfUsers.forEach(function(user) {
         DB_addUser(user);
     });
+
+    return new Promise(function (resolve, reject) {});
 }
 
 function clearUserTables () {
@@ -366,6 +221,19 @@ function searchUsers () {
                 console.log(entry.email);
             });
         });
+}
+
+function addTrip (groupInfo) {
+    var cleanTrip = new Group_trip (
+        groupInfo.name,
+        groupInfo.desc,
+        groupInfo.supervisors
+    );
+    cleanTrip.members = groupInfo.members;
+    cleanTrip.events = groupInfo.events;
+    cleanTrip.emergencyContacts = groupInfo.emergencyContacts;
+
+    return DB_addTripV2(cleanTrip);
 }
 
 function addDummyTrips () {
