@@ -18,7 +18,7 @@
                 clone.querySelector(".etimestamp").innerHTML = eve.timestamp;
 
                 let eventDate = new Date(eve.timestamp.split(" ")[0]);
-                if (eventDate == today) {
+                if (eventDate.toDateString() == today.toDateString()) {
                     document.getElementById("currentHoldingMsg").innerHTML = "";
                     document.getElementById("eventContainer").appendChild(clone);
                 }

@@ -539,6 +539,14 @@ table, tr {
 	color: var(--light-text);
 }
 
+.pignose-calendar-unit.pignose-calendar-unit-sun a {
+	color: var(--light-text);
+}
+
+.pignose-calendar-unit.pignose-calendar-unit-sun:focus {
+	background-color: var(--100);
+}
+
 .profilePicture::after{
 	background: no-repeat;
 	background-image: url("img/ic_photo_camera_3x.png");

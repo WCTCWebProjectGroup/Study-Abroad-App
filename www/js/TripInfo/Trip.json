@@ -52,7 +52,37 @@
 				"desc": "Movie etc...",
 				"location": "Le Grand Rex",
 				"timestamp": "1/6/2017 6:00 pm"
-			}
+			},
+            {
+                "name": "Current Event",
+                "desc": "current event desc ....",
+                "location": "Somewhere",
+                "timestamp": "1/29/2017 12:00 pm" 
+            },
+            {
+                "name": "Current Event #2",
+                "desc": "current event #2 desc ....",
+                "location": "Somewhere",
+                "timestamp": "1/29/2017 2:00 pm" 
+            },
+            {
+                "name": "Current Event #3",
+                "desc": "current event #3 desc ....",
+                "location": "Somewhere",
+                "timestamp": "1/29/2017 4:00 pm" 
+            },
+            {
+                "name": "Future Event",
+                "desc": "Future event desc...",
+                "location": "Somewhere",
+                "timestamp": "2/15/2017 12:00 pm"
+            },
+            {
+                "name": "Future Event #2",
+                "desc": "Future event #2 desc...",
+                "location": "Somewhere",
+                "timestamp": "2/15/2017 1:00 pm"
+            }
 		]
 	},
     "userList": [

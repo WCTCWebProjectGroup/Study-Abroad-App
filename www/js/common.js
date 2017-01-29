@@ -47,7 +47,7 @@ function showUsrPanel(usrInfoObj) {
     document.getElementById("usrImage").setAttribute("src", usrInfoObj.image);
     document.getElementById("usrEmail").setAttribute("href", "tel:" + usrInfoObj.email);
     document.getElementById("usrEmail").querySelector("button").innerHTML = usrInfoObj.email;
-    let phoneHTML = "";
+    document.getElementById("usrPhoneNo").innerHTML = "";
     usrInfoObj.phoneNo.forEach(function (number) {
         let el = document.createElement("a");
         el.setAttribute("href", "tel:" + number);        
