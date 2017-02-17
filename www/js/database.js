@@ -2,11 +2,11 @@
 // The app will use only ONE database, for now it will be called TripMySchoolDB
 // Needs to be included before index.js!
 
-// *The database currently has the tables; 'Users', 'Trips', 'CUser'.
-// *The entry in the 'CUsers' table is the user who logged in. 
+// *The database currently has the tables; 'Users', 'Trips'
 
 // ----- New API using Dexie ----- //
-// Global Vars - TODO: Put in function
+// Global Vars - TODO: Put in anon-function
+
 var db;
 
 // Return the database name
@@ -22,6 +22,7 @@ function DB_Tables () {
     ];
 }
 
+// This is the function that sets up the database schema
 function DB_init () {
     db = new Dexie(DB_name());
 
@@ -49,6 +50,7 @@ function DB_addTrip (trip) {
     });
 }
 
+// Improved function for adding trips to the db
 function DB_addTripV2 (trip) {
     return db.transaction("rw", db.Trips, function() {
         db.Trips.add({
@@ -163,18 +165,10 @@ function Group_event (name, desc, startTimeStamp, endTimeStamp, location) {
 
 // ----- Test functions ----- //
 
-function testDB () {
-    getCurrentUser()
-        .then(function(entry){
-            if (entry !== null)
-                console.log("Currently logged in as " + entry.fname + " " + entry.lname);
-            else
-                console.log("Not currently logged in");
-        });
-}
-
+// This is the function which stores the array of users to the database
 function addUsers (userList) {
     var bunchOfUsers = [];
+    var bunchOfUsersPromises = [];
     var i = 0;
     userList.forEach ( function (user) {
         bunchOfUsers[i] = new Group_user(
@@ -192,16 +186,18 @@ function addUsers (userList) {
     });
 
     bunchOfUsers.forEach(function(user) {
-        DB_addUser(user);
+        bunchOfUsersPromises.push(DB_addUser(user));
     });
 
-    return new Promise(function (resolve, reject) {});
+    return Promise.all(bunchOfUsersPromises);
 }
 
+// Wipes all entries in the user table
 function clearUserTables () {
     db.Users.clear();
 }
 
+// This function is for development purposes, it prints out all entries in the user table to the log
 function printOutUsers () {
     db.Users
         .toArray(function (person) {
@@ -211,18 +207,7 @@ function printOutUsers () {
         });
 }
 
-function searchUsers () {
-    var fname = document.getElementById("testInp4").value;
-    db.Users
-        .where("fname")
-        .startsWith(fname)
-        .toArray(function (list) {
-            list.forEach(function (entry) {
-                console.log(entry.email);
-            });
-        });
-}
-
+// This is the function that enters the group info from the json object
 function addTrip (groupInfo) {
     var cleanTrip = new Group_trip (
         groupInfo.name,
@@ -236,96 +221,10 @@ function addTrip (groupInfo) {
     return DB_addTripV2(cleanTrip);
 }
 
-function addDummyTrips () {
-    var bunchOfTrips = [];
-    var i = 0;
-    groupList.forEach (function (trip) {
-        bunchOfTrips[i] = new Group_trip (
-            trip.name,
-            trip.desc,
-            userList[i].uid
-        );
-        bunchOfTrips[i].uid = i + "ABC";
-        bunchOfTrips[i].members = trip.members;
-        bunchOfTrips[i].events = trip.events;
-        i++;
-    });
-
-    // Working block
-    bunchOfTrips.forEach(function(trip) {
-        DB_addTrip(trip);
-    });
-}
-
+// Wipes all entries from the trip table
 function clearTripsTable () {
     db.Trips.clear();
 }
-
-function printOutTrips () {
-    db.Trips
-        .toArray(function (person) {
-            person.forEach(function (entry) {
-                console.log(entry.name);
-            });
-        });
-}
-
-function searchTrips () {
-    var fname = document.getElementById("testInp9").value;
-    db.Trips
-        .where("name")
-        .startsWith(fname)
-        .toArray(function (list) {
-            list.forEach(function (entry) {
-                console.log(entry.name);
-            });
-        });
-}
-
-function testLogin () {
-    console.log("Demo login");
-    var new_usr = new Group_user("Tester", "McTester", "2624421666", "test@gmail.com", "img/Bloo.jpg", "WCTC", [{title: "Favorite Book", body: "Hunger Games"}]);
-    new_usr.uid = "1482024710156";
-    new_usr.password = "1216985755";
-    setCurrentUser(new_usr)
-        .then(function (e) {
-            // window.location.assign("groups.html");
-            window.location.assign("group.html");
-        });
-}
-
-function testGetCUserInfo (resolve, reject) {
-    // var tmp = db.CUser.toArray();
-    db.CUser
-        .toArray(function (list) {
-            if (list.length > 0) {
-                list.forEach(function (entry) {
-                    console.log(entry.uid);
-                    db.Users
-                        .get(entry.uid, function (cuserObj) {
-                            console.log(cuserObj);
-                            //resolve(cuserObj);
-                        });
-                });
-            } else {
-                console.log("Unable to print usr info because not logged in");
-                //reject();
-            }
-        });
-}
-
-function updateCUserName () {
-    var newFname = document.getElementById("testInp16").value;
-    db.CUser
-        .toArray(function (list) {
-            list.forEach(function (entry) {
-                db.Users
-                    .where("uid") //{uid: entry.uid, fname: "Charlie"});
-                    .equals(entry.uid)
-                    .modify({fname: newFname});
-            });
-        }).then(testGetCUserInfo);
-} 
 
 function getTripMembers () {
     db.Trips.get('0ABC')
@@ -338,21 +237,6 @@ function getTripMembers () {
                     });
             });
         });
-}
-
-function checkTripsForUpdates () {
-    db.Trips.get('0ABC')
-}
-
-function getTripLastUpdate(uid) {
-    //XMLHttpRequest();
-    serverLU = 123456;
-    return serverLU;
-}
-
-function testingCheckIfUsrExists () {
-    var uid = parseInt(document.getElementById("testInp20").value);
-    checkIfUsrExists(uid).then(function(e){console.log(e);});
 }
 
 // ----- Initialize the database ----- //

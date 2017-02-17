@@ -5,7 +5,7 @@
  * 
  * Files to be moved
  * 
- * database.js - May keep it seperate, still deciding whether to move it or not
+ * None...
  * 
  * 
  * Files moved
@@ -13,6 +13,9 @@
  * drawer.js
  * loadingScreen.html (contains a script to toggle the loading screen on/off)
  * nav.js (never moved to the repo but contained scripts for showing what appeared in the nav - was never finished also)
+ * 
+ * Currently this file contains functions for the navigational drawer, displaying a loading screen,
+ * displaying modals containing contact or event information, and filtering contacts. 
  * 
  */
 
@@ -109,14 +112,4 @@ function filterContacts() {
             }
         }
     }
-}
-
-function setCTripAndGoToTrip (newUid) {
-    db.CTrip
-        .clear()
-        .then(function () {
-            db.CTrip.add({uid: newUid})
-        }).then(function () {
-            window.location.assign("group.html");
-        });
 }

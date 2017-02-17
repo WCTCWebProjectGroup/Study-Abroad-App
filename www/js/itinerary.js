@@ -1,3 +1,5 @@
+// This function loads the trip supervisor info, emergency contact info, and
+// sets up the calendar with the info from the trip events.
 (function(){
     var loadingMsg = document.getElementById("loadingMsg");
 

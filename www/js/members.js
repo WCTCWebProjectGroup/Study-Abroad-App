@@ -8,15 +8,12 @@ db.Users
             let el = document.getElementById("contactCardT");
             let clone = document.importNode(el.content, true);
 
-            //console.log(e);
             clone.querySelector(".contactName").innerHTML = (e.fname + " " + e.lname);
-            // clone.querySelector(".contactEmail").innerHTML = ("Email: <a href=mailto:" + e.email + ">" + e.email + "</a>");
-            // clone.querySelector(".contactPhoneNos").innerHTML = ("Phone: <a href=mailto:" + e.phoneNo + ">" + e.phoneNo + "</a>");
             clone.querySelector("img").setAttribute("src", e.photo);
             
             document.getElementById("groupContacts").appendChild(clone);
 
-            var usrInfo = {
+            let usrInfo = {
                 fullName: e.fname + " " + e.lname,
                 image: e.photo,
                 email: e.email,
@@ -30,5 +27,3 @@ db.Users
 }).then(function () {
     doneLoadingContacts();
 });
-        // });
-

@@ -248,7 +248,6 @@ h2 {
 header {
 	/*background: linear-gradient(to bottom right, var(--700), var(--400), var(--100));*/
 	background-color: var(--500);
-	background-image: url("../img/tmslogo.jpeg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 
@@ -261,7 +260,7 @@ header {
 	padding: 8px 0px;
 	position: relative;
 	margin-bottom: 12px;
-	min-height: 70px;
+	min-height: 100px;
 
 	height: 100%;
 	width: 100%;
@@ -272,6 +271,8 @@ header h1 {
 	font-size: 25px;
 	display: inline;
 	text-shadow: 4px 4px 8px rgba(0,0,0,0.55);
+
+	position: absolute;
 
 	padding-left: 100px;
 	padding-right: 100px;
@@ -296,7 +297,7 @@ table, tr {
 	border: 2px solid var(--A400);
 	border-radius: 50px;
 	box-shadow: var(--box-shadow);
-	display: inline-block;
+	display: block;
 
 	margin: auto;
 	margin-top: 4px;
@@ -335,7 +336,7 @@ table, tr {
 	border: 2px solid var(--A400);
 	float: left;
 
-	margin: 0 10px 0 -25px;
+	margin: -2px 0px 0px -26px;
 	
 	height: 50px;
 	width: 50px;
@@ -984,7 +985,7 @@ input:checked:not([type=submit]) + .slider::after {
 	position: relative;
 	float: left;
 
-	width: 90px;
+	margin-left: 8px;
 }
 
 #searchContacts {
@@ -1004,7 +1005,7 @@ input:checked:not([type=submit]) + .slider::after {
 	padding-bottom: 4px;
 	position: absolute;
 
-	top: 100px;
+	top: 130px;
 	right: 20px;
 
 	height: 30px;
@@ -1031,7 +1032,7 @@ input:checked:not([type=submit]) + .slider::after {
 
 #sideNav {
 	background-color: var(--500);
-	background-image: url("../img/tmsArtwork.jpeg");
+	/*background-image: url("../img/tmsArtwork.jpeg");*/
 	background-size: 100% 100%;
 	border-right: 4px solid var(--A700);
 	overflow-x: hidden;
@@ -1062,9 +1063,9 @@ input:checked:not([type=submit]) + .slider::after {
 	transition: 0s ease-in-out;
 }
 
-#sideNav a:not(#clsBttn) {
+/*#sideNav a:not(#clsBttn) {
 	background-color: rgba(0,0,0,.4);
-}
+}*/
 
 #sideNav label {
 	color: var(--light-text);
